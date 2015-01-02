@@ -249,7 +249,7 @@ void OverviewPage::updateDarksendProgress(){
     //Get average rounds of inputs
     double a = ((double)pwalletMain->GetAverageAnonymizedRounds() / (double)nDarksendRounds)*100;
     //Get the anon threshold
-    double max = nAnonymizeDarkcoinAmount;
+    double max = nAnonymizeBitgoldcoinAmount;
     //If it's more than the wallet amount, limit to that.
     if(max > (double)(pwalletMain->GetBalance()/COIN)-1) max = (double)(pwalletMain->GetBalance()/COIN)-1;
     //denominated balance / anon threshold -- the percentage that we've completed 
@@ -273,7 +273,7 @@ void OverviewPage::darkSendStatus()
         updateDarksendProgress();
 
         std::ostringstream convert2;
-        convert2 << nAnonymizeDarkcoinAmount << " DRK / " << nDarksendRounds << " Rounds";
+        convert2 << nAnonymizeBitgoldcoinAmount << " BGC / " << nDarksendRounds << " Rounds";
         QString s2(convert2.str().c_str());
         ui->labelAmountRounds->setText(s2);
     }
@@ -299,7 +299,7 @@ void OverviewPage::darkSendStatus()
 
         if (pwalletMain->GetBalance() - pwalletMain->GetAnonymizedBalance() > 2*COIN){
             if (walletModel->getEncryptionStatus() != WalletModel::Unencrypted){
-                if((nAnonymizeDarkcoinAmount*COIN)-pwalletMain->GetAnonymizedBalance() > 1.1*COIN &&
+                if((nAnonymizeBitgoldcoinAmount*COIN)-pwalletMain->GetAnonymizedBalance() > 1.1*COIN &&
                     walletModel->getEncryptionStatus() == WalletModel::Locked){
 
                     WalletModel::UnlockContext ctx(walletModel->requestUnlock(false));
@@ -310,7 +310,7 @@ void OverviewPage::darkSendStatus()
                         LogPrintf("Wallet is locked and user declined to unlock. Disabling Darksend.\n");
                     }
                 }
-                if((nAnonymizeDarkcoinAmount*COIN)-pwalletMain->GetAnonymizedBalance() <= 1.1*COIN && 
+                if((nAnonymizeBitgoldcoinAmount*COIN)-pwalletMain->GetAnonymizedBalance() <= 1.1*COIN && 
                     walletModel->getEncryptionStatus() == WalletModel::Unlocked &&
                     darkSendPool.GetMyTransactionCount() == 0){
 
@@ -393,7 +393,7 @@ void OverviewPage::toggleDarksend(){
     int64 balance = pwalletMain->GetBalance();
     if(balance < 2.5*COIN){
         QMessageBox::warning(this, tr("Darksend"),
-            tr("Darksend requires at least 2.5 DRK to use."),
+            tr("Darksend requires at least 2.5 BGC to use."),
             QMessageBox::Ok, QMessageBox::Ok);
         return;
     }
@@ -410,7 +410,7 @@ void OverviewPage::toggleDarksend(){
 
         /* show darksend configuration if client has defaults set */
 
-        if(nAnonymizeDarkcoinAmount == 0){
+        if(nAnonymizeBitgoldcoinAmount == 0){
             DarksendConfig dlg(this);
             dlg.setModel(walletModel);
             dlg.exec();

@@ -41,7 +41,7 @@ unsigned int nTransactionsUpdated = 0;
 map<uint256, CBlockIndex*> mapBlockIndex;
 uint256 hashGenesisBlock("0x00000ffd590b1485b3caadc19b22e6379c733355108f107a430458cdf3407ab6"); //mainnet
 
-static CBigNum bnProofOfWorkLimit(~uint256(0) >> 20); // DarkCoin: starting difficulty is 1 / 2^12
+static CBigNum bnProofOfWorkLimit(~uint256(0) >> 20); // BitgoldCoin: starting difficulty is 1 / 2^12
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
 uint256 nBestChainWork = 0;
@@ -75,7 +75,7 @@ map<uint256, set<uint256> > mapOrphanTransactionsByPrev;
 // Constant stuff for coinbase transactions we create:
 CScript COINBASE_FLAGS;
 
-const string strMessageMagic = "DarkCoin Signed Message:\n";
+const string strMessageMagic = "BitgoldCoin Signed Message:\n";
 
 double dHashesPerSec = 0.0;
 int64 nHPSTimerStart = 0;
@@ -625,7 +625,7 @@ int64 CTransaction::GetMinFee(unsigned int nBlockSize, bool fAllowFree,
             nMinFee = 0;
     }
 
-    // DarkCoin
+    // BitgoldCoin
     // To limit dust spam, add nBaseFee for each output less than DUST_SOFT_LIMIT
     BOOST_FOREACH(const CTxOut& txout, vout)
         if (txout.nValue < DUST_SOFT_LIMIT)
@@ -1450,8 +1450,8 @@ int64 GetMasternodePayment(int nHeight, int64 blockValue)
     return ret;
 }
 
-static const int64 nTargetTimespan = 24 * 60 * 60; // DarkCoin: 1 day
-static const int64 nTargetSpacing = 2.5 * 60; // DarkCoin: 2.5 minutes
+static const int64 nTargetTimespan = 24 * 60 * 60; // BitgoldCoin: 1 day
+static const int64 nTargetSpacing = 2.5 * 60; // BitgoldCoin: 2.5 minutes
 static const int64 nInterval = nTargetTimespan / nTargetSpacing; // 576
 
 //
@@ -1510,7 +1510,7 @@ unsigned int static GetNextWorkRequired_V1(const CBlockIndex* pindexLast, const 
         return pindexLast->nBits;
     }
 
-    // DarkCoin: This fixes an issue where a 51% attack can change difficulty at will.
+    // BitgoldCoin: This fixes an issue where a 51% attack can change difficulty at will.
     // Go back the full period unless it's the first retarget after genesis. Code courtesy of Art Forz
     int blockstogoback = nInterval-1;
     if ((pindexLast->nHeight+1) != nInterval)
@@ -1605,7 +1605,7 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const CBloc
 }
 
 unsigned int static DarkGravityWave3(const CBlockIndex* pindexLast, const CBlockHeader *pblock) {
-    /* current difficulty formula, darkcoin - DarkGravity v3, written by Evan Duffield - evan@darkcoin.io */
+    /* current difficulty formula, bitgoldcoin - DarkGravity v3, written by Evan Duffield - evan@bitgoldcoin.io */
     const CBlockIndex *BlockLastSolved = pindexLast;
     const CBlockIndex *BlockReading = pindexLast;
     const CBlockHeader *BlockCreating = pblock;
@@ -2766,7 +2766,7 @@ bool CBlock::CheckBlock(CValidationState &state, bool fCheckPOW, bool fCheckMerk
     if (vtx.empty() || vtx.size() > MAX_BLOCK_SIZE || ::GetSerializeSize(*this, SER_NETWORK, PROTOCOL_VERSION) > MAX_BLOCK_SIZE)
         return state.DoS(100, error("CheckBlock() : size limits failed"));
 
-    // DarkCoin: Special short-term limits to avoid 10,000 BDB lock limit:
+    // BitgoldCoin: Special short-term limits to avoid 10,000 BDB lock limit:
     if (GetBlockTime() < 1376568000)  // stop enforcing 15 August 2013 00:00:00
     {
         // Rule is: #unique txids referenced <= 4,500
@@ -3017,7 +3017,7 @@ bool CBlock::AcceptBlock(CValidationState &state, CDiskBlockPos *dbp)
 
 bool CBlockIndex::IsSuperMajority(int minVersion, const CBlockIndex* pstart, unsigned int nRequired, unsigned int nToCheck)
 {
-    // DarkCoin: temporarily disable v2 block lockin until we are ready for v2 transition
+    // BitgoldCoin: temporarily disable v2 block lockin until we are ready for v2 transition
     return false;
     unsigned int nFound = 0;
     for (unsigned int i = 0; i < nToCheck && nFound < nRequired && pstart != NULL; i++)
@@ -5011,7 +5011,7 @@ bool SendMessages(CNode* pto, bool fSendTrickle)
 
 //////////////////////////////////////////////////////////////////////////////
 //
-// DarkCoinMiner
+// BitgoldCoinMiner
 //
 
 int static FormatHashBlocks(void* pbuffer, unsigned int len)
@@ -5490,7 +5490,7 @@ bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
         return false;
 
     //// debug print
-    LogPrintf("DarkCoinMiner:\n");
+    LogPrintf("BitgoldCoinMiner:\n");
     LogPrintf("proof-of-work found  \n  hash: %s  \ntarget: %s\n", hash.GetHex().c_str(), hashTarget.GetHex().c_str());
     pblock->print();
     LogPrintf("generated %s\n", FormatMoney(pblock->vtx[0].vout[0].nValue).c_str());
@@ -5499,7 +5499,7 @@ bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
     {
         LOCK(cs_main);
         if (pblock->hashPrevBlock != hashBestChain)
-            return error("DarkCoinMiner : generated block is stale");
+            return error("BitgoldCoinMiner : generated block is stale");
 
         // Remove key from key pool
         reservekey.KeepKey();
@@ -5513,17 +5513,17 @@ bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
         // Process this block the same as if we had received it from another node
         CValidationState state;
         if (!ProcessBlock(state, NULL, pblock))
-            return error("DarkCoinMiner : ProcessBlock, block not accepted");
+            return error("BitgoldCoinMiner : ProcessBlock, block not accepted");
     }
 
     return true;
 }
 
-void static DarkCoinMiner(CWallet *pwallet)
+void static BitgoldCoinMiner(CWallet *pwallet)
 {
-    LogPrintf("DarkCoinMiner started\n");
+    LogPrintf("BitgoldCoinMiner started\n");
     SetThreadPriority(THREAD_PRIORITY_LOWEST);
-    RenameThread("darkcoin-miner");
+    RenameThread("bitgoldcoin-miner");
 
     // Each thread has its own key and counter
     CReserveKey reservekey(pwallet);
@@ -5545,7 +5545,7 @@ void static DarkCoinMiner(CWallet *pwallet)
         CBlock *pblock = &pblocktemplate->block;
         IncrementExtraNonce(pblock, pindexPrev, nExtraNonce);
 
-        LogPrintf("Running DarkCoinMiner with %"PRIszu" transactions in block (%u bytes)\n", pblock->vtx.size(),
+        LogPrintf("Running BitgoldCoinMiner with %"PRIszu" transactions in block (%u bytes)\n", pblock->vtx.size(),
                ::GetSerializeSize(*pblock, SER_NETWORK, PROTOCOL_VERSION));
 
         //
@@ -5642,7 +5642,7 @@ void static DarkCoinMiner(CWallet *pwallet)
     } }
     catch (boost::thread_interrupted)
     {
-        LogPrintf("DarkCoinMiner terminated\n");
+        LogPrintf("BitgoldCoinMiner terminated\n");
         throw;
     }
 }
@@ -5667,7 +5667,7 @@ void GenerateBitcoins(bool fGenerate, CWallet* pwallet)
 
     minerThreads = new boost::thread_group();
     for (int i = 0; i < nThreads; i++)
-        minerThreads->create_thread(boost::bind(&DarkCoinMiner, pwallet));
+        minerThreads->create_thread(boost::bind(&BitgoldCoinMiner, pwallet));
 }
 
 // Amount compression:

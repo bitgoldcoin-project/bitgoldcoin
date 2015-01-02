@@ -31,7 +31,7 @@ public:
         Language,          // QString
         CoinControlFeatures, // bool
         DarksendRounds,    // int
-        AnonymizeDarkcoinAmount, //int
+        AnonymizeBitgoldcoinAmount, //int
         OptionIDRowCount,
     };
 
@@ -66,7 +66,7 @@ signals:
     void displayUnitChanged(int unit);
     void transactionFeeChanged(qint64);
     void darksendRoundsChanged(int);
-    void anonymizeDarkcoinAmountChanged(int);
+    void anonymizeBitgoldcoinAmountChanged(int);
     void coinControlFeaturesChanged(bool);
 };
 

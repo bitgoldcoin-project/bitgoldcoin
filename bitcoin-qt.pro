@@ -2,8 +2,8 @@
 QMAKE_MOC = $$QMAKE_MOC -DBOOST_NO_TEMPLATE_PARTIAL_SPECIALIZATION -DBOOST_TT_HAS_OPERATOR_HPP_INCLUDED
 
 TEMPLATE = app
-TARGET = darkcoin-qt
-macx:TARGET = "DarkCoin-Qt"
+TARGET = bitgoldcoin-qt
+macx:TARGET = "Bitgoldcoin-Qt"
 VERSION = 0.9.0.0
 INCLUDEPATH += src src/json src/qt
 QT += core gui network
@@ -369,7 +369,7 @@ DEPENDPATH += src/qt/test
 QT += testlib
 DEFINES += USE_QRCODE
 LIBS += -lqrencode
-TARGET = darkcoin-qt_test
+TARGET = bitgoldcoin-qt_test
 DEFINES += BITCOIN_QT_TEST
   macx: CONFIG -= app_bundle
 }
@@ -472,7 +472,7 @@ macx:HEADERS += src/qt/macdockiconhandler.h src/qt/macnotificationhandler.h
 macx:OBJECTIVE_SOURCES += src/qt/macdockiconhandler.mm src/qt/macnotificationhandler.mm
 macx:LIBS += -framework Foundation -framework ApplicationServices -framework AppKit -framework CoreServices
 macx:DEFINES += MAC_OSX MSG_NOSIGNAL=0
-macx:ICON = src/qt/res/icons/darkcoin.icns
+macx:ICON = src/qt/res/icons/bitgoldcoin.icns
 macx:QMAKE_CFLAGS_THREAD += -pthread
 macx:QMAKE_LFLAGS_THREAD += -pthread
 macx:QMAKE_CXXFLAGS_THREAD += -pthread

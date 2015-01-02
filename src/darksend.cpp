@@ -35,8 +35,8 @@ map<uint256, CDarksendBroadcastTx> mapDarksendBroadcastTxes;
 int RequestedMasterNodeList = 0; 
 
 /* *** BEGIN DARKSEND MAGIC - DARKCOIN **********
-    Copyright 2014, Darkcoin Developers 
-        eduffield - evan@darkcoin.io
+    Copyright 2014, Bitgoldcoin Developers 
+        eduffield - evan@bitgoldcoin.io
 */
 
 void ProcessMessageDarksend(CNode* pfrom, std::string& strCommand, CDataStream& vRecv)
@@ -1423,14 +1423,14 @@ bool CDarkSendPool::DoAutomaticDenominating(bool fDryRun, bool ready)
     int maxAmount = DARKSEND_POOL_MAX/COIN;
     bool hasFeeInput = false;
 
-    // if we have more denominated funds (of any maturity) than the nAnonymizeDarkcoinAmount, we should use use those
-    if(pwalletMain->GetDenominatedBalance(true) >= nAnonymizeDarkcoinAmount*COIN ||
+    // if we have more denominated funds (of any maturity) than the nAnonymizeBitgoldcoinAmount, we should use use those
+    if(pwalletMain->GetDenominatedBalance(true) >= nAnonymizeBitgoldcoinAmount*COIN ||
         pwalletMain->GetDenominatedBalance(true) >= pwalletMain->GetBalance()*.9) {
         minRounds = 0;
         maxRounds = nDarksendRounds;
     }
     //if we're set to less than a thousand, don't submit for than that to the pool
-    if(nAnonymizeDarkcoinAmount < DARKSEND_POOL_MAX/COIN) maxAmount = nAnonymizeDarkcoinAmount;
+    if(nAnonymizeBitgoldcoinAmount < DARKSEND_POOL_MAX/COIN) maxAmount = nAnonymizeBitgoldcoinAmount;
 
     int64 balanceNeedsAnonymized = pwalletMain->GetBalance() - pwalletMain->GetAnonymizedBalance();
     if(balanceNeedsAnonymized > maxAmount*COIN) balanceNeedsAnonymized= maxAmount*COIN;
@@ -1462,7 +1462,7 @@ bool CDarkSendPool::DoAutomaticDenominating(bool fDryRun, bool ready)
         return false;
     }
 
-    // the darksend pool can only take 2.5DRK minimum
+    // the darksend pool can only take 2.5BGC minimum
     if(nValueIn < COIN*2.5 || 
         (vecDisabledDenominations.size() > 0 && nValueIn < COIN*12.5)
     ){
@@ -1486,7 +1486,7 @@ bool CDarkSendPool::DoAutomaticDenominating(bool fDryRun, bool ready)
     if(fDryRun) return true;
 
     if(vecDisabledDenominations.size() == 0){
-        //if we have 20x 0.1DRk and 1DRK inputs, we can start just anonymizing 10DRK inputs.
+        //if we have 20x 0.1DRk and 1BGC inputs, we can start just anonymizing 10BGC inputs.
         if(pwalletMain->CountInputsWithAmount((1     * COIN)+1) >= 20 && 
             pwalletMain->CountInputsWithAmount((.1     * COIN)+1) >= 20){
             vecDisabledDenominations.push_back((1     * COIN)+1);
@@ -1535,9 +1535,9 @@ bool CDarkSendPool::DoAutomaticDenominating(bool fDryRun, bool ready)
         }
         if(sessionTotalValue > maxAmount*COIN) sessionTotalValue = maxAmount*COIN;
 
-        double fDarkcoinSubmitted = sessionTotalValue / COIN;
+        double fBitgoldcoinSubmitted = sessionTotalValue / COIN;
 
-        LogPrintf("Submiting Darksend for %f DRK\n", fDarkcoinSubmitted);
+        LogPrintf("Submiting Darksend for %f BGC\n", fBitgoldcoinSubmitted);
 
         if(pwalletMain->GetDenominatedBalance(true, true) > 0){ //get denominated unconfirmed inputs 
             LogPrintf("DoAutomaticDenominating -- Found unconfirmed denominated outputs, will wait till they confirm to continue.\n");
@@ -1735,7 +1735,7 @@ bool CDarkSendPool::SplitUpMoney(bool justCollateral)
     }
 
     if(splitUpInARow >= 2){
-        LogPrintf("Error: Darksend SplitUpMoney was called multiple times in a row. This should not happen. Please submit a detailed explanation of the steps it took to create this error and submit to evan@darkcoin.io. \n");
+        LogPrintf("Error: Darksend SplitUpMoney was called multiple times in a row. This should not happen. Please submit a detailed explanation of the steps it took to create this error and submit to evan@bitgoldcoin.io. \n");
         fEnableDarksend = false;
         return false;
     }
@@ -1770,7 +1770,7 @@ bool CDarkSendPool::SplitUpMoney(bool justCollateral)
     vecSend.push_back(make_pair(scriptChange, (DARKSEND_COLLATERAL*5)+DARKSEND_FEE));
     nTotalOut += (DARKSEND_COLLATERAL*5)+DARKSEND_FEE;
 
-    // ****** Add outputs in bases of two from 1 darkcoin *** /
+    // ****** Add outputs in bases of two from 1 bitgoldcoin *** /
     if(!justCollateral){
         bool continuing = true;
 
@@ -1919,10 +1919,10 @@ int CDarkSendPool::GetDenominations(const std::vector<CTxOut>& vout){
 
     // Function returns as follows:
     //
-    // bit 0 - 500DRK+1 ( bit on if present )
-    // bit 1 - 100DRK+1 
-    // bit 2 - 10DRK+1 
-    // bit 3 - 1DRK+1 
+    // bit 0 - 500BGC+1 ( bit on if present )
+    // bit 1 - 100BGC+1 
+    // bit 2 - 10BGC+1 
+    // bit 3 - 1BGC+1 
     // bit 4 - fee
     // bit 5 - other sizes
 
@@ -2173,7 +2173,7 @@ void ThreadCheckDarkSendPool()
                     darkSendPool.SendRandomPaymentToSelf();
                     int nLeftToAnon = ((pwalletMain->GetBalance() - pwalletMain->GetAnonymizedBalance())/COIN)-3;
                     if(nLeftToAnon > 999) nLeftToAnon = 999;
-                    nAnonymizeDarkcoinAmount = (rand() % nLeftToAnon)+3;
+                    nAnonymizeBitgoldcoinAmount = (rand() % nLeftToAnon)+3;
                 } else {
                     darkSendPool.DoAutomaticDenominating();
                 }

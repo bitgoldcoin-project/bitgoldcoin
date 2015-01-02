@@ -5,7 +5,7 @@
 CActiveMasternode activeMasternode;
 
 //
-// Bootup the masternode, look for a 1000DRK input and register on the network
+// Bootup the masternode, look for a 1000BGC input and register on the network
 //
 void CActiveMasternode::ManageStatus()
 {

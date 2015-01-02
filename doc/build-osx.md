@@ -1,4 +1,4 @@
-Mac OS X darkcoind build instructions
+Mac OS X bitgoldcoind build instructions
 ====================================
 
 Authors
@@ -26,7 +26,7 @@ Eric Young (eay@cryptsoft.com) and UPnP software written by Thomas Bernard.
 Notes
 -----
 
-See `doc/readme-qt.rst` for instructions on building DarkCoin-Qt, the
+See `doc/readme-qt.rst` for instructions on building bitgoldcoin-Qt, the
 graphical user interface.
 
 Tested on OS X 10.5 through 10.8 on Intel processors only. PPC is not
@@ -72,14 +72,14 @@ Installing the dependencies using MacPorts is very straightforward.
 
     sudo port install boost db48@+no_java openssl miniupnpc
 
-### Building `darkcoind`
+### Building `bitgoldcoind`
 
 1. Clone the github tree to get the source code and go into the directory.
 
-        git clone git@github.com:darkcoin-project/darkcoin.git darkcoin
-        cd darkcoin
+        git clone git@github.com:bitgoldcoin-project/bitgoldcoin.git bitgoldcoin
+        cd bitgoldcoin
 
-2.  Build darkcoind:
+2.  Build bitgoldcoind:
 
         cd src
         make -f makefile.osx
@@ -107,12 +107,12 @@ If not, you can ensure that the Brew OpenSSL is correctly linked by running
 
 Rerunning "openssl version" should now return the correct version.
 
-### Building `darkcoind`
+### Building `bitgoldcoind`
 
 1. Clone the github tree to get the source code and go into the directory.
 
-        git clone git@github.com:darkcoin-project/darkcoin.git darkcoin
-        cd darkcoin
+        git clone git@github.com:bitgoldcoin-project/bitgoldcoin.git bitgoldcoin
+        cd bitgoldcoin
 
 2.  Modify source in order to pick up the `openssl` library.
 
@@ -127,7 +127,7 @@ Rerunning "openssl version" should now return the correct version.
 
         patch -p1 < contrib/homebrew/makefile.osx.mavericks.patch
 
-3.  Build darkcoind:
+3.  Build bitgoldcoind:
 
         cd src
         make -f makefile.osx
@@ -139,8 +139,8 @@ Rerunning "openssl version" should now return the correct version.
 Creating a release build
 ------------------------
 
-A darkcoind binary is not included in the DarkCoin-Qt.app bundle. You can ignore
-this section if you are building `darkcoind` for your own use.
+A bitgoldcoind binary is not included in the bitgoldcoin-Qt.app bundle. You can ignore
+this section if you are building `bitgoldcoind` for your own use.
 
 If you are building `litecond` for others, your build machine should be set up
 as follows for maximum compatibility:
@@ -161,30 +161,30 @@ As of December 2012, the `boost` port does not obey `macosx_deployment_target`.
 Download `http://gavinandresen-bitcoin.s3.amazonaws.com/boost_macports_fix.zip`
 for a fix. Some ports also seem to obey either `build_arch` or
 `macosx_deployment_target`, but not both at the same time. For example, building
-on an OS X 10.6 64-bit machine fails. Official release builds of DarkCoin-Qt are
+on an OS X 10.6 64-bit machine fails. Official release builds of bitgoldcoin-Qt are
 compiled on an OS X 10.6 32-bit machine to workaround that problem.
 
-Once dependencies are compiled, creating `DarkCoin-Qt.app` is easy:
+Once dependencies are compiled, creating `bitgoldcoin-Qt.app` is easy:
 
     make -f Makefile.osx RELEASE=1
 
 Running
 -------
 
-It's now available at `./darkcoind`, provided that you are still in the `src`
+It's now available at `./bitgoldcoind`, provided that you are still in the `src`
 directory. We have to first create the RPC configuration file, though.
 
-Run `./darkcoind` to get the filename where it should be put, or just try these
+Run `./bitgoldcoind` to get the filename where it should be put, or just try these
 commands:
 
-    echo -e "rpcuser=darkcoinrpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/DarkCoin/darkcoin.conf"
-    chmod 600 "/Users/${USER}/Library/Application Support/DarkCoin/darkcoin.conf"
+    echo -e "rpcuser=bitgoldcoinrpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/bitgoldcoin/bitgoldcoin.conf"
+    chmod 600 "/Users/${USER}/Library/Application Support/bitgoldcoin/bitgoldcoin.conf"
 
 When next you run it, it will start downloading the blockchain, but it won't
 output anything while it's doing this. This process may take several hours.
 
 Other commands:
 
-    ./darkcoind --help  # for a list of command-line options.
-    ./darkcoind -daemon # to start the darkcoin daemon.
-    ./darkcoind help    # When the daemon is running, to get a list of RPC commands
+    ./bitgoldcoind --help  # for a list of command-line options.
+    ./bitgoldcoind -daemon # to start the bitgoldcoin daemon.
+    ./bitgoldcoind help    # When the daemon is running, to get a list of RPC commands

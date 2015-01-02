@@ -37,7 +37,7 @@ void DarksendConfig::clickBasic()
     configure(true, 1000, 2);
 
     QMessageBox::information(this, tr("Darksend Configuration"),
-                         tr("Darksend was successfully set to basic (1000 DRK and 2 rounds). You can change this at any time by opening Darkcoin's configuration screen."));
+                         tr("Darksend was successfully set to basic (1000 BGC and 2 rounds). You can change this at any time by opening Bitgoldcoin's configuration screen."));
 
     close();
 }
@@ -47,7 +47,7 @@ void DarksendConfig::clickHigh()
     configure(true, 1000, 4);
 
     QMessageBox::information(this, tr("Darksend Configuration"),
-                         tr("Darksend was successfully set to high (1000 DRK and 4 rounds). You can change this at any time by opening Darkcoin's configuration screen."));
+                         tr("Darksend was successfully set to high (1000 BGC and 4 rounds). You can change this at any time by opening Bitgoldcoin's configuration screen."));
 
     close();
 }
@@ -57,7 +57,7 @@ void DarksendConfig::clickMax()
     configure(true, 1000, 8);
 
     QMessageBox::information(this, tr("Darksend Configuration"),
-                         tr("Darksend was successfully set to maximum (1000 DRK and 8 rounds). You can change this at any time by opening Darkcoin's configuration screen."));
+                         tr("Darksend was successfully set to maximum (1000 BGC and 8 rounds). You can change this at any time by opening Bitgoldcoin's configuration screen."));
 
     close();
 }
@@ -67,8 +67,8 @@ void DarksendConfig::configure(bool enabled, int coins, int rounds) {
     QSettings settings;
 
     settings.setValue("nDarksendRounds", rounds);
-    settings.setValue("nAnonymizeDarkcoinAmount", coins);
+    settings.setValue("nAnonymizeBitgoldcoinAmount", coins);
 
     nDarksendRounds = rounds;
-    nAnonymizeDarkcoinAmount = coins;    
+    nAnonymizeBitgoldcoinAmount = coins;    
 }

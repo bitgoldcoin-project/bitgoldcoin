@@ -35,7 +35,7 @@ SendCoinsDialog::SendCoinsDialog(QWidget *parent) :
 #endif
 #if QT_VERSION >= 0x040700
     /* Do not move this to the XML file, Qt before 4.7 will choke on it */
-    ui->lineEditCoinControlChange->setPlaceholderText(tr("Enter a DarkCoin address (e.g. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)"));
+    ui->lineEditCoinControlChange->setPlaceholderText(tr("Enter a BitgoldCoin address (e.g. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)"));
 #endif
 
     addEntry();
@@ -148,7 +148,7 @@ void SendCoinsDialog::on_sendButton_clicked()
 
     if(ui->checkUseDarksend->isChecked()) {
         recipients[0].inputType = "ONLY_DENOMINATED";
-        funds = "Using <b>Anonymous Funds (will be rounded up to the nearest 0.1DRK)</b>";
+        funds = "Using <b>Anonymous Funds (will be rounded up to the nearest 0.1BGC)</b>";
     } else {
         recipients[0].inputType = "ALL_COINS";
         funds = "Using <b>ANY AVAILABLE Funds</b>";
@@ -546,7 +546,7 @@ void SendCoinsDialog::coinControlChangeEdited(const QString & text)
         else if (!CBitcoinAddress(text.toStdString()).IsValid())
         {
             ui->labelCoinControlChangeLabel->setStyleSheet("QLabel{color:red;}");
-            ui->labelCoinControlChangeLabel->setText(tr("Warning: Invalid Darkcoin address"));
+            ui->labelCoinControlChangeLabel->setText(tr("Warning: Invalid Bitgoldcoin address"));
         }
         else
         {

@@ -423,7 +423,7 @@ public:
     bool SplitUpMoney(bool justCollateral=false);
     // get the denominations for a list of outputs (returns a bitshifted integer)
     int GetDenominations(const std::vector<CTxOut>& vout);
-    // get the denominations for a specific amount of darkcoin. 
+    // get the denominations for a specific amount of bitgoldcoin. 
     int GetDenominationsByAmount(int64 nAmount);
     int GetDenominationsByAmounts(std::vector<int64>& vecAmount);
 };

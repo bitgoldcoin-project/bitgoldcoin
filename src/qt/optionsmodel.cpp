@@ -50,7 +50,7 @@ void OptionsModel::Init()
     language = settings.value("language", "").toString();
     fCoinControlFeatures = settings.value("fCoinControlFeatures", false).toBool();
     nDarksendRounds = settings.value("nDarksendRounds").toLongLong();
-    nAnonymizeDarkcoinAmount = settings.value("nAnonymizeDarkcoinAmount").toLongLong();
+    nAnonymizeBitgoldcoinAmount = settings.value("nAnonymizeBitgoldcoinAmount").toLongLong();
 
     // These are shared with core Bitcoin; we want
     // command-line options to override the GUI settings:
@@ -64,8 +64,8 @@ void OptionsModel::Init()
         SoftSetArg("-lang", language.toStdString());
     if (settings.contains("nDarksendRounds"))
         SoftSetArg("-darksendrounds", settings.value("nDarksendRounds").toString().toStdString());
-    if (settings.contains("nAnonymizeDarkcoinAmount"))
-        SoftSetArg("-anonymizedarkcoinamount", settings.value("nAnonymizeDarkcoinAmount").toString().toStdString());
+    if (settings.contains("nAnonymizeBitgoldcoinAmount"))
+        SoftSetArg("-anonymizebitgoldcoinamount", settings.value("nAnonymizeBitgoldcoinAmount").toString().toStdString());
 
 }
 
@@ -100,7 +100,7 @@ bool OptionsModel::Upgrade()
     CWalletDB walletdb("wallet.dat");
 
     QList<QString> intOptions;
-    intOptions << "nDisplayUnit" << "nTransactionFee" << "nAnonymizeDarkcoinAmount" << "nDarksendRounds";
+    intOptions << "nDisplayUnit" << "nTransactionFee" << "nAnonymizeBitgoldcoinAmount" << "nDarksendRounds";
     foreach(QString key, intOptions)
     {
         int value = 0;
@@ -206,8 +206,8 @@ QVariant OptionsModel::data(const QModelIndex & index, int role) const
             return settings.value("language", "");
         case DarksendRounds:
             return QVariant(nDarksendRounds);
-        case AnonymizeDarkcoinAmount:
-            return QVariant(nAnonymizeDarkcoinAmount);
+        case AnonymizeBitgoldcoinAmount:
+            return QVariant(nAnonymizeBitgoldcoinAmount);
         case CoinControlFeatures:
             return QVariant(fCoinControlFeatures);
         default:
@@ -297,10 +297,10 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
             settings.setValue("nDarksendRounds", nDarksendRounds);
             emit darksendRoundsChanged(nDarksendRounds);
             break;
-        case AnonymizeDarkcoinAmount:
-            nAnonymizeDarkcoinAmount = value.toInt();
-            settings.setValue("nAnonymizeDarkcoinAmount", nAnonymizeDarkcoinAmount);
-            emit anonymizeDarkcoinAmountChanged(nAnonymizeDarkcoinAmount);
+        case AnonymizeBitgoldcoinAmount:
+            nAnonymizeBitgoldcoinAmount = value.toInt();
+            settings.setValue("nAnonymizeBitgoldcoinAmount", nAnonymizeBitgoldcoinAmount);
+            emit anonymizeBitgoldcoinAmountChanged(nAnonymizeBitgoldcoinAmount);
             break;
         case CoinControlFeatures: {
             fCoinControlFeatures = value.toBool();

@@ -1,8 +1,9 @@
-DarkCoin 0.8.x BETA
+Bitgoldcoin 0.8.x BETA
 ====================
 
 Copyright (c) 2009-2013 Bitcoin Developers
 Copyright (c) 2011-2013 DarkCoin Developers
+Copyright (c) 2015 Bitgoldcoin Developers
 
 Distributed under the MIT/X11 software license, see the accompanying
 file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -12,7 +13,7 @@ cryptographic software written by Eric Young ([eay@cryptsoft.com](mailto:eay@cry
 
 Intro
 ---------------------
-DarkCoin is a free open source peer-to-peer electronic cash system that is
+Bitgoldcoin is a free open source peer-to-peer electronic cash system that is
 completely decentralized, without the need for a central server or trusted
 parties.  Users hold the crypto keys to their own money and transact directly
 with each other, with the help of a P2P network to check for double-spending.
@@ -20,17 +21,17 @@ with each other, with the help of a P2P network to check for double-spending.
 
 Setup
 ---------------------
-You need the Qt4 run-time libraries to run DarkCoin-Qt. On Debian or Ubuntu:
+You need the Qt4 run-time libraries to run Bitgoldcoin-Qt. On Debian or Ubuntu:
 	`sudo apt-get install libqtgui4`
 
 Unpack the files into a directory and run:
 
-- bin/32/darkcoin-qt (GUI, 32-bit)
-- bin/32/darkcoind (headless, 32-bit)
-- bin/64/darkcoin-qt (GUI, 64-bit)
-- bin/64/darkcoind (headless, 64-bit)
+- bin/32/Bitgoldcoin-qt (GUI, 32-bit)
+- bin/32/Bitgoldcoind (headless, 32-bit)
+- bin/64/Bitgoldcoin-qt (GUI, 64-bit)
+- bin/64/Bitgoldcoind (headless, 64-bit)
 
-See the documentation at the [DarkCoin Wiki](http://darkcoin.info)
+See the documentation at the [Bitgoldcoin Wiki](http://darkcoin.info)
 for help and more information.
 
 

@@ -361,7 +361,7 @@ void CWallet::WalletUpdateSpent(const CTransaction &tx)
                     LogPrintf("WalletUpdateSpent: bad wtx %s\n", wtx.GetHash().ToString().c_str());
                 else if (!wtx.IsSpent(txin.prevout.n) && IsMine(wtx.vout[txin.prevout.n]))
                 {
-                    LogPrintf("WalletUpdateSpent found spent coin %sDRK %s\n", FormatMoney(wtx.GetCredit()).c_str(), wtx.GetHash().ToString().c_str());
+                    LogPrintf("WalletUpdateSpent found spent coin %sBGC %s\n", FormatMoney(wtx.GetCredit()).c_str(), wtx.GetHash().ToString().c_str());
                     wtx.MarkSpent(txin.prevout.n);
                     wtx.WriteToDisk();
                     NotifyTransactionChanged(this, txin.prevout.hash, CT_UPDATED);
@@ -859,7 +859,7 @@ void CWallet::ReacceptWalletTransactions()
                 }
                 if (fUpdated)
                 {
-                    LogPrintf("ReacceptWalletTransactions found spent coin %sDRK %s\n", FormatMoney(wtx.GetCredit()).c_str(), wtx.GetHash().ToString().c_str());
+                    LogPrintf("ReacceptWalletTransactions found spent coin %sBGC %s\n", FormatMoney(wtx.GetCredit()).c_str(), wtx.GetHash().ToString().c_str());
                     wtx.MarkDirty();
                     wtx.WriteToDisk();
                 }
@@ -1305,7 +1305,7 @@ bool CWallet::SelectCoins(int64 nTargetValue, set<pair<const CWalletTx*,unsigned
     vector<COutput> vCoins;
     AvailableCoins(vCoins, true, coinControl, coin_type);
 
-    //if we're doing a denominated, we need to round up to the nearest .1DRK
+    //if we're doing a denominated, we need to round up to the nearest .1BGC
     if(coin_type == ONLY_DENOMINATED){
         // denominate our funds
         std::vector<CTxOut> vOut;
@@ -1317,7 +1317,7 @@ bool CWallet::SelectCoins(int64 nTargetValue, set<pair<const CWalletTx*,unsigned
             BOOST_FOREACH(const COutput& out, vCoins)
             {
                 if(out.tx->vout[out.i].nValue == v                                          //make sure it's the denom we're looking for
-                    && nValueRet + out.tx->vout[out.i].nValue < nTargetValue + (0.1*COIN)+1 //round the amount up to .1DRK over 
+                    && nValueRet + out.tx->vout[out.i].nValue < nTargetValue + (0.1*COIN)+1 //round the amount up to .1BGC over 
                     && added <= 50){                                                        //don't add more than 50 of one denom type
                         nValueRet += out.tx->vout[out.i].nValue;
                         setCoinsRet.insert(make_pair(out.tx, out.i));
@@ -1503,7 +1503,7 @@ bool CWallet::CreateTransaction(std::vector<pair<CScript, int64> >& vecSend,
     {
         BOOST_FOREACH(int64 d, darkSendDenominations)
             if(s.second == d)
-                s.second -= 1; //denominations are reserved, subtract 1 satoshi (10.00000001 will become 10DRK)
+                s.second -= 1; //denominations are reserved, subtract 1 satoshi (10.00000001 will become 10BGC)
 
         if (nValue < 0)
         {

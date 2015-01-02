@@ -186,12 +186,12 @@ bool AppInit(int argc, char* argv[])
         if (mapArgs.count("-?") || mapArgs.count("--help"))
         {
             // First part of help message is specific to bitcoind / RPC client
-            std::string strUsage = _("DarkCoin version") + " " + FormatFullVersion() + "\n\n" +
+            std::string strUsage = _("BitgoldCoin version") + " " + FormatFullVersion() + "\n\n" +
                 _("Usage:") + "\n" +
-                  "  darkcoind [options]                     " + "\n" +
-                  "  darkcoind [options] <command> [params]  " + _("Send command to -server or darkcoind") + "\n" +
-                  "  darkcoind [options] help                " + _("List commands") + "\n" +
-                  "  darkcoind [options] help <command>      " + _("Get help for a command") + "\n";
+                  "  bitgoldcoind [options]                     " + "\n" +
+                  "  bitgoldcoind [options] <command> [params]  " + _("Send command to -server or bitgoldcoind") + "\n" +
+                  "  bitgoldcoind [options] help                " + _("List commands") + "\n" +
+                  "  bitgoldcoind [options] help <command>      " + _("Get help for a command") + "\n";
 
             strUsage += "\n" + HelpMessage();
 
@@ -205,7 +205,7 @@ bool AppInit(int argc, char* argv[])
 
         // Command-line RPC
         for (int i = 1; i < argc; i++)
-            if (!IsSwitchChar(argv[i][0]) && !boost::algorithm::istarts_with(argv[i], "darkcoin:"))
+            if (!IsSwitchChar(argv[i][0]) && !boost::algorithm::istarts_with(argv[i], "bitgoldcoin:"))
                 fCommandLine = true;
 
         if (fCommandLine)
@@ -309,8 +309,8 @@ std::string HelpMessage()
 {
     string strUsage = _("Options:") + "\n" +
         "  -?                     " + _("This help message") + "\n" +
-        "  -conf=<file>           " + _("Specify configuration file (default: darkcoin.conf)") + "\n" +
-        "  -pid=<file>            " + _("Specify pid file (default: darkcoind.pid)") + "\n" +
+        "  -conf=<file>           " + _("Specify configuration file (default: bitgoldcoin.conf)") + "\n" +
+        "  -pid=<file>            " + _("Specify pid file (default: bitgoldcoind.pid)") + "\n" +
         "  -gen                   " + _("Generate coins (default: 0)") + "\n" +
         "  -datadir=<dir>         " + _("Specify data directory") + "\n" +
         "  -dbcache=<n>           " + _("Set database cache size in megabytes (default: 25)") + "\n" +
@@ -320,7 +320,7 @@ std::string HelpMessage()
         "  -socks=<n>             " + _("Select the version of socks proxy to use (4-5, default: 5)") + "\n" +
         "  -tor=<ip:port>         " + _("Use proxy to reach tor hidden services (default: same as -proxy)") + "\n"
         "  -dns                   " + _("Allow DNS lookups for -addnode, -seednode and -connect") + "\n" +
-        "  -port=<port>           " + _("Listen for connections on <port> (default: 9999 or testnet: 19999)") + "\n" +
+        "  -port=<port>           " + _("Listen for connections on <port> (default: 9989 or testnet: 19989)") + "\n" +
         "  -maxconnections=<n>    " + _("Maintain at most <n> connections to peers (default: 125)") + "\n" +
         "  -addnode=<ip>          " + _("Add a node to connect to and attempt to keep the connection open") + "\n" +
         "  -connect=<ip>          " + _("Connect only to the specified node(s)") + "\n" +
@@ -364,7 +364,7 @@ std::string HelpMessage()
 #endif
         "  -rpcuser=<user>        " + _("Username for JSON-RPC connections") + "\n" +
         "  -rpcpassword=<pw>      " + _("Password for JSON-RPC connections") + "\n" +
-        "  -rpcport=<port>        " + _("Listen for JSON-RPC connections on <port> (default: 9998 or testnet: 19998)") + "\n" +
+        "  -rpcport=<port>        " + _("Listen for JSON-RPC connections on <port> (default: 9988 or testnet: 19988)") + "\n" +
         "  -rpcallowip=<ip>       " + _("Allow JSON-RPC connections from specified IP address") + "\n" +
 #ifndef QT_GUI
         "  -rpcconnect=<ip>       " + _("Send commands to node running on <ip> (default: 127.0.0.1)") + "\n" +
@@ -398,7 +398,7 @@ std::string HelpMessage()
         "  -disabledarksend=<n>      "   + _("Disable use of automated darksend for funds stored in this wallet (0-1, default: 1)") + "\n" +
         "  -enabledaemondarksend=<n>      "   + _("Darksend is not usually enabled in daemon mode (0-1, default: 1)") + "\n" +
         "  -darksendrounds=<n>      "   + _("Use N separate masternodes to anonymize funds  (2-8, default: 2)") + "\n" +
-        "  -anonymizedarkcoinamount=<n>      "   + _("Keep N darkcoin anonymized (default: 0)") + "\n" +
+        "  -anonymizebitgoldcoinamount=<n>      "   + _("Keep N bitgoldcoin anonymized (default: 0)") + "\n" +
         "  -liquidityprovider=<n>      "   + _("Provide liquidity to Darksend by infrequently mixing coins on a continual basis (0-100, default: 0, 1=very frequent, high fees, 100=very infrequent, low fees)") + "\n" +
 
         "\n" + _("InstantX options:") + "\n" +
@@ -410,7 +410,7 @@ std::string HelpMessage()
         "  -blockmaxsize=<n>      "   + _("Set maximum block size in bytes (default: 250000)") + "\n" +
         "  -blockprioritysize=<n> "   + _("Set maximum size of high-priority/low-fee transactions in bytes (default: 27000)") + "\n" +
 
-        "\n" + _("SSL options: (see the DarkCoin Wiki for SSL setup instructions)") + "\n" +
+        "\n" + _("SSL options: (see the BitgoldCoin Wiki for SSL setup instructions)") + "\n" +
         "  -rpcssl                                  " + _("Use OpenSSL (https) for JSON-RPC connections") + "\n" +
         "  -rpcsslcertificatechainfile=<file.cert>  " + _("Server certificate file (default: server.cert)") + "\n" +
         "  -rpcsslprivatekeyfile=<file.pem>         " + _("Server private key (default: server.pem)") + "\n" +
@@ -705,12 +705,12 @@ bool AppInit2(boost::thread_group& threadGroup)
     if (file) fclose(file);
     static boost::interprocess::file_lock lock(pathLockFile.string().c_str());
     if (!lock.try_lock())
-        return InitError(strprintf(_("Cannot obtain a lock on data directory %s. DarkCoin is probably already running."), strDataDir.c_str()));
+        return InitError(strprintf(_("Cannot obtain a lock on data directory %s. BitgoldCoin is probably already running."), strDataDir.c_str()));
 
     if (GetBoolArg("-shrinkdebugfile", !fDebug))
         ShrinkDebugFile();
     LogPrintf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    LogPrintf("DarkCoin version %s (%s)\n", FormatFullVersion().c_str(), CLIENT_DATE.c_str());
+    LogPrintf("BitgoldCoin version %s (%s)\n", FormatFullVersion().c_str(), CLIENT_DATE.c_str());
     LogPrintf("Using OpenSSL version %s\n", SSLeay_version(SSLEAY_VERSION));
     if (!fLogTimestamps)
         LogPrintf("Startup time: %s\n", DateTimeStrFormat("%Y-%m-%d %H:%M:%S", GetTime()).c_str());
@@ -720,7 +720,7 @@ bool AppInit2(boost::thread_group& threadGroup)
     std::ostringstream strErrors;
 
     if (fDaemon)
-        fprintf(stdout, "DarkCoin server starting\n");
+        fprintf(stdout, "BitgoldCoin server starting\n");
 
     if (nScriptCheckThreads) {
         LogPrintf("Using %u threads for script verification\n", nScriptCheckThreads);
@@ -1096,10 +1096,10 @@ bool AppInit2(boost::thread_group& threadGroup)
                 InitWarning(msg);
             }
             else if (nLoadWalletRet == DB_TOO_NEW)
-                strErrors << _("Error loading wallet.dat: Wallet requires newer version of DarkCoin") << "\n";
+                strErrors << _("Error loading wallet.dat: Wallet requires newer version of BitgoldCoin") << "\n";
             else if (nLoadWalletRet == DB_NEED_REWRITE)
             {
-                strErrors << _("Wallet needed to be rewritten: restart DarkCoin to complete") << "\n";
+                strErrors << _("Wallet needed to be rewritten: restart BitgoldCoin to complete") << "\n";
                 LogPrintf("%s", strErrors.str().c_str());
                 return InitError(strErrors.str());
             }
@@ -1258,22 +1258,22 @@ bool AppInit2(boost::thread_group& threadGroup)
         nDarksendRounds = 99999;
     }
 
-    nAnonymizeDarkcoinAmount = GetArg("-anonymizedarkcoinamount", 0);
-    if(nAnonymizeDarkcoinAmount > 999999) nAnonymizeDarkcoinAmount = 999999;
-    if(nAnonymizeDarkcoinAmount < 2) nAnonymizeDarkcoinAmount = 2;
+    nAnonymizeBitgoldcoinAmount = GetArg("-anonymizebitgoldcoinamount", 0);
+    if(nAnonymizeBitgoldcoinAmount > 999999) nAnonymizeBitgoldcoinAmount = 999999;
+    if(nAnonymizeBitgoldcoinAmount < 2) nAnonymizeBitgoldcoinAmount = 2;
 
     bool fEnableInstantX = GetBoolArg("-enableinstantx", true);
     if(fEnableInstantX){
         nInstantXDepth = GetArg("-instantxdepth", 1);
         if(nInstantXDepth > 60) nInstantXDepth = 60;
-        if(nInstantXDepth < 0) nAnonymizeDarkcoinAmount = 0;
+        if(nInstantXDepth < 0) nAnonymizeBitgoldcoinAmount = 0;
     } else {
         nInstantXDepth = 0;
     }
 
     LogPrintf("nInstantXDepth %d\n", nInstantXDepth);
     LogPrintf("Darksend rounds %d\n", nDarksendRounds);
-    LogPrintf("Anonymize Darkcoin Amount %d\n", nAnonymizeDarkcoinAmount);
+    LogPrintf("Anonymize Bitgoldcoin Amount %d\n", nAnonymizeBitgoldcoinAmount);
 
     darkSendDenominations.push_back( (100   * COIN)+1 );
     darkSendDenominations.push_back( (10    * COIN)+1 );

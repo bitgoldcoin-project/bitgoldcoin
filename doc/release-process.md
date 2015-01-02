@@ -5,7 +5,7 @@ Release Process
 
 ###update (commit) version in sources
 
-	darkcoin-qt.pro
+	bitgoldcoin-qt.pro
 	contrib/verifysfbinaries/verify.sh
 	doc/README*
 	share/setup.nsi
@@ -23,11 +23,11 @@ Release Process
 
 ##perform gitian builds
 
- From a directory containing the darkcoin source, gitian-builder and gitian.sigs
+ From a directory containing the bitgoldcoin source, gitian-builder and gitian.sigs
   
 	export SIGNER=(your gitian key, ie bluematt, sipa, etc)
 	export VERSION=(new version, e.g. 0.9.11.0)
-	pushd ./darkcoin
+	pushd ./bitgoldcoin
 	git checkout v${VERSION}
 	popd
 	pushd ./gitian-builder
@@ -63,25 +63,25 @@ Release Process
 	wget 'http://llvm.org/releases/3.2/clang+llvm-3.2-x86-linux-ubuntu-12.04.tar.gz' -O clang-llvm-3.2-x86-linux-ubuntu-12.04.tar.gz
 	wget 'https://raw.githubusercontent.com/theuni/osx-cross-depends/master/patches/cdrtools/genisoimage.diff' -O cdrkit-deterministic.patch
 	cd ..
-	./bin/gbuild ../darkcoin/contrib/gitian-descriptors/linux/gitian-linux-boost.yml
+	./bin/gbuild ../bitgoldcoin/contrib/gitian-descriptors/linux/gitian-linux-boost.yml
 	mv build/out/boost-*.zip inputs/
-	./bin/gbuild ../darkcoin/contrib/gitian-descriptors/linux/gitian-linux-deps.yml
+	./bin/gbuild ../bitgoldcoin/contrib/gitian-descriptors/linux/gitian-linux-deps.yml
 	mv build/out/bitcoin-deps-*.zip inputs/
-	./bin/gbuild ../darkcoin/contrib/gitian-descriptors/linux/gitian-linux-qt.yml
+	./bin/gbuild ../bitgoldcoin/contrib/gitian-descriptors/linux/gitian-linux-qt.yml
 	mv build/out/qt-*.tar.gz inputs/
-	./bin/gbuild ../darkcoin/contrib/gitian-descriptors/windows/gitian-win-boost.yml
+	./bin/gbuild ../bitgoldcoin/contrib/gitian-descriptors/windows/gitian-win-boost.yml
 	mv build/out/boost-*.zip inputs/
-	./bin/gbuild ../darkcoin/contrib/gitian-descriptors/windows/gitian-win-deps.yml
+	./bin/gbuild ../bitgoldcoin/contrib/gitian-descriptors/windows/gitian-win-deps.yml
 	mv build/out/bitcoin-deps-*.zip inputs/
-	./bin/gbuild ../darkcoin/contrib/gitian-descriptors/windows/gitian-win-qt4.yml
+	./bin/gbuild ../bitgoldcoin/contrib/gitian-descriptors/windows/gitian-win-qt4.yml
 	mv build/out/qt-*.zip inputs/
-	./bin/gbuild ../darkcoin/contrib/gitian-descriptors/windows/gitian-win-protobuf.yml
+	./bin/gbuild ../bitgoldcoin/contrib/gitian-descriptors/windows/gitian-win-protobuf.yml
 	mv build/out/protobuf-*.zip inputs/
-	./bin/gbuild ../darkcoin/contrib/gitian-descriptors/osx/gitian-osx-native.yml
+	./bin/gbuild ../bitgoldcoin/contrib/gitian-descriptors/osx/gitian-osx-native.yml
 	mv build/out/osx-*.tar.gz inputs/
-	./bin/gbuild ../darkcoin/contrib/gitian-descriptors/osx/gitian-osx-depends.yml
+	./bin/gbuild ../bitgoldcoin/contrib/gitian-descriptors/osx/gitian-osx-depends.yml
 	mv build/out/osx-*.tar.gz inputs/
-	./bin/gbuild ../darkcoin/contrib/gitian-descriptors/osx/gitian-osx-qt.yml
+	./bin/gbuild ../bitgoldcoin/contrib/gitian-descriptors/osx/gitian-osx-qt.yml
 	mv build/out/osx-*.tar.gz inputs/
 
  The expected SHA256 hashes of the intermediate inputs are:
@@ -105,48 +105,48 @@ Release Process
     d6bec84c7ac8c3aa5aa2ea728bc3561f6fdfb4c58bc616ddfca757d6f4b03198  osx-depends-qt-5.2.1-r4.tar.gz
 
 
- Build darkcoind and darkcoin-qt on Linux32, Linux64, Win32 and OSX:
+ Build bitgoldcoind and bitgoldcoin-qt on Linux32, Linux64, Win32 and OSX:
   
-	./bin/gbuild --commit darkcoin=v${VERSION} ../darkcoin/contrib/gitian-descriptors/linux/gitian-linux-darkcoin.yml
-	./bin/gsign --signer $SIGNER --release ${VERSION} --destination ../gitian.sigs/ ../darkcoin/contrib/gitian-descriptors/linux/gitian-linux-darkcoin.yml
+	./bin/gbuild --commit bitgoldcoin=v${VERSION} ../bitgoldcoin/contrib/gitian-descriptors/linux/gitian-linux-bitgoldcoin.yml
+	./bin/gsign --signer $SIGNER --release ${VERSION} --destination ../gitian.sigs/ ../bitgoldcoin/contrib/gitian-descriptors/linux/gitian-linux-bitgoldcoin.yml
 	pushd build/out
-	zip -r darkcoin-${VERSION}-linux-gitian.zip *
-	mv darkcoin-${VERSION}-linux-gitian.zip ../../../
+	zip -r bitgoldcoin-${VERSION}-linux-gitian.zip *
+	mv bitgoldcoin-${VERSION}-linux-gitian.zip ../../../
 	popd
-	./bin/gbuild --commit darkcoin=v${VERSION} ../darkcoin/contrib/gitian-descriptors/windows/gitian-win-darkcoin.yml
-	./bin/gsign --signer $SIGNER --release ${VERSION}-win --destination ../gitian.sigs/ ../darkcoin/contrib/gitian-descriptors/windows/gitian-win-darkcoin.yml
+	./bin/gbuild --commit bitgoldcoin=v${VERSION} ../bitgoldcoin/contrib/gitian-descriptors/windows/gitian-win-bitgoldcoin.yml
+	./bin/gsign --signer $SIGNER --release ${VERSION}-win --destination ../gitian.sigs/ ../bitgoldcoin/contrib/gitian-descriptors/windows/gitian-win-bitgoldcoin.yml
 	pushd build/out
-	zip -r darkcoin-${VERSION}-win-gitian.zip *
-	mv darkcoin-${VERSION}-win-gitian.zip ../../../
+	zip -r bitgoldcoin-${VERSION}-win-gitian.zip *
+	mv bitgoldcoin-${VERSION}-win-gitian.zip ../../../
 	popd
-        ./bin/gbuild --commit darkcoin=v${VERSION} ../darkcoin/contrib/gitian-descriptors/osx/gitian-osx-darkcoin.yml
-        ./bin/gsign --signer $SIGNER --release ${VERSION}-osx --destination ../gitian.sigs/ ../darkcoin/contrib/gitian-descriptors/osx/gitian-osx-darkcoin.yml
+        ./bin/gbuild --commit bitgoldcoin=v${VERSION} ../bitgoldcoin/contrib/gitian-descriptors/osx/gitian-osx-bitgoldcoin.yml
+        ./bin/gsign --signer $SIGNER --release ${VERSION}-osx --destination ../gitian.sigs/ ../bitgoldcoin/contrib/gitian-descriptors/osx/gitian-osx-bitgoldcoin.yml
 	pushd build/out
-	mv DarkCoin-Qt.dmg ../../../
+	mv BitgoldCoin-Qt.dmg ../../../
 	popd
 	popd
 
   Build output expected:
 
-  1. linux 32-bit and 64-bit binaries + source (darkcoin-${VERSION}-linux-gitian.zip)
-  2. windows 32-bit binaries + installer + source (darkcoin-${VERSION}-win-gitian.zip)
-  3. OSX installer (DarkCoin-Qt.dmg)
+  1. linux 32-bit and 64-bit binaries + source (bitgoldcoin-${VERSION}-linux-gitian.zip)
+  2. windows 32-bit binaries + installer + source (bitgoldcoin-${VERSION}-win-gitian.zip)
+  3. OSX installer (BitgoldCoin-Qt.dmg)
   4. Gitian signatures (in gitian.sigs/${VERSION}[-win|-osx]/(your gitian key)/
 
 repackage gitian builds for release as stand-alone zip/tar/installer exe
 
 **Linux .tar.gz:**
 
-	unzip darkcoin-${VERSION}-linux-gitian.zip -d darkcoin-${VERSION}-linux
-	tar czvf darkcoin-${VERSION}-linux.tar.gz darkcoin-${VERSION}-linux
-	rm -rf darkcoin-${VERSION}-linux
+	unzip bitgoldcoin-${VERSION}-linux-gitian.zip -d bitgoldcoin-${VERSION}-linux
+	tar czvf bitgoldcoin-${VERSION}-linux.tar.gz bitgoldcoin-${VERSION}-linux
+	rm -rf bitgoldcoin-${VERSION}-linux
 
 **Windows .zip and setup.exe:**
 
-	unzip darkcoin-${VERSION}-win-gitian.zip -d darkcoin-${VERSION}-win
-	mv darkcoin-${VERSION}-win/darkcoin-*-setup.exe .
-	zip -r darkcoin-${VERSION}-win.zip darkcoin-${VERSION}-win
-	rm -rf darkcoin-${VERSION}-win
+	unzip bitgoldcoin-${VERSION}-win-gitian.zip -d bitgoldcoin-${VERSION}-win
+	mv bitgoldcoin-${VERSION}-win/bitgoldcoin-*-setup.exe .
+	zip -r bitgoldcoin-${VERSION}-win.zip bitgoldcoin-${VERSION}-win
+	rm -rf bitgoldcoin-${VERSION}-win
 
 ###Next steps:
 
@@ -156,10 +156,10 @@ repackage gitian builds for release as stand-alone zip/tar/installer exe
 
 * create SHA256SUMS for builds, and PGP-sign it
 
-* update darkcoin.io version
+* update bitgoldcoin.io version
   make sure all OS download links go to the right versions
   
-* update download sizes on darkcoin.io
+* update download sizes on bitgoldcoin.io
 
 * update forum version
 
@@ -184,11 +184,11 @@ Commit your signature to gitian.sigs:
 
 - Announce the release:
 
-  - Add the release to darkcoin.io: https://github.com/darkcoinproject/darkcoin.io/tree/master/_releases
+  - Add the release to bitgoldcoin.io: https://github.com/bitgoldcoinproject/bitgoldcoin.io/tree/master/_releases
 
-  - Release sticky on darkcointalk
+  - Release sticky on bitgoldcointalk
 
-  - Darkcoin-development mailing list
+  - Bitgoldcoin-development mailing list
 
   - Optionally reddit /r/DRKCoin, ...
 

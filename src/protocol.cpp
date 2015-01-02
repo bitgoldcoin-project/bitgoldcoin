@@ -21,9 +21,9 @@ static unsigned char pchMessageStartTestOld[4] = { 0xfc, 0xc1, 0xb7, 0xdc };
 static unsigned char pchMessageStartTestNew[4] = { 0xce, 0xe2, 0xca, 0xff };
 static unsigned int nMessageStartTestSwitchTime = 1398869551+(60*5);
 
-// Darkcoin message start (switch from Litecoin's)
+// Bitgoldcoin message start (switch from Litecoin's)
 static unsigned char pchMessageStartLitecoin[4] = { 0xfb, 0xc0, 0xb6, 0xdb };
-static unsigned char pchMessageStartDarkcoin[4] = { 0xbf, 0x0c, 0x6b, 0xbd };
+static unsigned char pchMessageStartBitgoldcoin[4] = { 0xbf, 0x0c, 0x6b, 0xbd };
 static unsigned int nMessageStartSwitchTime = 1400094580; //Wed, 14 May 2014 19:09:40 GMT
 
 void GetMessageStart(unsigned char pchMessageStart[], bool fPersistent)
@@ -31,7 +31,7 @@ void GetMessageStart(unsigned char pchMessageStart[], bool fPersistent)
     if (fTestNet)
         memcpy(pchMessageStart, (fPersistent || GetAdjustedTime() > nMessageStartTestSwitchTime)? pchMessageStartTestNew : pchMessageStartTestOld, sizeof(pchMessageStartTestNew));
     else
-        memcpy(pchMessageStart, (fPersistent || GetAdjustedTime() > nMessageStartSwitchTime)? pchMessageStartDarkcoin : pchMessageStartLitecoin, sizeof(pchMessageStartDarkcoin));
+        memcpy(pchMessageStart, (fPersistent || GetAdjustedTime() > nMessageStartSwitchTime)? pchMessageStartBitgoldcoin : pchMessageStartLitecoin, sizeof(pchMessageStartBitgoldcoin));
 }
 
 static const char* ppszTypeName[] =

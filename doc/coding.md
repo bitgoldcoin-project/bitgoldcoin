@@ -86,7 +86,7 @@ Threads
  
 - ThreadRPCServer : Remote procedure call handler, listens on port 9998 for connections and services them.
  
-- DarkcoinMiner : Generates darkcoins
+- BitgoldcoinMiner : Generates Bitgoldcoins
   
 - ThreadMapPort : Universal plug-and-play startup/shutdown
  
