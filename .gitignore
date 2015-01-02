@@ -1,7 +1,7 @@
 src/*.exe
-src/darkcoin
-src/darkcoind
-src/test_darkcoin
+src/bitgoldcoin
+src/bitgoldcoind
+src/test_bitgoldcoin
 .settings
 .*.swp
 *.*~*
@@ -10,17 +10,17 @@ src/test_darkcoin
 *.orig
 *.o
 *.patch
-.darkcoin
+.bitgoldcoin
 
 # Compilation and Qt preprocessor part
 *.qm
 Makefile
-darkcoin-qt
-DarkCoin-Qt.app
+bitgoldcoin-qt
+bitgoldcoin-Qt.app
 
-# Unit-tests
+# Unit-testsbitgoldcoin
 Makefile.test
-darkcoin-qt_test
+bitgoldcoin-qt_test
 
 # Resources cpp
 qrc_*.cpp

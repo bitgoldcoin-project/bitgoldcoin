@@ -1,9 +1,9 @@
-Building DarkCoin
+Building Bitgoldcoin
 
-See doc/readme-qt.rst for instructions on building DarkCoin-Qt,
+See doc/readme-qt.rst for instructions on building Bitgoldcoin-Qt,
 the intended-for-end-users, nice-graphical-interface, reference
 implementation of DarkCoin.
 
-See doc/build-*.txt for instructions on building darkcoind,
+See doc/build-*.txt for instructions on building Bitgoldcoind,
 the intended-for-services, no-graphical-interface, reference
-implementation of DarkCoin.
+implementation of Bitgoldcoin.

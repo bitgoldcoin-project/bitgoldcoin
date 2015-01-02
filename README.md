@@ -1,17 +1,18 @@
-Darkcoin integration/staging tree
+Bitgoldcoin integration/staging tree
 ================================
 
-https://www.darkcoin.io
+http://bitgoldcoin-project.github.io/bitgoldcoin
 
 Copyright (c) 2009-2013 Bitcoin Developers
 Copyright (c) 2011-2014 The Litecoin Developers
 Copyright (c) 2012-2013 The Peercoin Developers
 Copyright (c) 2014 The Darkcoin Developers
+Copyright (c) 2015 The Bitgoldcoin Developers
 
-What is Darkcoin?
+What is Bitgoldcoin?
 ----------------
 
-Darkcoin (DRK) is an open sourced, privacy-centric digital currency. It allows you keep your finances private as you make transactions, similar to cash.
+Bitgoldcoin (BGC) is an open sourced, privacy-centric digital currency. It allows you keep your finances private as you make transactions, similar to cash.
 
  - Super secure hashing algorithm: 11 rounds of scientific hashing functions (blake, bmw, groestl, jh, keccak, skein, luffa, cubehash, shavite, simd, echo)
  - Block reward is controlled by moore's law: 2222222/(((Difficulty+2600)/9)^2)
@@ -22,12 +23,12 @@ Darkcoin (DRK) is an open sourced, privacy-centric digital currency. It allows y
  - Anonymous blockchain using Darksend technology
 
 For more information, as well as an immediately useable, binary version of
-the Darkcoin client sofware, see https://www.darkcoin.io.
+the Bitgoldcoin client sofware, see http://bitgoldcoin-project.github.io/bitgoldcoin.
 
 License
 -------
 
-Darkcoin is released under the terms of the MIT license. See `COPYING` for more
+Bitgoldcoin is released under the terms of the MIT license. See `COPYING` for more
 information or see http://opensource.org/licenses/MIT.
 
 Development process
@@ -36,7 +37,7 @@ Development process
 Developers work in their own trees, then submit pull requests when they think
 their feature or bug fix is ready.
 
-If it is a simple/trivial/non-controversial change, then one of the Darkcoin
+If it is a simple/trivial/non-controversial change, then one of the Bitgoldcoin
 development team members simply pulls it.
 
 If it is a *more complicated or potentially controversial* change, then the patch
