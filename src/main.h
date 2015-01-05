@@ -430,7 +430,8 @@ public:
     {
         // Large (in bytes) low-priority (new, small-coin) transactions
         // need a fee.
-        return dPriority > COIN * 576 / 250;
+        return dPriority > COIN * 576 / 250;// BGC: 576 blocks found a day. Priority cutoff is 1 BGC day / 250 bytes.
+
     }
 
     // Apply the effects of this transaction on the UTXO set represented by view
