@@ -347,7 +347,7 @@ BOOST_AUTO_TEST_CASE(darksend_masternode_class)
     std::vector<unsigned char> newSig;
     int64 newNow = GetTimeMicros();
 
-    CMasterNode mn(CService("10.10.10.10:9999"), CTxIn(1000, 0), pubkey, newSig, newNow, pubkey, PROTOCOL_VERSION);
+    CMasterNode mn(CService("10.10.10.10:9989"), CTxIn(1000, 0), pubkey, newSig, newNow, pubkey, PROTOCOL_VERSION);
     mn.unitTest = true;
     mn.UpdateLastSeen();
     mn.Check();

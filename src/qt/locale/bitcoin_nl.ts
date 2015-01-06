@@ -1407,8 +1407,8 @@ Adres: %4
     </message>
     <message>
         <location line="+34"/>
-        <source>The address to send the payment to (e.g. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</source>
-        <translation>Het adres waaraan u wilt betalen  (bijv. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</translation>
+        <source>The address to send the payment to (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
+        <translation>Het adres waaraan u wilt betalen  (bijv. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</translation>
     </message>
     <message>
         <location line="+60"/>
@@ -1448,8 +1448,8 @@ Adres: %4
     </message>
     <message>
         <location filename="../sendcoinsentry.cpp" line="+1"/>
-        <source>Enter a BitgoldCoin address (e.g. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</source>
-        <translation>Vul een BitgoldCoinadres in (bijv. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</translation>
+        <source>Enter a BitgoldCoin address (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
+        <translation>Vul een BitgoldCoinadres in (bijv. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</translation>
     </message>
 </context>
 <context>
@@ -1471,8 +1471,8 @@ Adres: %4
     </message>
     <message>
         <location line="+18"/>
-        <source>The address to sign the message with (e.g. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</source>
-        <translation>Het adres om het bericht mee te ondertekenen (Vb.: XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8).</translation>
+        <source>The address to sign the message with (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
+        <translation>Het adres om het bericht mee te ondertekenen (Vb.: G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j).</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -1544,8 +1544,8 @@ Adres: %4
     </message>
     <message>
         <location line="+21"/>
-        <source>The address the message was signed with (e.g. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</source>
-        <translation>Het adres waarmee bet bericht was ondertekend (Vb.: XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8).</translation>
+        <source>The address the message was signed with (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
+        <translation>Het adres waarmee bet bericht was ondertekend (Vb.: G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j).</translation>
     </message>
     <message>
         <location line="+40"/>
@@ -1565,8 +1565,8 @@ Adres: %4
     <message>
         <location filename="../signverifymessagedialog.cpp" line="+27"/>
         <location line="+3"/>
-        <source>Enter a BitgoldCoin address (e.g. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</source>
-        <translation>Vul een BitgoldCoinadres in (bijv. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</translation>
+        <source>Enter a BitgoldCoin address (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
+        <translation>Vul een BitgoldCoinadres in (bijv. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</translation>
     </message>
     <message>
         <location line="-2"/>
@@ -2239,8 +2239,8 @@ Adres: %4
     </message>
     <message>
         <location line="-28"/>
-        <source>Listen for connections on &lt;port&gt; (default: 9999 or testnet: 19999)</source>
-        <translation>Luister voor verbindingen op &lt;poort&gt; (standaard: 9999 of testnet: 19999)</translation>
+        <source>Listen for connections on &lt;port&gt; (default: 9989 or testnet: 19989)</source>
+        <translation>Luister voor verbindingen op &lt;poort&gt; (standaard: 9989 of testnet: 19989)</translation>
     </message>
     <message>
         <location line="+5"/>
@@ -2274,8 +2274,8 @@ Adres: %4
     </message>
     <message>
         <location line="+27"/>
-        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: 9998 or testnet: 19998)</source>
-        <translation>Wacht op JSON-RPC-connecties op poort &lt;port&gt; (standaard: 9998 of testnet: 19998)</translation>
+        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: 9988 or testnet: 19988)</source>
+        <translation>Wacht op JSON-RPC-connecties op poort &lt;port&gt; (standaard: 9988 of testnet: 19988)</translation>
     </message>
     <message>
         <location line="+37"/>

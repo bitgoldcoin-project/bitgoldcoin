@@ -35,7 +35,7 @@ SendCoinsDialog::SendCoinsDialog(QWidget *parent) :
 #endif
 #if QT_VERSION >= 0x040700
     /* Do not move this to the XML file, Qt before 4.7 will choke on it */
-    ui->lineEditCoinControlChange->setPlaceholderText(tr("Enter a BitgoldCoin address (e.g. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)"));
+    ui->lineEditCoinControlChange->setPlaceholderText(tr("Enter a BitgoldCoin address (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)"));
 #endif
 
     addEntry();

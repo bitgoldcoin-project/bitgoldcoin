@@ -1408,8 +1408,8 @@ Adress: %4
     </message>
     <message>
         <location line="+34"/>
-        <source>The address to send the payment to (e.g. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</source>
-        <translation>Adressen som betalningen skall skickas till  (t.ex. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</translation>
+        <source>The address to send the payment to (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
+        <translation>Adressen som betalningen skall skickas till  (t.ex. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</translation>
     </message>
     <message>
         <location line="+60"/>
@@ -1449,8 +1449,8 @@ Adress: %4
     </message>
     <message>
         <location filename="../sendcoinsentry.cpp" line="+1"/>
-        <source>Enter a BitgoldCoin address (e.g. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</source>
-        <translation>Ange en BitgoldCoin-adress (t.ex. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</translation>
+        <source>Enter a BitgoldCoin address (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
+        <translation>Ange en BitgoldCoin-adress (t.ex. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</translation>
     </message>
 </context>
 <context>
@@ -1472,8 +1472,8 @@ Adress: %4
     </message>
     <message>
         <location line="+18"/>
-        <source>The address to sign the message with (e.g. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</source>
-        <translation>Adressen att signera meddelandet med  (t.ex. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</translation>
+        <source>The address to sign the message with (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
+        <translation>Adressen att signera meddelandet med  (t.ex. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -1545,8 +1545,8 @@ Adress: %4
     </message>
     <message>
         <location line="+21"/>
-        <source>The address the message was signed with (e.g. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</source>
-        <translation>Adressen som meddelandet var signerat med  (t.ex. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</translation>
+        <source>The address the message was signed with (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
+        <translation>Adressen som meddelandet var signerat med  (t.ex. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</translation>
     </message>
     <message>
         <location line="+40"/>
@@ -1566,8 +1566,8 @@ Adress: %4
     <message>
         <location filename="../signverifymessagedialog.cpp" line="+27"/>
         <location line="+3"/>
-        <source>Enter a BitgoldCoin address (e.g. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</source>
-        <translation>Ange en BitgoldCoin-adress (t.ex. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</translation>
+        <source>Enter a BitgoldCoin address (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
+        <translation>Ange en BitgoldCoin-adress (t.ex. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</translation>
     </message>
     <message>
         <location line="-2"/>
@@ -2238,8 +2238,8 @@ Adress: %4
     </message>
     <message>
         <location line="-28"/>
-        <source>Listen for connections on &lt;port&gt; (default: 9999 or testnet: 19999)</source>
-        <translation>Lyssna efter anslutningar på &lt;port&gt; (förvalt: 9999 eller testnet: 19999)</translation>
+        <source>Listen for connections on &lt;port&gt; (default: 9989 or testnet: 19989)</source>
+        <translation>Lyssna efter anslutningar på &lt;port&gt; (förvalt: 9989 eller testnet: 19989)</translation>
     </message>
     <message>
         <location line="+5"/>
@@ -2273,8 +2273,8 @@ Adress: %4
     </message>
     <message>
         <location line="+27"/>
-        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: 9998 or testnet: 19998)</source>
-        <translation>Lyssna på JSON-RPC-anslutningar på &lt;port&gt; (förvalt: 9998 eller testnet: 19998)</translation>
+        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: 9988 or testnet: 19988)</source>
+        <translation>Lyssna på JSON-RPC-anslutningar på &lt;port&gt; (förvalt: 9988 eller testnet: 19988)</translation>
     </message>
     <message>
         <location line="+37"/>

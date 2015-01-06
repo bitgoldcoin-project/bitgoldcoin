@@ -1407,8 +1407,8 @@ Address: %4
     </message>
     <message>
         <location line="+34"/>
-        <source>The address to send the payment to (e.g. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</source>
-        <translation>付款的目標位址 (比如說 XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</translation>
+        <source>The address to send the payment to (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
+        <translation>付款的目標位址 (比如說 G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</translation>
     </message>
     <message>
         <location line="+60"/>
@@ -1448,8 +1448,8 @@ Address: %4
     </message>
     <message>
         <location filename="../sendcoinsentry.cpp" line="+1"/>
-        <source>Enter a BitgoldCoin address (e.g. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</source>
-        <translation>輸入莱特幣位址 (比如說 XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</translation>
+        <source>Enter a BitgoldCoin address (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
+        <translation>輸入莱特幣位址 (比如說 G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</translation>
     </message>
 </context>
 <context>
@@ -1471,8 +1471,8 @@ Address: %4
     </message>
     <message>
         <location line="+18"/>
-        <source>The address to sign the message with (e.g. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</source>
-        <translation>用來簽署訊息的位址 (比如說 XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</translation>
+        <source>The address to sign the message with (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
+        <translation>用來簽署訊息的位址 (比如說 G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -1544,8 +1544,8 @@ Address: %4
     </message>
     <message>
         <location line="+21"/>
-        <source>The address the message was signed with (e.g. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</source>
-        <translation>簽署該訊息的位址 (比如說 XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</translation>
+        <source>The address the message was signed with (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
+        <translation>簽署該訊息的位址 (比如說 G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</translation>
     </message>
     <message>
         <location line="+40"/>
@@ -1565,8 +1565,8 @@ Address: %4
     <message>
         <location filename="../signverifymessagedialog.cpp" line="+27"/>
         <location line="+3"/>
-        <source>Enter a BitgoldCoin address (e.g. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</source>
-        <translation>輸入莱特幣位址 (比如說 XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</translation>
+        <source>Enter a BitgoldCoin address (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
+        <translation>輸入莱特幣位址 (比如說 G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</translation>
     </message>
     <message>
         <location line="-2"/>
@@ -2244,8 +2244,8 @@ Address: %4
     </message>
     <message>
         <location line="-28"/>
-        <source>Listen for connections on &lt;port&gt; (default: 9999 or testnet: 19999)</source>
-        <translation>在通訊埠 &lt;port&gt; 聽候連線 (預設: 9999, 或若為測試網路: 19999)</translation>
+        <source>Listen for connections on &lt;port&gt; (default: 9989 or testnet: 19989)</source>
+        <translation>在通訊埠 &lt;port&gt; 聽候連線 (預設: 9989, 或若為測試網路: 19989)</translation>
     </message>
     <message>
         <location line="+5"/>
@@ -2279,8 +2279,8 @@ Address: %4
     </message>
     <message>
         <location line="+27"/>
-        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: 9998 or testnet: 19998)</source>
-        <translation>在通訊埠 &lt;port&gt; 聽候 JSON-RPC 連線 (預設: 9998, 或若為測試網路: 19998)</translation>
+        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: 9988 or testnet: 19988)</source>
+        <translation>在通訊埠 &lt;port&gt; 聽候 JSON-RPC 連線 (預設: 9988, 或若為測試網路: 19988)</translation>
     </message>
     <message>
         <location line="+37"/>

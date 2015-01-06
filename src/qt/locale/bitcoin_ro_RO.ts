@@ -1398,7 +1398,7 @@ Address: %4
     </message>
     <message>
         <location line="+34"/>
-        <source>The address to send the payment to (e.g. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</source>
+        <source>The address to send the payment to (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1439,8 +1439,8 @@ Address: %4
     </message>
     <message>
         <location filename="../sendcoinsentry.cpp" line="+1"/>
-        <source>Enter a BitgoldCoin address (e.g. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</source>
-        <translation>Introduceţi o adresă BitgoldCoin (de exemplu: XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</translation>
+        <source>Enter a BitgoldCoin address (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
+        <translation>Introduceţi o adresă BitgoldCoin (de exemplu: G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</translation>
     </message>
 </context>
 <context>
@@ -1462,8 +1462,8 @@ Address: %4
     </message>
     <message>
         <location line="+18"/>
-        <source>The address to sign the message with (e.g. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</source>
-        <translation>Introduceţi o adresă BitgoldCoin (de exemplu: XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</translation>
+        <source>The address to sign the message with (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
+        <translation>Introduceţi o adresă BitgoldCoin (de exemplu: G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -1535,8 +1535,8 @@ Address: %4
     </message>
     <message>
         <location line="+21"/>
-        <source>The address the message was signed with (e.g. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</source>
-        <translation>Introduceţi o adresă BitgoldCoin (de exemplu: XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</translation>
+        <source>The address the message was signed with (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
+        <translation>Introduceţi o adresă BitgoldCoin (de exemplu: G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</translation>
     </message>
     <message>
         <location line="+40"/>
@@ -1556,8 +1556,8 @@ Address: %4
     <message>
         <location filename="../signverifymessagedialog.cpp" line="+27"/>
         <location line="+3"/>
-        <source>Enter a BitgoldCoin address (e.g. XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</source>
-        <translation>Introduceţi o adresă BitgoldCoin (de exemplu: XpAy7r5RVdGLnnjWNKuB9EUDiJ5Tje9GZ8)</translation>
+        <source>Enter a BitgoldCoin address (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
+        <translation>Introduceţi o adresă BitgoldCoin (de exemplu: G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</translation>
     </message>
     <message>
         <location line="-2"/>
@@ -2228,8 +2228,8 @@ Address: %4
     </message>
     <message>
         <location line="-28"/>
-        <source>Listen for connections on &lt;port&gt; (default: 9999 or testnet: 19999)</source>
-        <translation>Lista a conectiunile in &lt;port&gt; (initial:  9999 sau testnet: 19999)</translation>
+        <source>Listen for connections on &lt;port&gt; (default: 9989 or testnet: 19989)</source>
+        <translation>Lista a conectiunile in &lt;port&gt; (initial:  9989 sau testnet: 19989)</translation>
     </message>
     <message>
         <location line="+5"/>
@@ -2263,7 +2263,7 @@ Address: %4
     </message>
     <message>
         <location line="+27"/>
-        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: 9998 or testnet: 19998)</source>
+        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: 9988 or testnet: 19988)</source>
         <translation type="unfinished"/>
     </message>
     <message>
