@@ -39,8 +39,8 @@ CTxMemPool mempool;
 unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
-//uint256 hashGenesisBlock("0x00000ffd590b1485b3caadc19b22e6379c733355108f107a430458cdf3407ab6"); //mainnet
-uint256 hashGenesisBlock("0x"); //mainnet
+uint256 hashGenesisBlock("0x000004a282bbc9e804c455cb8613cea8696789a76cbbcedd87b509117f031d1a"); //mainnet
+//uint256 hashGenesisBlock("0x"); //mainnet
 
 static CBigNum bnProofOfWorkLimit(~uint256(0) >> 20); // BitgoldCoin: starting difficulty is 1 / 2^12
 CBlockIndex* pindexGenesisBlock = NULL;
@@ -2126,6 +2126,7 @@ bool CBlock::ConnectBlock(CValidationState &state, CBlockIndex* pindex, CCoinsVi
     if (GetHash() == hashGenesisBlock) {
         view.SetBestBlock(pindex);
         pindexGenesisBlock = pindex;
+	LogPrintf("inside if (GetHash() == hashGenesisBlock)")
         return true;
     }
 
@@ -3493,7 +3494,7 @@ bool LoadBlockIndex()
 {
     if (fTestNet)
     {
-        hashGenesisBlock = uint256("0x");
+        hashGenesisBlock = uint256("0x000004a282bbc9e804c455cb8613cea8696789a76cbbcedd87b509117f031d1a");
     }
 
     //
@@ -3531,6 +3532,19 @@ bool InitBlockIndex() {
         //   vMerkleTree: 97ddfbbae6
 
 
+//BGC`s Genesis Block
+
+//CBlock(hash=7d837dd706def8c8b91ce270aa2ab73f704cf9d4926dd6fbf718385c281d49bc, input=010000000000000000000000000000000000000000000000000000000000000000000000f053de5f302698268eb29a17cabd4cc83d9e5db5100b758f77d8fc88e8cbc375984daa54f0ff0f1e00000000, PoW=7d837dd706def8c8b91ce270aa2ab73f704cf9d4926dd6fbf718385c281d49bc, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=75c3cbe888fcd8778f750b10b55d9e3dc84cbdca179ab28e269826305fde53f0, nTime=1420447128, nBits=1e0ffff0, nNonce=0, vtx=1)
+
+//CTransaction(hash=75c3cbe888fcd8778f750b10b55d9e3dc84cbdca179ab28e269826305fde53f0, ver=1, vin.size=1, vout.size=1, nLockTime=0)
+//CTxIn(COutPoint(0000000000000000000000000000000000000000000000000000000000000000, 4294967295), coinbase 04ffff001d01044c4c434e4e2030352f4a616e2f32303135204e6f727468204b6f72656120707573686573206261636b20616761696e737420552e532e2073616e6374696f6e7320666f7220536f6e79206861636b)
+    
+//CTxOut(nValue=50.00000000, scriptPubKey=040184710fa689ad5023690c80f3a4)
+  
+//vMerkleTree: 75c3cbe888fcd8778f750b10b55d9e3dc84cbdca179ab28e269826305fde53f0
+
+
+
         // Genesis block
         const char* pszTimestamp = "CNN 05/Jan/2015 North Korea pushes back against U.S. sanctions for Sony hack";
         CTransaction txNew;
@@ -3546,12 +3560,12 @@ bool InitBlockIndex() {
         block.nVersion = 1;
         block.nTime    = 1420447128;
         block.nBits    = 0x1e0ffff0;
-        block.nNonce   = 0;
+        block.nNonce   = 29113809;
 
         if (fTestNet)
         {
-            block.nTime    = 1420447216;
-            block.nNonce   = 0;
+            block.nTime    = 1420447128;
+            block.nNonce   = 29113809;
         }
 
         //// debug print
@@ -3559,13 +3573,7 @@ bool InitBlockIndex() {
         LogPrintf("%s\n", hash.ToString().c_str());
         LogPrintf("%s\n", hashGenesisBlock.ToString().c_str());
         LogPrintf("%s\n", block.hashMerkleRoot.ToString().c_str());
-        //assert(block.hashMerkleRoot == uint256("0xe0028eb9648db56b1ac77cf090b99048a8007e2bb64b68f092c03c7f56a662c7"));
-	assert(block.hashMerkleRoot == uint256("0x"));
-
-
-
-
-
+        assert(block.hashMerkleRoot == uint256("0x75c3cbe888fcd8778f750b10b55d9e3dc84cbdca179ab28e269826305fde53f0"));
 
 
 
