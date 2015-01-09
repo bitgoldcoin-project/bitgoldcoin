@@ -39,7 +39,7 @@ CTxMemPool mempool;
 unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
-uint256 hashGenesisBlock("0x000004a282bbc9e804c455cb8613cea8696789a76cbbcedd87b509117f031d1a"); //mainnet
+uint256 hashGenesisBlock("0x00000c37d13ec500e393e825d82d5c5eec2f5336dd79e82b1f7c11ccee16c124"); //mainnet
 //uint256 hashGenesisBlock("0x"); //mainnet
 
 static CBigNum bnProofOfWorkLimit(~uint256(0) >> 20); // BitgoldCoin: starting difficulty is 1 / 2^12
@@ -2126,7 +2126,7 @@ bool CBlock::ConnectBlock(CValidationState &state, CBlockIndex* pindex, CCoinsVi
     if (GetHash() == hashGenesisBlock) {
         view.SetBestBlock(pindex);
         pindexGenesisBlock = pindex;
-	LogPrintf("inside if (GetHash() == hashGenesisBlock)")
+	LogPrintf("inside if (GetHash() == hashGenesisBlock)");
         return true;
     }
 
@@ -3494,7 +3494,7 @@ bool LoadBlockIndex()
 {
     if (fTestNet)
     {
-        hashGenesisBlock = uint256("0x000004a282bbc9e804c455cb8613cea8696789a76cbbcedd87b509117f031d1a");
+        hashGenesisBlock = uint256("0x00000c37d13ec500e393e825d82d5c5eec2f5336dd79e82b1f7c11ccee16c124");
     }
 
     //
@@ -3560,13 +3560,17 @@ bool InitBlockIndex() {
         block.nVersion = 1;
         block.nTime    = 1420447128;
         block.nBits    = 0x1e0ffff0;
-        block.nNonce   = 29113809;
+        block.nNonce   = 31136987;
 
         if (fTestNet)
         {
             block.nTime    = 1420447128;
-            block.nNonce   = 29113809;
+            block.nNonce   = 31136987;
         }
+
+
+/// code for Search a Genesis Block 
+	
 
         //// debug print
         uint256 hash = block.GetHash();
@@ -3576,7 +3580,7 @@ bool InitBlockIndex() {
         assert(block.hashMerkleRoot == uint256("0x75c3cbe888fcd8778f750b10b55d9e3dc84cbdca179ab28e269826305fde53f0"));
 
 
-
+	
 
         block.print();
         assert(hash == hashGenesisBlock);
