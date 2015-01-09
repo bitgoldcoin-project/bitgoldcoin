@@ -40,7 +40,6 @@ unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
 uint256 hashGenesisBlock("0x00000c37d13ec500e393e825d82d5c5eec2f5336dd79e82b1f7c11ccee16c124"); //mainnet
-//uint256 hashGenesisBlock("0x"); //mainnet
 
 static CBigNum bnProofOfWorkLimit(~uint256(0) >> 20); // BitgoldCoin: starting difficulty is 1 / 2^12
 CBlockIndex* pindexGenesisBlock = NULL;
@@ -1606,7 +1605,7 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const CBloc
 }
 
 unsigned int static DarkGravityWave3(const CBlockIndex* pindexLast, const CBlockHeader *pblock) {
-    /* current difficulty formula, bitgoldcoin - DarkGravity v3, written by Evan Duffield - evan@bitgoldcoin.io */
+    /* current difficulty formula, Darkcoin - DarkGravity v3, written by Evan Duffield - evan@darkcoin.io */
     const CBlockIndex *BlockLastSolved = pindexLast;
     const CBlockIndex *BlockReading = pindexLast;
     const CBlockHeader *BlockCreating = pblock;
@@ -2126,7 +2125,6 @@ bool CBlock::ConnectBlock(CValidationState &state, CBlockIndex* pindex, CCoinsVi
     if (GetHash() == hashGenesisBlock) {
         view.SetBestBlock(pindex);
         pindexGenesisBlock = pindex;
-	LogPrintf("inside if (GetHash() == hashGenesisBlock)");
         return true;
     }
 
@@ -3578,9 +3576,6 @@ bool InitBlockIndex() {
         LogPrintf("%s\n", hashGenesisBlock.ToString().c_str());
         LogPrintf("%s\n", block.hashMerkleRoot.ToString().c_str());
         assert(block.hashMerkleRoot == uint256("0x75c3cbe888fcd8778f750b10b55d9e3dc84cbdca179ab28e269826305fde53f0"));
-
-
-	
 
         block.print();
         assert(hash == hashGenesisBlock);
