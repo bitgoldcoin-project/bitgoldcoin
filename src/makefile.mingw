@@ -17,19 +17,25 @@
 
 CXX ?= g++
 
-USE_UPNP:=-
+USE_UPNP:=1
 USE_IPV6:=1
 
 DEPSDIR?=/usr/local
-BOOST_SUFFIX?=-mgw46-mt-sd-1_52
+BOOST_SUFFIX?=-mgw49-mt-s-1_55
 
 INCLUDEPATHS= \
  -I"$(CURDIR)" \
- -I"$(DEPSDIR)/include"
+ -I"/c/deps/boost_1_55_0" \
+ -I"/c/deps" \
+ -I"/c/deps/db-4.8.30.NC/build_unix" \
+ -I"/c/deps/openssl-1.0.1j/include"
 
 LIBPATHS= \
  -L"$(CURDIR)/leveldb" \
- -L"$(DEPSDIR)/lib"
+ -L"/c/deps/boost_1_55_0/stage/lib" \
+ -L"/c/deps/miniupnpc" \
+ -L"/c/deps/db-4.8.30.NC/build_unix" \
+ -L"/c/deps/openssl-1.0.1j"
 
 LIBS= \
  -l leveldb \
@@ -47,12 +53,9 @@ DEFS=-D_MT -DWIN32 -D_WINDOWS -DBOOST_THREAD_USE_LIB -DBOOST_SPIRIT_THREADSAFE
 DEBUGFLAGS=-g
 CFLAGS=-mthreads -O2 -w -Wall -Wextra -Wformat -Wformat-security -Wno-unused-parameter $(DEBUGFLAGS) $(DEFS) $(INCLUDEPATHS)
 # enable: ASLR, DEP and large address aware
-LDFLAGS=-Wl,--dynamicbase -Wl,--nxcompat -Wl,--large-address-aware
+LDFLAGS=-Wl,--dynamicbase -Wl,--nxcompat -Wl,--large-address-aware -static
 
 TESTDEFS = -DTEST_DATA_DIR=$(abspath test/data)
-ifdef UNIT_TEST
-DEFS+=-DUNIT_TEST=1
-endif
 
 ifndef USE_UPNP
 	override USE_UPNP = -
@@ -82,26 +85,19 @@ OBJS= \
     obj/key.o \
     obj/db.o \
     obj/init.o \
-    obj/core.o \
-    obj/masternode.o \
-    obj/activemasternode.o \
-    obj/masternodeconfig.o \
-    obj/instantx.o \
     obj/keystore.o \
     obj/main.o \
-    obj/darksend.o \
     obj/net.o \
     obj/protocol.o \
     obj/bitcoinrpc.o \
-    obj/rpcdarksend.o \
     obj/rpcdump.o \
     obj/rpcnet.o \
     obj/rpcmining.o \
-    obj/rpcdarksend.o \
     obj/rpcwallet.o \
     obj/rpcblockchain.o \
     obj/rpcrawtransaction.o \
     obj/script.o \
+    obj/scrypt.o \
     obj/sync.o \
     obj/util.o \
     obj/wallet.o \
@@ -110,20 +106,13 @@ OBJS= \
     obj/bloom.o \
     obj/noui.o \
     obj/leveldb.o \
-    obj/txdb.o\
-    obj/blake.o\
-    obj/bmw.o\
-    obj/groestl.o\
-    obj/jh.o\
-    obj/keccak.o\
-    obj/skein.o\
-    obj/cubehash.o \
-    obj/luffa.o \
-    obj/aes_helper.o \
-    obj/echo.o \
-    obj/shavite.o \
-    obj/simd.o \
-    obj/checkpointsync.o
+    obj/txdb.o
+
+ifdef USE_SSE2
+DEFS += -DUSE_SSE2
+OBJS_SSE2= obj/scrypt-sse2.o
+OBJS += $(OBJS_SSE2)
+endif
 
 all: bitgoldcoind.exe
 
@@ -144,9 +133,6 @@ obj/%-sse2.o: %-sse2.cpp
 
 obj/%.o: %.cpp $(HEADERS)
 	$(CXX) -c $(CFLAGS) -o $@ $<
-
-obj/%.o: %.c $(HEADERS)
-	$(CXX) -c $(CFLAGS) -fpermissive -o $@ $<
 
 bitgoldcoind.exe: $(OBJS:obj/%=obj/%)
 	$(CXX) $(CFLAGS) $(LDFLAGS) -o $@ $(LIBPATHS) $^ $(LIBS)

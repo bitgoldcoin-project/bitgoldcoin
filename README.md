@@ -1,29 +1,25 @@
 Bitgoldcoin integration/staging tree
 ================================
 
-http://bitgoldcoin-project.github.io/bitgoldcoin
+http://www.bitgoldcoin.org
 
-Copyright (c) 2009-2013 Bitcoin Developers
-Copyright (c) 2011-2014 The Litecoin Developers
-Copyright (c) 2012-2013 The Peercoin Developers
-Copyright (c) 2014 The Darkcoin Developers
-Copyright (c) 2015 The Bitgoldcoin Developers
+Copyright (c) 2009-2014 Bitcoin Developers
+Copyright (c) 2011-2014 Bitgoldcoin Developers
 
 What is Bitgoldcoin?
 ----------------
 
-Bitgoldcoin (BGC) is an open sourced, privacy-centric digital currency. It allows you keep your finances private as you make transactions, similar to cash.
+Bitgoldcoin is a lite version of Bitcoin using scrypt as a proof-of-work algorithm.
+ - 2.5 minute block targets
+ - subsidy halves in 840k blocks (~4 years)
+ - ~84 million total coins
 
- - Super secure hashing algorithm: 11 rounds of scientific hashing functions (blake, bmw, groestl, jh, keccak, skein, luffa, cubehash, shavite, simd, echo)
- - Block reward is controlled by moore's law: 2222222/(((Difficulty+2600)/9)^2)
- - GPU/CPU only mining
- - Block generation: 2.5 minutes
- - Difficulty Retargets every block using Dark Gravity Wave
- - Est. ~7M Coins in 2015, ~13M in 2020, ~23M in 2030
- - Anonymous blockchain using Darksend technology
+The rest is the same as Bitcoin.
+ - 50 coins per block
+ - 2016 blocks to retarget difficulty
 
 For more information, as well as an immediately useable, binary version of
-the Bitgoldcoin client sofware, see http://bitgoldcoin-project.github.io/bitgoldcoin.
+the Bitgoldcoin client sofware, see http://www.bitgoldcoin.org.
 
 License
 -------
@@ -41,8 +37,7 @@ If it is a simple/trivial/non-controversial change, then one of the Bitgoldcoin
 development team members simply pulls it.
 
 If it is a *more complicated or potentially controversial* change, then the patch
-submitter will be asked to start a discussion (if they haven't already) on the
-[mailing list](http://sourceforge.net/mailarchive/forum.php?forum_name=bitcoin-development).
+submitter will be asked to start a discussion with the devs and community.
 
 The patch will be accepted if there is broad consensus that it is a good thing.
 Developers should expect to rework and resubmit patches if the code doesn't
@@ -50,8 +45,8 @@ match the project's coding conventions (see `doc/coding.txt`) or are
 controversial.
 
 The `master` branch is regularly built and tested, but is not guaranteed to be
-completely stable. [Tags](https://github.com/darkcoinproject/darkcoin/tags) are created
-regularly to indicate new official, stable release versions of DarkCoin.
+completely stable. [Tags](https://github.com/bitgoldcoin-project/bitgoldcoin/tags) are created
+regularly to indicate new official, stable release versions of Bitgoldcoin.
 
 Testing
 -------
@@ -74,5 +69,5 @@ Unit tests for the GUI code are in `src/qt/test/`. To compile and run them:
 
     qmake BITCOIN_QT_TEST=1 -o Makefile.test bitcoin-qt.pro
     make -f Makefile.test
-    ./darkcoin-qt_test
+    ./bitgoldcoin-qt_test
 

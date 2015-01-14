@@ -20,15 +20,17 @@
 #include "protocol.h"
 #include "addrman.h"
 #include "hash.h"
-#include "key.h"
 #include "bloom.h"
-#include "core.h"
 
 class CNode;
 class CBlockIndex;
 extern int nBestHeight;
 
 
+/** The maximum number of entries in an 'inv' protocol message */
+static const unsigned int MAX_INV_SZ = 50000;
+/** The maximum number of entries in mapAskFor */
+static const size_t MAPASKFOR_MAX_SZ = MAX_INV_SZ;
 
 inline unsigned int ReceiveFloodSize() { return 1000*GetArg("-maxreceivebuffer", 5*1000); }
 inline unsigned int SendBufferSize() { return 1000*GetArg("-maxsendbuffer", 1*1000); }
@@ -39,15 +41,13 @@ bool GetMyExternalIP(CNetAddr& ipRet);
 void AddressCurrentlyConnected(const CService& addr);
 CNode* FindNode(const CNetAddr& ip);
 CNode* FindNode(const CService& ip);
-CNode* ConnectNode(CAddress addrConnect, const char *strDest = NULL, bool darkSendMaster = false);
+CNode* ConnectNode(CAddress addrConnect, const char *strDest = NULL);
 void MapPort(bool fUseUPnP);
 unsigned short GetListenPort();
 bool BindListenPort(const CService &bindAddr, std::string& strError=REF(std::string()));
 void StartNode(boost::thread_group& threadGroup);
 bool StopNode();
 void SocketSendData(CNode *pnode);
-
-typedef int NodeId;
 
 enum
 {
@@ -90,8 +90,7 @@ extern limitedmap<CInv, int64> mapAlreadyAskedFor;
 extern std::vector<std::string> vAddedNodes;
 extern CCriticalSection cs_vAddedNodes;
 
-extern NodeId nLastNodeId;
-extern CCriticalSection cs_nLastNodeId;
+
 
 
 class CNodeStats
@@ -195,18 +194,15 @@ public:
     bool fNetworkNode;
     bool fSuccessfullyConnected;
     bool fDisconnect;
-    bool fAskedForBlocks;    // true when getblocks 0 sent
     // We use fRelayTxes for two purposes -
     // a) it allows us to not relay tx invs before receiving the peer's version message
     // b) the peer may tell us in their version message that we should not relay tx invs
     //    until they have initialized their bloom filter.
     bool fRelayTxes;
-    bool fDarkSendMaster;
     CSemaphoreGrant grantOutbound;
     CCriticalSection cs_filter;
     CBloomFilter* pfilter;
     int nRefCount;
-    NodeId id;
 protected:
 
     // Denial-of-service detection/prevention
@@ -214,7 +210,6 @@ protected:
     static std::map<CNetAddr, int64> setBanned;
     static CCriticalSection cs_setBanned;
     int nMisbehavior;
-    std::vector<std::string> vecRequestsFulfilled; //keep track of what client has asked for
 
 public:
     uint256 hashContinue;
@@ -228,7 +223,6 @@ public:
     std::set<CAddress> setAddrKnown;
     bool fGetAddr;
     std::set<uint256> setKnown;
-    uint256 hashCheckpointKnown;
 
     // inventory based relay
     mruset<CInv> setInventoryKnown;
@@ -258,8 +252,6 @@ public:
         fNetworkNode = false;
         fSuccessfullyConnected = false;
         fDisconnect = false;
-        hashCheckpointKnown = 0;
-        fAskedForBlocks = false;
         nRefCount = 0;
         nSendSize = 0;
         nSendOffset = 0;
@@ -271,14 +263,8 @@ public:
         fGetAddr = false;
         nMisbehavior = 0;
         fRelayTxes = false;
-        fDarkSendMaster = false;
         setInventoryKnown.max_size(SendBufferSize() / 1000);
         pfilter = new CBloomFilter();
-
-        {
-            LOCK(cs_nLastNodeId);
-            id = nLastNodeId++;
-        }
 
         // Be shy and don't send version until we hear
         if (hSocket != INVALID_SOCKET && !fInbound)
@@ -375,6 +361,9 @@ public:
 
     void AskFor(const CInv& inv)
     {
+        if (mapAskFor.size() > MAPASKFOR_MAX_SZ)
+            return;
+
         // We're using mapAskFor as a priority queue,
         // the key is the earliest time the request can be sent
         int64 nRequestTime;
@@ -384,7 +373,7 @@ public:
         else
             nRequestTime = 0;
         if (fDebugNet)
-            LogPrintf("askfor %s   %"PRI64d" (%s)\n", inv.ToString().c_str(), nRequestTime, DateTimeStrFormat("%H:%M:%S", nRequestTime/1000000).c_str());
+            printf("askfor %s   %"PRI64d" (%s)\n", inv.ToString().c_str(), nRequestTime, DateTimeStrFormat("%H:%M:%S", nRequestTime/1000000).c_str());
 
         // Make sure not to reuse time indexes to keep things in the same order
         int64 nNow = (GetTime() - 1) * 1000000;
@@ -410,7 +399,8 @@ public:
         ENTER_CRITICAL_SECTION(cs_vSend);
         assert(ssSend.size() == 0);
         ssSend << CMessageHeader(pszCommand, 0);
-        LogPrint("net2", "sending (peer=%d): %s ", id, pszCommand);
+        if (fDebug)
+            printf("sending: %s ", pszCommand);
     }
 
     // TODO: Document the precondition of this function.  Is cs_vSend locked?
@@ -420,7 +410,8 @@ public:
 
         LEAVE_CRITICAL_SECTION(cs_vSend);
 
-        LogPrint("net2", "(aborted)\n");
+        if (fDebug)
+            printf("(aborted)\n");
     }
 
     // TODO: Document the precondition of this function.  Is cs_vSend locked?
@@ -428,7 +419,7 @@ public:
     {
         if (mapArgs.count("-dropmessagestest") && GetRand(atoi(mapArgs["-dropmessagestest"])) == 0)
         {
-            LogPrintf("dropmessages DROPPING SEND MESSAGE\n");
+            printf("dropmessages DROPPING SEND MESSAGE\n");
             AbortMessage();
             return;
         }
@@ -447,7 +438,9 @@ public:
         assert(ssSend.size () >= CMessageHeader::CHECKSUM_OFFSET + sizeof(nChecksum));
         memcpy((char*)&ssSend[CMessageHeader::CHECKSUM_OFFSET], &nChecksum, sizeof(nChecksum));
 
-        LogPrint("net2", "(%d bytes)\n", nSize);
+        if (fDebug) {
+            printf("(%d bytes)\n", nSize);
+        }
 
         std::deque<CSerializeData>::iterator it = vSendMsg.insert(vSendMsg.end(), CSerializeData());
         ssSend.GetAndClear(*it);
@@ -621,38 +614,7 @@ public:
         }
     }
 
-    template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10>
-    void PushMessage(const char* pszCommand, const T1& a1, const T2& a2, const T3& a3, const T4& a4, const T5& a5, const T6& a6, const T7& a7, const T8& a8, const T9& a9, const T10& a10)
-    {
-        try
-        {
-            BeginMessage(pszCommand);
-            ssSend << a1 << a2 << a3 << a4 << a5 << a6 << a7 << a8 << a9 << a10;
-            EndMessage();
-        }
-        catch (...)
-        {
-            AbortMessage();
-            throw;
-        }
-    }
-
-    bool HasFulfilledRequest(std::string strRequest)
-    {
-        BOOST_FOREACH(std::string& type, vecRequestsFulfilled)
-        {
-            if(type == strRequest) return true;
-        }
-        return false;
-    }
-
-    void FulfilledRequest(std::string strRequest)
-    {
-        if(HasFulfilledRequest(strRequest)) return;
-        vecRequestsFulfilled.push_back(strRequest);
-    }
-
-    bool PushGetBlocks(CBlockIndex* pindexBegin, uint256 hashEnd);
+    void PushGetBlocks(CBlockIndex* pindexBegin, uint256 hashEnd);
     bool IsSubscribed(unsigned int nChannel);
     void Subscribe(unsigned int nChannel, unsigned int nHops=0);
     void CancelSubscribe(unsigned int nChannel);
@@ -680,21 +642,10 @@ public:
     void copyStats(CNodeStats &stats);
 };
 
-class CTransaction;
-class CTxIn;
-class CTxOut;
 
+
+class CTransaction;
 void RelayTransaction(const CTransaction& tx, const uint256& hash);
 void RelayTransaction(const CTransaction& tx, const uint256& hash, const CDataStream& ss);
-void RelayTransactionLockReq(const CTransaction& tx, const uint256& hash, bool relayToAll=false);
-void RelayDarkSendFinalTransaction(const int sessionID, const CTransaction& txNew);
-void RelayDarkSendIn(const std::vector<CTxIn>& in, const int64& nAmount, const CTransaction& txCollateral, const std::vector<CTxOut>& out);
-void RelayDarkSendStatus(const int sessionID, const int newState, const int newEntriesCount, const int newAccepted, const std::string error="");
-void RelayDarkSendElectionEntry(const CTxIn vin, const CService addr, const std::vector<unsigned char> vchSig, const int64 nNow, const CPubKey pubkey, const CPubKey pubkey2, const int count, const int current, const int64 lastUpdated, const int protocolVersion);
-void SendDarkSendElectionEntry(const CTxIn vin, const CService addr, const std::vector<unsigned char> vchSig, const int64 nNow, const CPubKey pubkey, const CPubKey pubkey2, const int count, const int current, const int64 lastUpdated, const int protocolVersion);
-void RelayDarkSendElectionEntryPing(const CTxIn vin, const std::vector<unsigned char> vchSig, const int64 nNow, const bool stop);
-void SendDarkSendElectionEntryPing(const CTxIn vin, const std::vector<unsigned char> vchSig, const int64 nNow, const bool stop);
-void RelayDarkSendCompletedTransaction(const int sessionID, const bool error, const std::string errorMessage);
-void RelayDarkSendMasterNodeContestant();
 
 #endif

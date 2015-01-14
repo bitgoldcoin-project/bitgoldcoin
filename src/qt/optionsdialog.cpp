@@ -1,10 +1,13 @@
+// Copyright (c) 2011-2013 The Bitcoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include "optionsdialog.h"
 #include "ui_optionsdialog.h"
 
 #include "bitcoinunits.h"
 #include "monitoreddatamapper.h"
 #include "netbase.h"
-#include "init.h"
 #include "optionsmodel.h"
 
 #include <QDir>
@@ -126,8 +129,11 @@ void OptionsDialog::setModel(OptionsModel *model)
 void OptionsDialog::setMapper()
 {
     /* Main */
-    mapper->addMapping(ui->transactionFee, OptionsModel::Fee);
     mapper->addMapping(ui->bitcoinAtStartup, OptionsModel::StartAtStartup);
+
+    /* Wallet */
+    mapper->addMapping(ui->transactionFee, OptionsModel::Fee);
+    mapper->addMapping(ui->spendZeroConfChange, OptionsModel::SpendZeroConfChange);
 
     /* Network */
     mapper->addMapping(ui->mapPortUpnp, OptionsModel::MapPortUPnP);
@@ -148,11 +154,6 @@ void OptionsDialog::setMapper()
     mapper->addMapping(ui->unit, OptionsModel::DisplayUnit);
     mapper->addMapping(ui->displayAddresses, OptionsModel::DisplayAddresses);
     mapper->addMapping(ui->coinControlFeatures, OptionsModel::CoinControlFeatures);
-
-    /* Darksend Rounds */
-    mapper->addMapping(ui->darksendRounds, OptionsModel::DarksendRounds);
-    mapper->addMapping(ui->anonymizeBitgoldcoin, OptionsModel::AnonymizeBitgoldcoinAmount);
-
 }
 
 void OptionsDialog::enableApplyButton()
@@ -183,7 +184,7 @@ void OptionsDialog::setSaveButtonState(bool fState)
     ui->okButton->setEnabled(fState);
 }
 
-/*void OptionsDialog::on_resetButton_clicked()
+void OptionsDialog::on_resetButton_clicked()
 {
     if(model)
     {
@@ -197,23 +198,22 @@ void OptionsDialog::setSaveButtonState(bool fState)
 
         disableApplyButton();
 
-        // disable restart warning messages display
+        /* disable restart warning messages display */
         fRestartWarningDisplayed_Lang = fRestartWarningDisplayed_Proxy = true;
 
-        // reset all options and save the default values (QSettings)
+        /* reset all options and save the default values (QSettings) */
         model->Reset();
         mapper->toFirst();
         mapper->submit();
 
-        // re-enable restart warning messages display
+        /* re-enable restart warning messages display */
         fRestartWarningDisplayed_Lang = fRestartWarningDisplayed_Proxy = false;
     }
-}*/
+}
 
 void OptionsDialog::on_okButton_clicked()
 {
     mapper->submit();
-    darkSendPool.cachedNumBlocks = 0;
     accept();
 }
 
@@ -225,7 +225,6 @@ void OptionsDialog::on_cancelButton_clicked()
 void OptionsDialog::on_applyButton_clicked()
 {
     mapper->submit();
-    darkSendPool.cachedNumBlocks = 0;
     disableApplyButton();
 }
 
@@ -233,7 +232,7 @@ void OptionsDialog::showRestartWarning_Proxy()
 {
     if(!fRestartWarningDisplayed_Proxy)
     {
-        QMessageBox::warning(this, tr("Warning"), tr("This setting will take effect after restarting BitgoldCoin."), QMessageBox::Ok);
+        QMessageBox::warning(this, tr("Warning"), tr("This setting will take effect after restarting Bitgoldcoin."), QMessageBox::Ok);
         fRestartWarningDisplayed_Proxy = true;
     }
 }
@@ -242,7 +241,7 @@ void OptionsDialog::showRestartWarning_Lang()
 {
     if(!fRestartWarningDisplayed_Lang)
     {
-        QMessageBox::warning(this, tr("Warning"), tr("This setting will take effect after restarting BitgoldCoin."), QMessageBox::Ok);
+        QMessageBox::warning(this, tr("Warning"), tr("This setting will take effect after restarting Bitgoldcoin."), QMessageBox::Ok);
         fRestartWarningDisplayed_Lang = true;
     }
 }

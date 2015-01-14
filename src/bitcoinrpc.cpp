@@ -182,10 +182,10 @@ Value stop(const Array& params, bool fHelp)
     if (fHelp || params.size() > 1)
         throw runtime_error(
             "stop\n"
-            "Stop BitgoldCoin server.");
+            "Stop Bitgoldcoin server.");
     // Shutdown will take long enough that the response should get back
     StartShutdown();
-    return "BitgoldCoin server stopping";
+    return "Bitgoldcoin server stopping";
 }
 
 
@@ -205,9 +205,6 @@ static const CRPCCommand vRPCCommands[] =
     { "getconnectioncount",     &getconnectioncount,     true,      false,      false },
     { "getpeerinfo",            &getpeerinfo,            true,      false,      false },
     { "addnode",                &addnode,                true,      true,       false },
-    { "getpoolinfo",            &getpoolinfo,            true,      false,      false },
-    { "darksend",               &darksend,               false,     false,      true },
-    { "masternode",             &masternode,             false,     false,      true },
     { "getaddednodeinfo",       &getaddednodeinfo,       true,      true,       false },
     { "getdifficulty",          &getdifficulty,          true,      false,      false },
     { "getnetworkhashps",       &getnetworkhashps,       true,      false,      false },
@@ -255,20 +252,15 @@ static const CRPCCommand vRPCCommands[] =
     { "submitblock",            &submitblock,            false,     false,      false },
     { "setmininput",            &setmininput,            false,     false,      false },
     { "listsinceblock",         &listsinceblock,         false,     false,      true },
-    { "makekeypair",            &makekeypair,            true,     	false,		true },
-    { "getcheckpoint",          &getcheckpoint,          true,      false,		false },
-    { "sendcheckpoint",         &sendcheckpoint,         true,      false,		false },
-    { "enforcecheckpoint",      &enforcecheckpoint,      true,      false,		false },
     { "dumpprivkey",            &dumpprivkey,            true,      false,      true },
     { "importprivkey",          &importprivkey,          false,     false,      true },
     { "listunspent",            &listunspent,            false,     false,      true },
     { "getrawtransaction",      &getrawtransaction,      false,     false,      false },
-    { "erasetransaction",       &erasetransaction,       false,     false,      false },
-    { "resendtransaction",      &resendtransaction,      false,     false,      false },
     { "createrawtransaction",   &createrawtransaction,   false,     false,      false },
     { "decoderawtransaction",   &decoderawtransaction,   false,     false,      false },
     { "signrawtransaction",     &signrawtransaction,     false,     false,      false },
     { "sendrawtransaction",     &sendrawtransaction,     false,     false,      false },
+    { "getnormalizedtxid",      &getnormalizedtxid,      true,      true,       false },
     { "gettxoutsetinfo",        &gettxoutsetinfo,        true,      false,      false },
     { "gettxout",               &gettxout,               true,      false,      false },
     { "lockunspent",            &lockunspent,            false,     false,      true },
@@ -760,7 +752,7 @@ void StartRPCThreads()
               "The username and password MUST NOT be the same.\n"
               "If the file does not exist, create it with owner-readable-only file permissions.\n"
               "It is also recommended to set alertnotify so you are notified of problems;\n"
-              "for example: alertnotify=echo %%s | mail -s \"BitgoldCoin Alert\" admin@foo.com\n"),
+              "for example: alertnotify=echo %%s | mail -s \"Bitgoldcoin Alert\" admin@foo.com\n"),
                 strWhatAmI.c_str(),
                 GetConfigFile().string().c_str(),
                 EncodeBase58(&rand_pwd[0],&rand_pwd[0]+32).c_str()),
@@ -782,12 +774,12 @@ void StartRPCThreads()
         filesystem::path pathCertFile(GetArg("-rpcsslcertificatechainfile", "server.cert"));
         if (!pathCertFile.is_complete()) pathCertFile = filesystem::path(GetDataDir()) / pathCertFile;
         if (filesystem::exists(pathCertFile)) rpc_ssl_context->use_certificate_chain_file(pathCertFile.string());
-        else LogPrintf("ThreadRPCServer ERROR: missing server certificate file %s\n", pathCertFile.string().c_str());
+        else printf("ThreadRPCServer ERROR: missing server certificate file %s\n", pathCertFile.string().c_str());
 
         filesystem::path pathPKFile(GetArg("-rpcsslprivatekeyfile", "server.pem"));
         if (!pathPKFile.is_complete()) pathPKFile = filesystem::path(GetDataDir()) / pathPKFile;
         if (filesystem::exists(pathPKFile)) rpc_ssl_context->use_private_key_file(pathPKFile.string(), ssl::context::pem);
-        else LogPrintf("ThreadRPCServer ERROR: missing server private key file %s\n", pathPKFile.string().c_str());
+        else printf("ThreadRPCServer ERROR: missing server private key file %s\n", pathPKFile.string().c_str());
 
         string strCiphers = GetArg("-rpcsslciphers", "TLSv1+HIGH:!SSLv2:!aNULL:!eNULL:!AH:!3DES:@STRENGTH");
         SSL_CTX_set_cipher_list(rpc_ssl_context->impl(), strCiphers.c_str());
@@ -861,7 +853,8 @@ void StopRPCThreads()
     if (rpc_io_service == NULL) return;
 
     rpc_io_service->stop();
-    rpc_worker_group->join_all();
+    if (rpc_worker_group != NULL)
+        rpc_worker_group->join_all();
     delete rpc_worker_group; rpc_worker_group = NULL;
     delete rpc_ssl_context; rpc_ssl_context = NULL;
     delete rpc_io_service; rpc_io_service = NULL;
@@ -896,7 +889,7 @@ void JSONRequest::parse(const Value& valRequest)
         throw JSONRPCError(RPC_INVALID_REQUEST, "Method must be a string");
     strMethod = valMethod.get_str();
     if (strMethod != "getwork" && strMethod != "getworkex" && strMethod != "getblocktemplate")
-        LogPrintf("ThreadRPCServer method=%s\n", strMethod.c_str());
+        printf("ThreadRPCServer method=%s\n", strMethod.c_str());
 
     // Parse params
     Value valParams = find_value(request, "params");
@@ -970,10 +963,10 @@ void ServiceConnection(AcceptedConnection *conn)
         }
         if (!HTTPAuthorized(mapHeaders))
         {
-            LogPrintf("ThreadRPCServer incorrect password attempt from %s\n", conn->peer_address_to_string().c_str());
+            printf("ThreadRPCServer incorrect password attempt from %s\n", conn->peer_address_to_string().c_str());
             /* Deter brute-forcing short passwords.
-               If this results in a DOS the user really
-               shouldn't have their RPC port exposed.*/
+               If this results in a DoS the user really
+               shouldn't have their RPC port exposed. */
             if (mapArgs["-rpcpassword"].size() < 20)
                 MilliSleep(250);
 
@@ -1161,7 +1154,6 @@ Array RPCConvertValues(const std::string &strMethod, const std::vector<std::stri
     if (strMethod == "getnetworkhashps"       && n > 0) ConvertTo<boost::int64_t>(params[0]);
     if (strMethod == "getnetworkhashps"       && n > 1) ConvertTo<boost::int64_t>(params[1]);
     if (strMethod == "sendtoaddress"          && n > 1) ConvertTo<double>(params[1]);
-    if (strMethod == "darksend"               && n > 1) ConvertTo<double>(params[1]);
     if (strMethod == "settxfee"               && n > 0) ConvertTo<double>(params[0]);
     if (strMethod == "setmininput"            && n > 0) ConvertTo<double>(params[0]);
     if (strMethod == "getreceivedbyaddress"   && n > 1) ConvertTo<boost::int64_t>(params[1]);
@@ -1180,7 +1172,6 @@ Array RPCConvertValues(const std::string &strMethod, const std::vector<std::stri
     if (strMethod == "listtransactions"       && n > 2) ConvertTo<boost::int64_t>(params[2]);
     if (strMethod == "listaccounts"           && n > 0) ConvertTo<boost::int64_t>(params[0]);
     if (strMethod == "walletpassphrase"       && n > 1) ConvertTo<boost::int64_t>(params[1]);
-    if (strMethod == "walletpassphrase"       && n > 2) ConvertTo<bool>(params[2]);
     if (strMethod == "getblocktemplate"       && n > 0) ConvertTo<Object>(params[0]);
     if (strMethod == "listsinceblock"         && n > 1) ConvertTo<boost::int64_t>(params[1]);
     if (strMethod == "sendmany"               && n > 1) ConvertTo<Object>(params[1]);
@@ -1198,6 +1189,7 @@ Array RPCConvertValues(const std::string &strMethod, const std::vector<std::stri
     if (strMethod == "createrawtransaction"   && n > 1) ConvertTo<Object>(params[1]);
     if (strMethod == "signrawtransaction"     && n > 1) ConvertTo<Array>(params[1], true);
     if (strMethod == "signrawtransaction"     && n > 2) ConvertTo<Array>(params[2], true);
+    if (strMethod == "sendrawtransaction"     && n > 1) ConvertTo<bool>(params[1], true);
     if (strMethod == "gettxout"               && n > 1) ConvertTo<boost::int64_t>(params[1]);
     if (strMethod == "gettxout"               && n > 2) ConvertTo<bool>(params[2]);
     if (strMethod == "lockunspent"            && n > 0) ConvertTo<bool>(params[0]);
@@ -1205,9 +1197,6 @@ Array RPCConvertValues(const std::string &strMethod, const std::vector<std::stri
     if (strMethod == "importprivkey"          && n > 2) ConvertTo<bool>(params[2]);
     if (strMethod == "verifychain"            && n > 0) ConvertTo<boost::int64_t>(params[0]);
     if (strMethod == "verifychain"            && n > 1) ConvertTo<boost::int64_t>(params[1]);
-    if (strMethod == "getpoolinfo"            && n > 0) ConvertTo<boost::int64_t>(params[0]);
-    if (strMethod == "enforcecheckpoint"      && n > 0) ConvertTo<bool>(params[0]);
-    if (strMethod == "enforcecheckpoint"      && n > 1) ConvertTo<boost::int64_t>(params[1]);
 
     return params;
 }
@@ -1296,7 +1285,7 @@ int main(int argc, char *argv[])
     {
         if (argc >= 2 && string(argv[1]) == "-server")
         {
-            LogPrintf("server ready\n");
+            printf("server ready\n");
             ThreadRPCServer(NULL);
         }
         else

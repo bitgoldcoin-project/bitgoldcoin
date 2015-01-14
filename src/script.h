@@ -425,14 +425,14 @@ public:
 
     bool GetOp2(const_iterator& pc, opcodetype& opcodeRet, std::vector<unsigned char>* pvchRet) const
     {
-        const_iterator  scriptEnd = end();
-        
         opcodeRet = OP_INVALIDOPCODE;
         if (pvchRet)
             pvchRet->clear();
+        if (pc >= end())
+            return false;
 
         // Read instruction
-        if (scriptEnd - pc < 1)
+        if (end() - pc < 1)
             return false;
         unsigned int opcode = *pc++;
 
@@ -446,13 +446,13 @@ public:
             }
             else if (opcode == OP_PUSHDATA1)
             {
-                if (scriptEnd - pc < 1)
+                if (end() - pc < 1)
                     return false;
                 nSize = *pc++;
             }
             else if (opcode == OP_PUSHDATA2)
             {
-                if (scriptEnd - pc < 2)
+                if (end() - pc < 2)
                     return false;
                 nSize = 0;
                 memcpy(&nSize, &pc[0], 2);
@@ -460,12 +460,12 @@ public:
             }
             else if (opcode == OP_PUSHDATA4)
             {
-                if (scriptEnd - pc < 4)
+                if (end() - pc < 4)
                     return false;
                 memcpy(&nSize, &pc[0], 4);
                 pc += 4;
             }
-            if (scriptEnd - pc < 0 || (unsigned int)(scriptEnd - pc) < nSize)
+            if (end() - pc < 0 || (unsigned int)(end() - pc) < nSize)
                 return false;
             if (pvchRet)
                 pvchRet->assign(pc, pc + nSize);
@@ -531,10 +531,9 @@ public:
     // pay-to-script-hash transactions:
     unsigned int GetSigOpCount(const CScript& scriptSig) const;
 
-    bool IsNormalPaymentScript() const;
     bool IsPayToScriptHash() const;
 
-    // Called by CTransaction::IsStandard
+    // Called by CTransaction::IsStandard and P2SH VerifyScript (which makes it consensus-critical).
     bool IsPushOnly() const
     {
         const_iterator pc = begin();
@@ -549,6 +548,8 @@ public:
         return true;
     }
 
+    // Called by IsStandardTx.
+    bool HasCanonicalPushes() const;
 
     void SetDestination(const CTxDestination& address);
     void SetMultisig(int nRequired, const std::vector<CPubKey>& keys);
@@ -556,7 +557,7 @@ public:
 
     void PrintHex() const
     {
-        LogPrintf("CScript(%s)\n", HexStr(begin(), end(), true).c_str());
+        printf("CScript(%s)\n", HexStr(begin(), end(), true).c_str());
     }
 
     std::string ToString() const
@@ -584,7 +585,7 @@ public:
 
     void print() const
     {
-        LogPrintf("%s\n", ToString().c_str());
+        printf("%s\n", ToString().c_str());
     }
 
     CScriptID GetID() const
@@ -669,6 +670,7 @@ public:
 bool IsCanonicalPubKey(const std::vector<unsigned char> &vchPubKey);
 bool IsCanonicalSignature(const std::vector<unsigned char> &vchSig);
 
+uint256 SignatureHash(CScript scriptCode, const CTransaction& txTo, unsigned int nIn, int nHashType);
 bool EvalScript(std::vector<std::vector<unsigned char> >& stack, const CScript& script, const CTransaction& txTo, unsigned int nIn, unsigned int flags, int nHashType);
 bool Solver(const CScript& scriptPubKey, txnouttype& typeRet, std::vector<std::vector<unsigned char> >& vSolutionsRet);
 int ScriptSigArgsExpected(txnouttype t, const std::vector<std::vector<unsigned char> >& vSolutions);
@@ -676,7 +678,6 @@ bool IsStandard(const CScript& scriptPubKey);
 bool IsMine(const CKeyStore& keystore, const CScript& scriptPubKey);
 bool IsMine(const CKeyStore& keystore, const CTxDestination &dest);
 bool ExtractDestination(const CScript& scriptPubKey, CTxDestination& addressRet);
-bool ExtractDestinationAndMine(const CKeyStore &keystore, const CScript& scriptPubKey, CTxDestination& addressRet, bool *outMine);
 bool ExtractDestinations(const CScript& scriptPubKey, txnouttype& typeRet, std::vector<CTxDestination>& addressRet, int& nRequiredRet);
 bool SignSignature(const CKeyStore& keystore, const CScript& fromPubKey, CTransaction& txTo, unsigned int nIn, int nHashType=SIGHASH_ALL);
 bool SignSignature(const CKeyStore& keystore, const CTransaction& txFrom, CTransaction& txTo, unsigned int nIn, int nHashType=SIGHASH_ALL);

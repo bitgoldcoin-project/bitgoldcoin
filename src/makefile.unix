@@ -16,12 +16,9 @@ LINK:=$(CXX)
 DEFS=-DBOOST_SPIRIT_THREADSAFE -D_FILE_OFFSET_BITS=64
 
 DEFS += $(addprefix -I,$(CURDIR) $(CURDIR)/obj $(BOOST_INCLUDE_PATH) $(BDB_INCLUDE_PATH) $(OPENSSL_INCLUDE_PATH))
-LIBS = $(addprefix -L,$(BOOST_LIB_PATH) $(BDB_LIB_PATH) $(OPENSSL_LIB_PATH)) -static-libstdc++
+LIBS = $(addprefix -L,$(BOOST_LIB_PATH) $(BDB_LIB_PATH) $(OPENSSL_LIB_PATH))
 
 TESTDEFS = -DTEST_DATA_DIR=$(abspath test/data)
-ifdef UNIT_TEST
-DEFS+=-DUNIT_TEST=1
-endif
 
 LMODE = dynamic
 LMODE2 = dynamic
@@ -64,7 +61,6 @@ endif
 LIBS+= \
  -Wl,-B$(LMODE2) \
    -l z \
-   -l rt \
    -l dl \
    -l pthread
 
@@ -99,7 +95,7 @@ LIBS+= \
 
     # -D_FORTIFY_SOURCE=2 does some checking for potentially exploitable code patterns in
     # the source such overflowing a statically defined buffer.
-    HARDENING+=-D_FORTIFY_SOURCE=2
+    HARDENING+=-U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2
 #
 
 
@@ -125,18 +121,11 @@ OBJS= \
     obj/key.o \
     obj/db.o \
     obj/init.o \
-    obj/core.o \
-    obj/masternode.o \
-    obj/masternodeconfig.o \
-    obj/activemasternode.o \
-    obj/instantx.o \
     obj/keystore.o \
     obj/main.o \
-    obj/darksend.o \
     obj/net.o \
     obj/protocol.o \
     obj/bitcoinrpc.o \
-    obj/rpcdarksend.o \
     obj/rpcdump.o \
     obj/rpcnet.o \
     obj/rpcmining.o \
@@ -144,6 +133,7 @@ OBJS= \
     obj/rpcblockchain.o \
     obj/rpcrawtransaction.o \
     obj/script.o \
+    obj/scrypt.o \
     obj/sync.o \
     obj/util.o \
     obj/wallet.o \
@@ -152,20 +142,14 @@ OBJS= \
     obj/bloom.o \
     obj/noui.o \
     obj/leveldb.o \
-    obj/txdb.o\
-    obj/cubehash.o \
-    obj/luffa.o \
-    obj/aes_helper.o \
-    obj/echo.o \
-    obj/shavite.o \
-    obj/simd.o \
-    obj/blake.o\
-    obj/bmw.o\
-    obj/groestl.o\
-    obj/jh.o\
-    obj/keccak.o\
-    obj/skein.o \
-    obj/checkpointsync.o
+    obj/txdb.o
+
+
+ifdef USE_SSE2
+DEFS += -DUSE_SSE2
+OBJS_SSE2= obj/scrypt-sse2.o
+OBJS += $(OBJS_SSE2)
+endif
 
 all: bitgoldcoind
 
@@ -200,13 +184,6 @@ obj/%-sse2.o: %-sse2.cpp
 
 obj/%.o: %.cpp
 	$(CXX) -c $(xCXXFLAGS) -MMD -MF $(@:%.o=%.d) -o $@ $<
-	@cp $(@:%.o=%.d) $(@:%.o=%.P); \
-	  sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
-	      -e '/^$$/ d' -e 's/$$/ :/' < $(@:%.o=%.d) >> $(@:%.o=%.P); \
-	  rm -f $(@:%.o=%.d)
-
-obj/%.o: %.c
-	$(CXX) -c $(xCXXFLAGS) -fpermissive -MMD -MF $(@:%.o=%.d) -o $@ $<
 	@cp $(@:%.o=%.d) $(@:%.o=%.P); \
 	  sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
 	      -e '/^$$/ d' -e 's/$$/ :/' < $(@:%.o=%.d) >> $(@:%.o=%.P); \

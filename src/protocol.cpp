@@ -12,28 +12,6 @@
 # include <arpa/inet.h>
 #endif
 
-
-// The message start string is designed to be unlikely to occur in normal data.
-// The characters are rarely used upper ascii, not valid as UTF-8, and produce
-// a large 4-byte int at any alignment.
-// Public testnet message start
-static unsigned char pchMessageStartTestOld[4] = { 0xfc, 0xc1, 0xb7, 0xdc };
-static unsigned char pchMessageStartTestNew[4] = { 0xce, 0xe2, 0xca, 0xff };
-static unsigned int nMessageStartTestSwitchTime = 1398869551+(60*5);
-
-// Bitgoldcoin message start (switch from Litecoin's)
-static unsigned char pchMessageStartLitecoin[4] = { 0xfb, 0xc0, 0xb6, 0xdb };
-static unsigned char pchMessageStartBitgoldcoin[4] = { 0xbf, 0x0c, 0x6b, 0xbd };
-static unsigned int nMessageStartSwitchTime = 1400094580; //Wed, 14 May 2014 19:09:40 GMT
-
-void GetMessageStart(unsigned char pchMessageStart[], bool fPersistent)
-{
-    if (fTestNet)
-        memcpy(pchMessageStart, (fPersistent || GetAdjustedTime() > nMessageStartTestSwitchTime)? pchMessageStartTestNew : pchMessageStartTestOld, sizeof(pchMessageStartTestNew));
-    else
-        memcpy(pchMessageStart, (fPersistent || GetAdjustedTime() > nMessageStartSwitchTime)? pchMessageStartBitgoldcoin : pchMessageStartLitecoin, sizeof(pchMessageStartBitgoldcoin));
-}
-
 static const char* ppszTypeName[] =
 {
     "ERROR",
@@ -44,7 +22,7 @@ static const char* ppszTypeName[] =
 
 CMessageHeader::CMessageHeader()
 {
-    GetMessageStart(pchMessageStart);
+    memcpy(pchMessageStart, ::pchMessageStart, sizeof(pchMessageStart));
     memset(pchCommand, 0, sizeof(pchCommand));
     pchCommand[1] = 1;
     nMessageSize = -1;
@@ -53,7 +31,7 @@ CMessageHeader::CMessageHeader()
 
 CMessageHeader::CMessageHeader(const char* pszCommand, unsigned int nMessageSizeIn)
 {
-    GetMessageStart(pchMessageStart);
+    memcpy(pchMessageStart, ::pchMessageStart, sizeof(pchMessageStart));
     strncpy(pchCommand, pszCommand, COMMAND_SIZE);
     nMessageSize = nMessageSizeIn;
     nChecksum = 0;
@@ -69,10 +47,8 @@ std::string CMessageHeader::GetCommand() const
 
 bool CMessageHeader::IsValid() const
 {
-    // Check start string  
-    unsigned char pchMessageStartProtocol[4];
-    GetMessageStart(pchMessageStartProtocol);
-    if (memcmp(pchMessageStart, pchMessageStartProtocol, sizeof(pchMessageStart)) != 0)
+    // Check start string
+    if (memcmp(pchMessageStart, ::pchMessageStart, sizeof(pchMessageStart)) != 0)
         return false;
 
     // Check the command string for errors
@@ -92,7 +68,7 @@ bool CMessageHeader::IsValid() const
     // Message size
     if (nMessageSize > MAX_SIZE)
     {
-        LogPrintf("CMessageHeader::IsValid() : (%s, %u bytes) nMessageSize > MAX_SIZE\n", GetCommand().c_str(), nMessageSize);
+        printf("CMessageHeader::IsValid() : (%s, %u bytes) nMessageSize > MAX_SIZE\n", GetCommand().c_str(), nMessageSize);
         return false;
     }
 
@@ -171,6 +147,6 @@ std::string CInv::ToString() const
 
 void CInv::print() const
 {
-    LogPrintf("CInv(%s)\n", ToString().c_str());
+    printf("CInv(%s)\n", ToString().c_str());
 }
 

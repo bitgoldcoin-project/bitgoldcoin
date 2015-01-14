@@ -1,3 +1,7 @@
+// Copyright (c) 2011-2013 The Bitcoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include "transactiontablemodel.h"
 
 #include "guiutil.h"
@@ -66,7 +70,7 @@ public:
      */
     void refreshWallet()
     {
-        LogPrintf("refreshWallet\n");
+        OutputDebugStringF("refreshWallet\n");
         cachedWallet.clear();
         {
             LOCK(wallet->cs_wallet);
@@ -85,7 +89,7 @@ public:
      */
     void updateWallet(const uint256 &hash, int status)
     {
-        LogPrintf("updateWallet %s %i\n", hash.ToString().c_str(), status);
+        OutputDebugStringF("updateWallet %s %i\n", hash.ToString().c_str(), status);
         {
             LOCK(wallet->cs_wallet);
 
@@ -113,7 +117,7 @@ public:
                     status = CT_DELETED; /* In model, but want to hide, treat as deleted */
             }
 
-            LogPrintf("   inWallet=%i inModel=%i Index=%i-%i showTransaction=%i derivedStatus=%i\n",
+            OutputDebugStringF("   inWallet=%i inModel=%i Index=%i-%i showTransaction=%i derivedStatus=%i\n",
                      inWallet, inModel, lowerIndex, upperIndex, showTransaction, status);
 
             switch(status)
@@ -121,12 +125,12 @@ public:
             case CT_NEW:
                 if(inModel)
                 {
-                    LogPrintf("Warning: updateWallet: Got CT_NEW, but transaction is already in model\n");
+                    OutputDebugStringF("Warning: updateWallet: Got CT_NEW, but transaction is already in model\n");
                     break;
                 }
                 if(!inWallet)
                 {
-                    LogPrintf("Warning: updateWallet: Got CT_NEW, but transaction is not in wallet\n");
+                    OutputDebugStringF("Warning: updateWallet: Got CT_NEW, but transaction is not in wallet\n");
                     break;
                 }
                 if(showTransaction)
@@ -150,7 +154,7 @@ public:
             case CT_DELETED:
                 if(!inModel)
                 {
-                    LogPrintf("Warning: updateWallet: Got CT_DELETED, but transaction is not in model\n");
+                    OutputDebugStringF("Warning: updateWallet: Got CT_DELETED, but transaction is not in model\n");
                     break;
                 }
                 // Removed -- remove entire transaction from table
@@ -353,8 +357,6 @@ QString TransactionTableModel::formatTxType(const TransactionRecord *wtx) const
         return tr("Received with");
     case TransactionRecord::RecvFromOther:
         return tr("Received from");
-    case TransactionRecord::RecvWithDarksend:
-        return tr("Received via Darksend");
     case TransactionRecord::SendToAddress:
     case TransactionRecord::SendToOther:
         return tr("Sent to");
@@ -362,16 +364,6 @@ QString TransactionTableModel::formatTxType(const TransactionRecord *wtx) const
         return tr("Payment to yourself");
     case TransactionRecord::Generated:
         return tr("Mined");
-
-    case TransactionRecord::DarksendDenominate:
-        return tr("Darksend Denominate");
-    case TransactionRecord::DarksendCollateralPayment:
-        return tr("Darksend Collateral Payment");
-    case TransactionRecord::DarksendSplitUpLarge:
-        return tr("Darksend Split Up Large Inputs");
-    case TransactionRecord::Darksent:
-        return tr("Darksent");
-
     default:
         return QString();
     }
@@ -383,7 +375,6 @@ QVariant TransactionTableModel::txAddressDecoration(const TransactionRecord *wtx
     {
     case TransactionRecord::Generated:
         return QIcon(":/icons/tx_mined");
-    case TransactionRecord::RecvWithDarksend:
     case TransactionRecord::RecvWithAddress:
     case TransactionRecord::RecvFromOther:
         return QIcon(":/icons/tx_input");
@@ -403,10 +394,8 @@ QString TransactionTableModel::formatTxToAddress(const TransactionRecord *wtx, b
     case TransactionRecord::RecvFromOther:
         return QString::fromStdString(wtx->address);
     case TransactionRecord::RecvWithAddress:
-    case TransactionRecord::RecvWithDarksend:
     case TransactionRecord::SendToAddress:
     case TransactionRecord::Generated:
-    case TransactionRecord::Darksent:
         return lookupAddress(wtx->address, tooltip);
     case TransactionRecord::SendToOther:
         return QString::fromStdString(wtx->address);

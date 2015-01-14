@@ -4,13 +4,13 @@
     <name>AboutDialog</name>
     <message>
         <location filename="../forms/aboutdialog.ui" line="+14"/>
-        <source>About BitgoldCoin</source>
-        <translation>Info su BitgoldCoin</translation>
+        <source>About Bitgoldcoin</source>
+        <translation>Info su Bitgoldcoin</translation>
     </message>
     <message>
         <location line="+39"/>
-        <source>&lt;b&gt;BitgoldCoin&lt;/b&gt; version</source>
-        <translation>Versione di &lt;b&gt;BitgoldCoin&lt;/b&gt;</translation>
+        <source>&lt;b&gt;Bitgoldcoin&lt;/b&gt; version</source>
+        <translation>Versione di &lt;b&gt;Bitgoldcoin&lt;/b&gt;</translation>
     </message>
     <message>
         <location line="+57"/>
@@ -34,8 +34,8 @@ Questo prodotto include software sviluppato dal progetto OpenSSL per l&apos;uso 
     </message>
     <message>
         <location line="+0"/>
-        <source>The BitgoldCoin developers</source>
-        <translation>Sviluppatori di BitgoldCoin</translation>
+        <source>The Bitgoldcoin developers</source>
+        <translation>Sviluppatori di Bitgoldcoin</translation>
     </message>
 </context>
 <context>
@@ -67,8 +67,8 @@ Questo prodotto include software sviluppato dal progetto OpenSSL per l&apos;uso 
     </message>
     <message>
         <location filename="../addressbookpage.cpp" line="+63"/>
-        <source>These are your BitgoldCoin addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
-        <translation>Questi sono i tuoi indirizzi BitgoldCoin per ricevere pagamenti. Potrai darne uno diverso ad ognuno per tenere così traccia di chi ti sta pagando.</translation>
+        <source>These are your Bitgoldcoin addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
+        <translation>Questi sono i tuoi indirizzi Bitgoldcoin per ricevere pagamenti. Potrai darne uno diverso ad ognuno per tenere così traccia di chi ti sta pagando.</translation>
     </message>
     <message>
         <location filename="../forms/addressbookpage.ui" line="+14"/>
@@ -82,7 +82,7 @@ Questo prodotto include software sviluppato dal progetto OpenSSL per l&apos;uso 
     </message>
     <message>
         <location line="+11"/>
-        <source>Sign a message to prove you own a BitgoldCoin address</source>
+        <source>Sign a message to prove you own a Bitgoldcoin address</source>
         <translation>Firma un messaggio per dimostrare di possedere questo indirizzo</translation>
     </message>
     <message>
@@ -107,8 +107,8 @@ Questo prodotto include software sviluppato dal progetto OpenSSL per l&apos;uso 
     </message>
     <message>
         <location line="-44"/>
-        <source>Verify a message to ensure it was signed with a specified BitgoldCoin address</source>
-        <translation>Verifica un messaggio per accertarsi che sia firmato con un indirizzo BitgoldCoin specifico</translation>
+        <source>Verify a message to ensure it was signed with a specified Bitgoldcoin address</source>
+        <translation>Verifica un messaggio per accertarsi che sia firmato con un indirizzo Bitgoldcoin specifico</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -122,7 +122,7 @@ Questo prodotto include software sviluppato dal progetto OpenSSL per l&apos;uso 
     </message>
     <message>
         <location filename="../addressbookpage.cpp" line="-5"/>
-        <source>These are your BitgoldCoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your Bitgoldcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -138,7 +138,7 @@ Questo prodotto include software sviluppato dal progetto OpenSSL per l&apos;uso 
     <message>
         <location line="+1"/>
         <source>Send &amp;Coins</source>
-        <translation>Invia &amp;BitgoldCoin</translation>
+        <translation>Invia &amp;Bitgoldcoin</translation>
     </message>
     <message>
         <location line="+260"/>
@@ -248,8 +248,8 @@ Questo prodotto include software sviluppato dal progetto OpenSSL per l&apos;uso 
     </message>
     <message>
         <location line="+1"/>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR DARKCOINS&lt;/b&gt;!</source>
-        <translation>Attenzione: se si cifra il portamonete e si perde la frase d&apos;ordine, &lt;b&gt;SI PERDERANNO TUTTI I PROPRI DARKCOIN&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITGOLDCOINS&lt;/b&gt;!</source>
+        <translation>Attenzione: se si cifra il portamonete e si perde la frase d&apos;ordine, &lt;b&gt;SI PERDERANNO TUTTI I PROPRI BITGOLDCOIN&lt;/b&gt;!</translation>
     </message>
     <message>
         <location line="+0"/>
@@ -275,8 +275,8 @@ Questo prodotto include software sviluppato dal progetto OpenSSL per l&apos;uso 
     </message>
     <message>
         <location line="-56"/>
-        <source>BitgoldCoin will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your bitgoldcoins from being stolen by malware infecting your computer.</source>
-        <translation>BitgoldCoin verrà ora chiuso per finire il processo di crittazione. Ricorda che criptare il tuo portamonete non può fornire una protezione totale contro furti causati da malware che dovessero infettare il tuo computer.</translation>
+        <source>Bitgoldcoin will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your bitgoldcoins from being stolen by malware infecting your computer.</source>
+        <translation>Bitgoldcoin verrà ora chiuso per finire il processo di crittazione. Ricorda che criptare il tuo portamonete non può fornire una protezione totale contro furti causati da malware che dovessero infettare il tuo computer.</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -374,8 +374,8 @@ Questo prodotto include software sviluppato dal progetto OpenSSL per l&apos;uso 
     </message>
     <message>
         <location line="+4"/>
-        <source>Show information about BitgoldCoin</source>
-        <translation>Mostra informazioni su BitgoldCoin</translation>
+        <source>Show information about Bitgoldcoin</source>
+        <translation>Mostra informazioni su Bitgoldcoin</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -419,12 +419,12 @@ Questo prodotto include software sviluppato dal progetto OpenSSL per l&apos;uso 
     </message>
     <message>
         <location line="-347"/>
-        <source>Send coins to a BitgoldCoin address</source>
+        <source>Send coins to a Bitgoldcoin address</source>
         <translation>Invia monete ad un indirizzo bitgoldcoin</translation>
     </message>
     <message>
         <location line="+49"/>
-        <source>Modify configuration options for BitgoldCoin</source>
+        <source>Modify configuration options for Bitgoldcoin</source>
         <translation>Modifica configurazione opzioni per bitgoldcoin</translation>
     </message>
     <message>
@@ -455,8 +455,8 @@ Questo prodotto include software sviluppato dal progetto OpenSSL per l&apos;uso 
     <message>
         <location line="-165"/>
         <location line="+530"/>
-        <source>BitgoldCoin</source>
-        <translation>BitgoldCoin</translation>
+        <source>Bitgoldcoin</source>
+        <translation>Bitgoldcoin</translation>
     </message>
     <message>
         <location line="-530"/>
@@ -480,8 +480,8 @@ Questo prodotto include software sviluppato dal progetto OpenSSL per l&apos;uso 
     </message>
     <message>
         <location line="+22"/>
-        <source>&amp;About BitgoldCoin</source>
-        <translation>&amp;Info su BitgoldCoin</translation>
+        <source>&amp;About Bitgoldcoin</source>
+        <translation>&amp;Info su Bitgoldcoin</translation>
     </message>
     <message>
         <location line="+9"/>
@@ -500,13 +500,13 @@ Questo prodotto include software sviluppato dal progetto OpenSSL per l&apos;uso 
     </message>
     <message>
         <location line="+7"/>
-        <source>Sign messages with your BitgoldCoin addresses to prove you own them</source>
-        <translation>Firma i messaggi con il tuo indirizzo BitgoldCoin per dimostrare di possederli</translation>
+        <source>Sign messages with your Bitgoldcoin addresses to prove you own them</source>
+        <translation>Firma i messaggi con il tuo indirizzo Bitgoldcoin per dimostrare di possederli</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>Verify messages to ensure they were signed with specified BitgoldCoin addresses</source>
-        <translation>Verifica i messaggi per accertarsi che siano stati firmati con gli indirizzi BitgoldCoin specificati</translation>
+        <source>Verify messages to ensure they were signed with specified Bitgoldcoin addresses</source>
+        <translation>Verifica i messaggi per accertarsi che siano stati firmati con gli indirizzi Bitgoldcoin specificati</translation>
     </message>
     <message>
         <location line="+28"/>
@@ -536,13 +536,13 @@ Questo prodotto include software sviluppato dal progetto OpenSSL per l&apos;uso 
     </message>
     <message>
         <location line="+47"/>
-        <source>BitgoldCoin client</source>
-        <translation>BitgoldCoin client</translation>
+        <source>Bitgoldcoin client</source>
+        <translation>Bitgoldcoin client</translation>
     </message>
     <message numerus="yes">
         <location line="+141"/>
-        <source>%n active connection(s) to BitgoldCoin network</source>
-        <translation><numerusform>%n connessione attiva alla rete BitgoldCoin</numerusform><numerusform>%n connessioni attive alla rete BitgoldCoin</numerusform></translation>
+        <source>%n active connection(s) to Bitgoldcoin network</source>
+        <translation><numerusform>%n connessione attiva alla rete Bitgoldcoin</numerusform><numerusform>%n connessioni attive alla rete Bitgoldcoin</numerusform></translation>
     </message>
     <message>
         <location line="+22"/>
@@ -657,8 +657,8 @@ Indirizzo: %4
     <message>
         <location line="-23"/>
         <location line="+23"/>
-        <source>URI can not be parsed! This can be caused by an invalid BitgoldCoin address or malformed URI parameters.</source>
-        <translation>Impossibile interpretare l&apos;URI! Ciò può essere causato da un indirizzo BitgoldCoin invalido o da parametri URI non corretti.</translation>
+        <source>URI can not be parsed! This can be caused by an invalid Bitgoldcoin address or malformed URI parameters.</source>
+        <translation>Impossibile interpretare l&apos;URI! Ciò può essere causato da un indirizzo Bitgoldcoin invalido o da parametri URI non corretti.</translation>
     </message>
     <message>
         <location line="+17"/>
@@ -672,8 +672,8 @@ Indirizzo: %4
     </message>
     <message>
         <location filename="../bitcoin.cpp" line="+111"/>
-        <source>A fatal error occurred. BitgoldCoin can no longer continue safely and will quit.</source>
-        <translation>Riscontrato un errore irreversibile. BitgoldCoin non può più continuare in sicurezza e verrà terminato.</translation>
+        <source>A fatal error occurred. Bitgoldcoin can no longer continue safely and will quit.</source>
+        <translation>Riscontrato un errore irreversibile. Bitgoldcoin non può più continuare in sicurezza e verrà terminato.</translation>
     </message>
 </context>
 <context>
@@ -738,7 +738,7 @@ Indirizzo: %4
     </message>
     <message>
         <location line="-5"/>
-        <source>The entered address &quot;%1&quot; is not a valid BitgoldCoin address.</source>
+        <source>The entered address &quot;%1&quot; is not a valid Bitgoldcoin address.</source>
         <translation>L&apos;indirizzo inserito &quot;%1&quot; non è un indirizzo bitgoldcoin valido.</translation>
     </message>
     <message>
@@ -757,8 +757,8 @@ Indirizzo: %4
     <message>
         <location filename="../guiutil.cpp" line="+424"/>
         <location line="+12"/>
-        <source>BitgoldCoin-Qt</source>
-        <translation>BitgoldCoin-Qt</translation>
+        <source>Bitgoldcoin-Qt</source>
+        <translation>Bitgoldcoin-Qt</translation>
     </message>
     <message>
         <location line="-12"/>
@@ -821,13 +821,13 @@ Indirizzo: %4
     </message>
     <message>
         <location line="+31"/>
-        <source>Automatically start BitgoldCoin after logging in to the system.</source>
-        <translation>Avvia automaticamente BitgoldCoin all&apos;accensione del computer</translation>
+        <source>Automatically start Bitgoldcoin after logging in to the system.</source>
+        <translation>Avvia automaticamente Bitgoldcoin all&apos;accensione del computer</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>&amp;Start BitgoldCoin on system login</source>
-        <translation>&amp;Fai partire BitgoldCoin all&apos;avvio del sistema</translation>
+        <source>&amp;Start Bitgoldcoin on system login</source>
+        <translation>&amp;Fai partire Bitgoldcoin all&apos;avvio del sistema</translation>
     </message>
     <message>
         <location line="+35"/>
@@ -846,8 +846,8 @@ Indirizzo: %4
     </message>
     <message>
         <location line="+6"/>
-        <source>Automatically open the BitgoldCoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Apri automaticamente la porta del client BitgoldCoin sul router. Questo funziona solo se il router supporta UPnP ed è abilitato.</translation>
+        <source>Automatically open the Bitgoldcoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Apri automaticamente la porta del client Bitgoldcoin sul router. Questo funziona solo se il router supporta UPnP ed è abilitato.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -856,7 +856,7 @@ Indirizzo: %4
     </message>
     <message>
         <location line="+7"/>
-        <source>Connect to the BitgoldCoin network through a SOCKS proxy (e.g. when connecting through Tor).</source>
+        <source>Connect to the Bitgoldcoin network through a SOCKS proxy (e.g. when connecting through Tor).</source>
         <translation>Connettiti alla rete Bitcon attraverso un proxy SOCKS (ad esempio quando ci si collega via Tor)</translation>
     </message>
     <message>
@@ -931,8 +931,8 @@ Indirizzo: %4
     </message>
     <message>
         <location line="+13"/>
-        <source>The user interface language can be set here. This setting will take effect after restarting BitgoldCoin.</source>
-        <translation>La lingua dell&apos;interfaccia utente può essere impostata qui. L&apos;impostazione avrà effetto dopo il riavvio di BitgoldCoin.</translation>
+        <source>The user interface language can be set here. This setting will take effect after restarting Bitgoldcoin.</source>
+        <translation>La lingua dell&apos;interfaccia utente può essere impostata qui. L&apos;impostazione avrà effetto dopo il riavvio di Bitgoldcoin.</translation>
     </message>
     <message>
         <location line="+11"/>
@@ -946,8 +946,8 @@ Indirizzo: %4
     </message>
     <message>
         <location line="+9"/>
-        <source>Whether to show BitgoldCoin addresses in the transaction list or not.</source>
-        <translation>Se mostrare l&apos;indirizzo BitgoldCoin nella transazione o meno.</translation>
+        <source>Whether to show Bitgoldcoin addresses in the transaction list or not.</source>
+        <translation>Se mostrare l&apos;indirizzo Bitgoldcoin nella transazione o meno.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -998,8 +998,8 @@ Indirizzo: %4
     <message>
         <location line="-9"/>
         <location line="+9"/>
-        <source>This setting will take effect after restarting BitgoldCoin.</source>
-        <translation>L&apos;impostazione avrà effetto dopo il riavvio di BitgoldCoin.</translation>
+        <source>This setting will take effect after restarting Bitgoldcoin.</source>
+        <translation>L&apos;impostazione avrà effetto dopo il riavvio di Bitgoldcoin.</translation>
     </message>
     <message>
         <location line="+29"/>
@@ -1017,8 +1017,8 @@ Indirizzo: %4
     <message>
         <location line="+50"/>
         <location line="+166"/>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the BitgoldCoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>Le informazioni visualizzate sono datate. Il tuo partafogli verrà sincronizzato automaticamente con il network BitgoldCoin dopo che la connessione è stabilita, ma questo processo non può essere completato ora.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitgoldcoin network after a connection is established, but this process has not completed yet.</source>
+        <translation>Le informazioni visualizzate sono datate. Il tuo partafogli verrà sincronizzato automaticamente con il network Bitgoldcoin dopo che la connessione è stabilita, ma questo processo non può essere completato ora.</translation>
     </message>
     <message>
         <location line="-124"/>
@@ -1221,8 +1221,8 @@ Indirizzo: %4
     </message>
     <message>
         <location line="+7"/>
-        <source>Show the BitgoldCoin-Qt help message to get a list with possible BitgoldCoin command-line options.</source>
-        <translation>Mostra il messaggio di aiuto di BitgoldCoin-QT per avere la lista di tutte le opzioni della riga di comando di BitgoldCoin.</translation>
+        <source>Show the Bitgoldcoin-Qt help message to get a list with possible Bitgoldcoin command-line options.</source>
+        <translation>Mostra il messaggio di aiuto di Bitgoldcoin-QT per avere la lista di tutte le opzioni della riga di comando di Bitgoldcoin.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1241,12 +1241,12 @@ Indirizzo: %4
     </message>
     <message>
         <location line="-104"/>
-        <source>BitgoldCoin - Debug window</source>
-        <translation>BitgoldCoin - Finestra debug</translation>
+        <source>Bitgoldcoin - Debug window</source>
+        <translation>Bitgoldcoin - Finestra debug</translation>
     </message>
     <message>
         <location line="+25"/>
-        <source>BitgoldCoin Core</source>
+        <source>Bitgoldcoin Core</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1256,8 +1256,8 @@ Indirizzo: %4
     </message>
     <message>
         <location line="+7"/>
-        <source>Open the BitgoldCoin debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Apri il file di log del debug di BitgoldCoin dalla cartella attuale. Può richiedere alcuni secondi per file di log grandi.</translation>
+        <source>Open the Bitgoldcoin debug log file from the current data directory. This can take a few seconds for large log files.</source>
+        <translation>Apri il file di log del debug di Bitgoldcoin dalla cartella attuale. Può richiedere alcuni secondi per file di log grandi.</translation>
     </message>
     <message>
         <location line="+102"/>
@@ -1266,8 +1266,8 @@ Indirizzo: %4
     </message>
     <message>
         <location filename="../rpcconsole.cpp" line="-30"/>
-        <source>Welcome to the BitgoldCoin RPC console.</source>
-        <translation>Benvenuto nella console RPC di BitgoldCoin</translation>
+        <source>Welcome to the Bitgoldcoin RPC console.</source>
+        <translation>Benvenuto nella console RPC di Bitgoldcoin</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -1292,7 +1292,7 @@ Indirizzo: %4
         <location line="+5"/>
         <location line="+5"/>
         <source>Send Coins</source>
-        <translation>Spedisci BitgoldCoin</translation>
+        <translation>Spedisci Bitgoldcoin</translation>
     </message>
     <message>
         <location line="+50"/>
@@ -1409,8 +1409,8 @@ Indirizzo: %4
     </message>
     <message>
         <location line="+34"/>
-        <source>The address to send the payment to (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
-        <translation>L&apos;indirizzo del beneficiario a cui inviare il pagamento (ad esempio G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</translation>
+        <source>The address to send the payment to (e.g. G3e4KFHDfwYskjdXcFP2Po1NpRU3483kdd)</source>
+        <translation>L&apos;indirizzo del beneficiario a cui inviare il pagamento (ad esempio G3e4KFHDfwYskjdXcFP2Po1NpRU3483kdd)</translation>
     </message>
     <message>
         <location line="+60"/>
@@ -1450,8 +1450,8 @@ Indirizzo: %4
     </message>
     <message>
         <location filename="../sendcoinsentry.cpp" line="+1"/>
-        <source>Enter a BitgoldCoin address (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
-        <translation>Inserisci un indirizzo BitgoldCoin (ad esempio G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</translation>
+        <source>Enter a Bitgoldcoin address (e.g. G3e4KFHDfwYskjdXcFP2Po1NpRU3483kdd)</source>
+        <translation>Inserisci un indirizzo Bitgoldcoin (ad esempio G3e4KFHDfwYskjdXcFP2Po1NpRU3483kdd)</translation>
     </message>
 </context>
 <context>
@@ -1473,8 +1473,8 @@ Indirizzo: %4
     </message>
     <message>
         <location line="+18"/>
-        <source>The address to sign the message with (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
-        <translation>Inserisci un indirizzo BitgoldCoin (ad esempio G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</translation>
+        <source>The address to sign the message with (e.g. G3e4KFHDfwYskjdXcFP2Po1NpRU3483kdd)</source>
+        <translation>Inserisci un indirizzo Bitgoldcoin (ad esempio G3e4KFHDfwYskjdXcFP2Po1NpRU3483kdd)</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -1515,7 +1515,7 @@ Indirizzo: %4
     </message>
     <message>
         <location line="+21"/>
-        <source>Sign the message to prove you own this BitgoldCoin address</source>
+        <source>Sign the message to prove you own this Bitgoldcoin address</source>
         <translation>Firma un messaggio per dimostrare di possedere questo indirizzo</translation>
     </message>
     <message>
@@ -1546,13 +1546,13 @@ Indirizzo: %4
     </message>
     <message>
         <location line="+21"/>
-        <source>The address the message was signed with (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
-        <translation>Inserisci un indirizzo BitgoldCoin (ad esempio G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</translation>
+        <source>The address the message was signed with (e.g. G3e4KFHDfwYskjdXcFP2Po1NpRU3483kdd)</source>
+        <translation>Inserisci un indirizzo Bitgoldcoin (ad esempio G3e4KFHDfwYskjdXcFP2Po1NpRU3483kdd)</translation>
     </message>
     <message>
         <location line="+40"/>
-        <source>Verify the message to ensure it was signed with the specified BitgoldCoin address</source>
-        <translation>Verifica il messaggio per assicurarsi che sia stato firmato con l&apos;indirizzo BitgoldCoin specificato</translation>
+        <source>Verify the message to ensure it was signed with the specified Bitgoldcoin address</source>
+        <translation>Verifica il messaggio per assicurarsi che sia stato firmato con l&apos;indirizzo Bitgoldcoin specificato</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1567,8 +1567,8 @@ Indirizzo: %4
     <message>
         <location filename="../signverifymessagedialog.cpp" line="+27"/>
         <location line="+3"/>
-        <source>Enter a BitgoldCoin address (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
-        <translation>Inserisci un indirizzo BitgoldCoin (ad esempio G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</translation>
+        <source>Enter a Bitgoldcoin address (e.g. G3e4KFHDfwYskjdXcFP2Po1NpRU3483kdd)</source>
+        <translation>Inserisci un indirizzo Bitgoldcoin (ad esempio G3e4KFHDfwYskjdXcFP2Po1NpRU3483kdd)</translation>
     </message>
     <message>
         <location line="-2"/>
@@ -1577,8 +1577,8 @@ Indirizzo: %4
     </message>
     <message>
         <location line="+3"/>
-        <source>Enter BitgoldCoin signature</source>
-        <translation>Inserisci firma BitgoldCoin</translation>
+        <source>Enter Bitgoldcoin signature</source>
+        <translation>Inserisci firma Bitgoldcoin</translation>
     </message>
     <message>
         <location line="+82"/>
@@ -1651,8 +1651,8 @@ Indirizzo: %4
     <name>SplashScreen</name>
     <message>
         <location filename="../splashscreen.cpp" line="+22"/>
-        <source>The BitgoldCoin developers</source>
-        <translation>Sviluppatori di BitgoldCoin</translation>
+        <source>The Bitgoldcoin developers</source>
+        <translation>Sviluppatori di Bitgoldcoin</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -2139,7 +2139,7 @@ Indirizzo: %4
     <message>
         <location filename="../walletmodel.cpp" line="+193"/>
         <source>Send Coins</source>
-        <translation>Spedisci BitgoldCoin</translation>
+        <translation>Spedisci Bitgoldcoin</translation>
     </message>
 </context>
 <context>
@@ -2189,8 +2189,8 @@ Indirizzo: %4
     <name>bitcoin-core</name>
     <message>
         <location filename="../bitcoinstrings.cpp" line="+94"/>
-        <source>BitgoldCoin version</source>
-        <translation>Versione di BitgoldCoin</translation>
+        <source>Bitgoldcoin version</source>
+        <translation>Versione di Bitgoldcoin</translation>
     </message>
     <message>
         <location line="+102"/>
@@ -2318,7 +2318,7 @@ rpcpassword=%s
 The username and password MUST NOT be the same.
 If the file does not exist, create it with owner-readable-only file permissions.
 It is also recommended to set alertnotify so you are notified of problems;
-for example: alertnotify=echo %%s | mail -s &quot;BitgoldCoin Alert&quot; admin@foo.com
+for example: alertnotify=echo %%s | mail -s &quot;Bitgoldcoin Alert&quot; admin@foo.com
 </source>
         <translation type="unfinished"/>
     </message>
@@ -2334,8 +2334,8 @@ for example: alertnotify=echo %%s | mail -s &quot;BitgoldCoin Alert&quot; admin@
     </message>
     <message>
         <location line="+3"/>
-        <source>Cannot obtain a lock on data directory %s. BitgoldCoin is probably already running.</source>
-        <translation>Non è possibile ottenere i dati sulla cartella %s. Probabilmente BitgoldCoin è già in esecuzione.</translation>
+        <source>Cannot obtain a lock on data directory %s. Bitgoldcoin is probably already running.</source>
+        <translation>Non è possibile ottenere i dati sulla cartella %s. Probabilmente Bitgoldcoin è già in esecuzione.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2379,8 +2379,8 @@ for example: alertnotify=echo %%s | mail -s &quot;BitgoldCoin Alert&quot; admin@
     </message>
     <message>
         <location line="+3"/>
-        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong BitgoldCoin will not work properly.</source>
-        <translation>Attenzione: si prega di controllare che la data del computer e l&apos;ora siano corrette. Se il vostro orologio è sbagliato BitgoldCoin non funziona correttamente.</translation>
+        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Bitgoldcoin will not work properly.</source>
+        <translation>Attenzione: si prega di controllare che la data del computer e l&apos;ora siano corrette. Se il vostro orologio è sbagliato Bitgoldcoin non funziona correttamente.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2629,8 +2629,8 @@ for example: alertnotify=echo %%s | mail -s &quot;BitgoldCoin Alert&quot; admin@
     </message>
     <message>
         <location line="+5"/>
-        <source>SSL options: (see the BitgoldCoin Wiki for SSL setup instructions)</source>
-        <translation>Opzioni SSL: (vedi il wiki di BitgoldCoin per le istruzioni di configurazione SSL)</translation>
+        <source>SSL options: (see the Bitgoldcoin Wiki for SSL setup instructions)</source>
+        <translation>Opzioni SSL: (vedi il wiki di Bitgoldcoin per le istruzioni di configurazione SSL)</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -2831,13 +2831,13 @@ for example: alertnotify=echo %%s | mail -s &quot;BitgoldCoin Alert&quot; admin@
     </message>
     <message>
         <location line="+1"/>
-        <source>Error loading wallet.dat: Wallet requires newer version of BitgoldCoin</source>
-        <translation>Errore caricamento wallet.dat: il wallet richiede una versione nuova di BitgoldCoin</translation>
+        <source>Error loading wallet.dat: Wallet requires newer version of Bitgoldcoin</source>
+        <translation>Errore caricamento wallet.dat: il wallet richiede una versione nuova di Bitgoldcoin</translation>
     </message>
     <message>
         <location line="+93"/>
-        <source>Wallet needed to be rewritten: restart BitgoldCoin to complete</source>
-        <translation>Il portamonete deve essere riscritto: riavviare BitgoldCoin per completare</translation>
+        <source>Wallet needed to be rewritten: restart Bitgoldcoin to complete</source>
+        <translation>Il portamonete deve essere riscritto: riavviare Bitgoldcoin per completare</translation>
     </message>
     <message>
         <location line="-95"/>
@@ -2896,8 +2896,8 @@ for example: alertnotify=echo %%s | mail -s &quot;BitgoldCoin Alert&quot; admin@
     </message>
     <message>
         <location line="-25"/>
-        <source>Unable to bind to %s on this computer. BitgoldCoin is probably already running.</source>
-        <translation>Impossibile collegarsi alla %s su questo computer. Probabilmente BitgoldCoin è già in esecuzione.</translation>
+        <source>Unable to bind to %s on this computer. Bitgoldcoin is probably already running.</source>
+        <translation>Impossibile collegarsi alla %s su questo computer. Probabilmente Bitgoldcoin è già in esecuzione.</translation>
     </message>
     <message>
         <location line="+64"/>

@@ -14,7 +14,7 @@ To Build
 	cd src/
 	make -f makefile.unix		# Headless bitgoldcoin
 
-See readme-qt.rst for instructions on building DarkCoin-Qt, the graphical user interface.
+See readme-qt.rst for instructions on building Bitgoldcoin-Qt, the graphical user interface.
 
 Dependencies
 ---------------------

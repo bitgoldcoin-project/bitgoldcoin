@@ -54,7 +54,7 @@ bool CCoinsViewDB::SetBestBlock(CBlockIndex *pindex) {
 }
 
 bool CCoinsViewDB::BatchWrite(const std::map<uint256, CCoins> &mapCoins, CBlockIndex *pindex) {
-    LogPrintf("Committing %u changed transactions to coin database...\n", (unsigned int)mapCoins.size());
+    printf("Committing %u changed transactions to coin database...\n", (unsigned int)mapCoins.size());
 
     CLevelDBBatch batch;
     for (std::map<uint256, CCoins>::const_iterator it = mapCoins.begin(); it != mapCoins.end(); it++)
@@ -240,24 +240,4 @@ bool CBlockTreeDB::LoadBlockIndexGuts()
     delete pcursor;
 
     return true;
-}
-
-bool CBlockTreeDB::ReadSyncCheckpoint(uint256& hashCheckpoint)
-{
-    return Read(string("hashSyncCheckpoint"), hashCheckpoint);
-}
- 
-bool CBlockTreeDB::WriteSyncCheckpoint(uint256 hashCheckpoint)
-{
-    return Write(string("hashSyncCheckpoint"), hashCheckpoint);
-}
- 
-bool CBlockTreeDB::ReadCheckpointPubKey(string& strPubKey)
-{
-    return Read(string("strCheckpointPubKey"), strPubKey);
-}
- 
-bool CBlockTreeDB::WriteCheckpointPubKey(const string& strPubKey)
-{
-    return Write(string("strCheckpointPubKey"), strPubKey);
 }

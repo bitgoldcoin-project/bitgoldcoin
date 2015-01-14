@@ -1,3 +1,7 @@
+// Copyright (c) 2011-2013 The Bitcoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include "splashscreen.h"
 #include "clientversion.h"
 #include "util.h"
@@ -10,8 +14,8 @@ SplashScreen::SplashScreen(const QPixmap &pixmap, Qt::WindowFlags f) :
     QSplashScreen(pixmap, f)
 {
     // set reference point, paddings
-    int paddingLeftCol2         = 33;
-    int paddingTopCol2          = 476;
+    int paddingLeftCol2         = 230;
+    int paddingTopCol2          = 376;
     int line1 = 0;
     int line2 = 13;
     int line3 = 26;
@@ -36,7 +40,7 @@ SplashScreen::SplashScreen(const QPixmap &pixmap, Qt::WindowFlags f) :
     }
 
     QPainter pixPaint(&newPixmap);
-    pixPaint.setPen(QColor(51,51,51));
+    pixPaint.setPen(QColor(70,70,70));
 
     pixPaint.setFont(QFont(font, 9*fontFactor));
     pixPaint.drawText(paddingLeftCol2,paddingTopCol2+line3,versionText);

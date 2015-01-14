@@ -1,6 +1,6 @@
-/*
- * W.J. van der Laan 2011-2012
- */
+// Copyright (c) 2011-2013 The Bitcoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <QApplication>
 
@@ -15,7 +15,6 @@
 #include "ui_interface.h"
 #include "paymentserver.h"
 #include "splashscreen.h"
-#include "masternodeconfig.h"
 
 #include <QMessageBox>
 #if QT_VERSION < 0x050000
@@ -25,8 +24,6 @@
 #include <QTimer>
 #include <QTranslator>
 #include <QLibraryInfo>
-#include <iostream>
-#include <fstream>  
 
 #ifdef Q_OS_MAC
 #include "macdockiconhandler.h"
@@ -113,7 +110,7 @@ static std::string Translate(const char* psz)
 static void handleRunawayException(std::exception *e)
 {
     PrintExceptionContinue(e, "Runaway exception");
-    QMessageBox::critical(0, "Runaway exception", BitcoinGUI::tr("A fatal error occurred. BitgoldCoin can no longer continue safely and will quit.") + QString("\n\n") + QString::fromStdString(strMiscWarning));
+    QMessageBox::critical(0, "Runaway exception", BitcoinGUI::tr("A fatal error occurred. Bitgoldcoin can no longer continue safely and will quit.") + QString("\n\n") + QString::fromStdString(strMiscWarning));
     exit(1);
 }
 
@@ -149,23 +146,20 @@ int main(int argc, char *argv[])
     {
         // This message can not be translated, as translation is not initialized yet
         // (which not yet possible because lang=XX can be overridden in bitcoin.conf in the data directory)
-        QMessageBox::critical(0, "BitgoldCoin",
+        QMessageBox::critical(0, "Bitgoldcoin",
                               QString("Error: Specified data directory \"%1\" does not exist.").arg(QString::fromStdString(mapArgs["-datadir"])));
         return 1;
     }
     ReadConfigFile(mapArgs, mapMultiArgs);
 
-    // Process masternode config
-    masternodeConfig.read(GetMasternodeConfigFile());
-
     // Application identification (must be set before OptionsModel is initialized,
     // as it is used to locate QSettings)
-    QApplication::setOrganizationName("BitgoldCoin");
-    QApplication::setOrganizationDomain("bitgoldcoin.io");
+    QApplication::setOrganizationName("Bitgoldcoin");
+    QApplication::setOrganizationDomain("bitgoldcoin.org");
     if(GetBoolArg("-testnet")) // Separate UI settings for testnet
-        QApplication::setApplicationName("BitgoldCoin-Qt-testnet");
+        QApplication::setApplicationName("Bitgoldcoin-Qt-testnet");
     else
-        QApplication::setApplicationName("BitgoldCoin-Qt");
+        QApplication::setApplicationName("Bitgoldcoin-Qt");
 
     // ... then GUI settings:
     OptionsModel optionsModel;
@@ -256,12 +250,8 @@ int main(int argc, char *argv[])
 
                 optionsModel.Upgrade(); // Must be done after AppInit2
 
-
                 if (splashref)
                     splash.finish(&window);
-
-                //make sure user has agreed to TOU
-                window.checkTOU();
 
                 ClientModel clientModel(&optionsModel);
                 WalletModel *walletModel = 0;

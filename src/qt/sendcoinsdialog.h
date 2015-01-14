@@ -1,9 +1,12 @@
+// Copyright (c) 2011-2013 The Bitcoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef SENDCOINSDIALOG_H
 #define SENDCOINSDIALOG_H
 
 #include <QDialog>
 #include <QString>
-#include <QTimer>
 
 namespace Ui {
     class SendCoinsDialog;
@@ -41,16 +44,12 @@ public slots:
     void accept();
     SendCoinsEntry *addEntry();
     void updateRemoveEnabled();
-    void setBalance(qint64 balance, qint64 unconfirmedBalance, qint64 immatureBalance, qint64 anonymizedBalance);
+    void setBalance(qint64 balance, qint64 unconfirmedBalance, qint64 immatureBalance);
 
 private:
-    QTimer *timer;
     Ui::SendCoinsDialog *ui;
     WalletModel *model;
     bool fNewRecipientAllowed;
-    bool boolCheckedBalance;
-    int cachedNumBlocks;
-    void send(QList<SendCoinsRecipient> recipients);
 
 private slots:
     void on_sendButton_clicked();

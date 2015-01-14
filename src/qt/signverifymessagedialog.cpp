@@ -1,3 +1,7 @@
+// Copyright (c) 2011-2013 The Bitcoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include "signverifymessagedialog.h"
 #include "ui_signverifymessagedialog.h"
 
@@ -24,11 +28,11 @@ SignVerifyMessageDialog::SignVerifyMessageDialog(QWidget *parent) :
 
 #if (QT_VERSION >= 0x040700)
     /* Do not move this to the XML file, Qt before 4.7 will choke on it */
-    ui->addressIn_SM->setPlaceholderText(tr("Enter a BitgoldCoin address (e.g. Ger4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)"));
+    ui->addressIn_SM->setPlaceholderText(tr("Enter a Bitgoldcoin address (e.g. G3e4KFHDfwYskjdXcFP2Po1NpRU3483kdd)"));
     ui->signatureOut_SM->setPlaceholderText(tr("Click \"Sign Message\" to generate signature"));
 
-    ui->addressIn_VM->setPlaceholderText(tr("Enter a BitgoldCoin address (e.g. Ger4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)"));
-    ui->signatureIn_VM->setPlaceholderText(tr("Enter BitgoldCoin signature"));
+    ui->addressIn_VM->setPlaceholderText(tr("Enter a Bitgoldcoin address (e.g. G3e4KFHDfwYskjdXcFP2Po1NpRU3483kdd)"));
+    ui->signatureIn_VM->setPlaceholderText(tr("Enter Bitgoldcoin signature"));
 #endif
 
     GUIUtil::setupAddressWidget(ui->addressIn_SM, this);
@@ -122,7 +126,7 @@ void SignVerifyMessageDialog::on_signMessageButton_SM_clicked()
         return;
     }
 
-    WalletModel::UnlockContext ctx(model->requestUnlock(true));
+    WalletModel::UnlockContext ctx(model->requestUnlock());
     if (!ctx.isValid())
     {
         ui->statusLabel_SM->setStyleSheet("QLabel { color: red; }");

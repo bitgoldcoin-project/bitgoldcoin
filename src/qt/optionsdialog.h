@@ -1,3 +1,7 @@
+// Copyright (c) 2011-2013 The Bitcoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef OPTIONSDIALOG_H
 #define OPTIONSDIALOG_H
 
@@ -36,7 +40,7 @@ private slots:
     void disableSaveButtons();
     /* set apply button and OK button state (enabled / disabled) */
     void setSaveButtonState(bool fState);
-//    void on_resetButton_clicked();
+    void on_resetButton_clicked();
     void on_okButton_clicked();
     void on_cancelButton_clicked();
     void on_applyButton_clicked();

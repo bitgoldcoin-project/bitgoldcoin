@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2012 The Bitcoin developers
+// Copyright (c) 2009-2014 The Bitcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -10,9 +10,6 @@
 #include "init.h"
 #include "util.h"
 #include "ui_interface.h"
-#include "checkpointsync.h"
-#include "activemasternode.h"
-#include "masternodeconfig.h"
 
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
@@ -28,6 +25,7 @@
 using namespace std;
 using namespace boost;
 
+CWallet* pwalletMain;
 CClientUIInterface uiInterface;
 
 #ifdef WIN32
@@ -91,12 +89,7 @@ static CCoinsViewDB *pcoinsdbview;
 
 void Shutdown()
 {
-
-    if(darkSendPool.GetMyTransactionCount() != 0){
-        printf("Error: Darksend appears to have a transaction in progress, you will possibly be charged fees for shuting down.\n");
-    }
-
-    LogPrintf("Shutdown : In progress...\n");
+    printf("Shutdown : In progress...\n");
     static CCriticalSection cs_Shutdown;
     TRY_LOCK(cs_Shutdown, lockShutdown);
     if (!lockShutdown) return;
@@ -127,7 +120,7 @@ void Shutdown()
     UnregisterWallet(pwalletMain);
     if (pwalletMain)
         delete pwalletMain;
-    LogPrintf("Shutdown : done\n");
+    printf("Shutdown : done\n");
 }
 
 //
@@ -186,7 +179,7 @@ bool AppInit(int argc, char* argv[])
         if (mapArgs.count("-?") || mapArgs.count("--help"))
         {
             // First part of help message is specific to bitcoind / RPC client
-            std::string strUsage = _("BitgoldCoin version") + " " + FormatFullVersion() + "\n\n" +
+            std::string strUsage = _("Bitgoldcoin version") + " " + FormatFullVersion() + "\n\n" +
                 _("Usage:") + "\n" +
                   "  bitgoldcoind [options]                     " + "\n" +
                   "  bitgoldcoind [options] <command> [params]  " + _("Send command to -server or bitgoldcoind") + "\n" +
@@ -198,10 +191,6 @@ bool AppInit(int argc, char* argv[])
             fprintf(stdout, "%s", strUsage.c_str());
             return false;
         }
-
-        // Process masternode config
-        masternodeConfig.read(GetMasternodeConfigFile());
-
 
         // Command-line RPC
         for (int i = 1; i < argc; i++)
@@ -264,7 +253,6 @@ bool AppInit(int argc, char* argv[])
 
 extern void noui_connect();
 int main(int argc, char* argv[])
-
 {
     bool fRet = false;
 
@@ -315,8 +303,7 @@ std::string HelpMessage()
         "  -datadir=<dir>         " + _("Specify data directory") + "\n" +
         "  -dbcache=<n>           " + _("Set database cache size in megabytes (default: 25)") + "\n" +
         "  -timeout=<n>           " + _("Specify connection timeout in milliseconds (default: 5000)") + "\n" +
-        "  -proxy=<ip:port>       " + _("Exclusively connect through socks proxy") + "\n" +
-        "  -proxytoo=<ip:port>    " + _("Also connect through socks proxy") + "\n" +
+        "  -proxy=<ip:port>       " + _("Connect through socks proxy") + "\n" +
         "  -socks=<n>             " + _("Select the version of socks proxy to use (4-5, default: 5)") + "\n" +
         "  -tor=<ip:port>         " + _("Use proxy to reach tor hidden services (default: same as -proxy)") + "\n"
         "  -dns                   " + _("Allow DNS lookups for -addnode, -seednode and -connect") + "\n" +
@@ -328,7 +315,6 @@ std::string HelpMessage()
         "  -externalip=<ip>       " + _("Specify your own public address") + "\n" +
         "  -onlynet=<net>         " + _("Only connect to nodes in network <net> (IPv4, IPv6 or Tor)") + "\n" +
         "  -discover              " + _("Discover own IP address (default: 1 when listening and no -externalip)") + "\n" +
-        "  -checkpointenforce     " + _("Only accept block chain matching checkpoints issued by the Auto-Checkpoint systems Master Node (default: 1)") + "\n" +
         "  -checkpoints           " + _("Only accept block chain matching built-in checkpoints (default: 1)") + "\n" +
         "  -listen                " + _("Accept connections from outside (default: 1 if no -proxy or -connect)") + "\n" +
         "  -bind=<addr>           " + _("Bind to given address and always listen on it. Use [host]:port notation for IPv6") + "\n" +
@@ -372,10 +358,8 @@ std::string HelpMessage()
         "  -rpcthreads=<n>        " + _("Set the number of threads to service RPC calls (default: 4)") + "\n" +
         "  -blocknotify=<cmd>     " + _("Execute command when the best block changes (%s in cmd is replaced by block hash)") + "\n" +
         "  -walletnotify=<cmd>    " + _("Execute command when a wallet transaction changes (%s in cmd is replaced by TxID)") + "\n" +
-		"  -zapwallettxes=<mode>  " + _("Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup") + "\n" +
-		"                         " + _("(default: 1, 1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)") + "\n" +
+        "  -spendzeroconfchange   " + _("Spend unconfirmed change when sending transactions (default: 1)") + "\n" +
         "  -alertnotify=<cmd>     " + _("Execute command when a relevant alert is received (%s in cmd is replaced by message)") + "\n" +
-        "  -wallet=<file>         " + _("Specify wallet file (within data directory)") + " " + strprintf(_("(default: %s)"), "wallet.dat") + "\n" +
         "  -upgradewallet         " + _("Upgrade wallet to latest format") + "\n" +
         "  -keypool=<n>           " + _("Set key pool size to <n> (default: 100)") + "\n" +
         "  -rescan                " + _("Rescan the block chain for missing wallet transactions") + "\n" +
@@ -384,33 +368,16 @@ std::string HelpMessage()
         "  -checklevel=<n>        " + _("How thorough the block verification is (0-4, default: 3)") + "\n" +
         "  -txindex               " + _("Maintain a full transaction index (default: 0)") + "\n" +
         "  -loadblock=<file>      " + _("Imports blocks from external blk000??.dat file") + "\n" +
+        "  -maxorphantx=<n>       " + _("Keep at most <n> unconnectable transactions in memory (default: 25)") + "\n" +
         "  -reindex               " + _("Rebuild block chain index from current blk000??.dat files") + "\n" +
         "  -par=<n>               " + _("Set the number of script verification threads (up to 16, 0 = auto, <0 = leave that many cores free, default: 0)") + "\n" +
-
-        "\n" + _("Masternode options:") + "\n" +
-        "  -masternode=<n>      "   + _("Enable the client to act as a masternode (0-1, default: 0)") + "\n" +
-        "  -mnconf=<file>           " + _("Specify masternode configuration file (default: masternode.conf)") + "\n" +
-		"  -masternodeprivkey=<n>      "   + _("Set the masternode private key") + "\n" +
-        "  -masternodeaddr=<n> "   + _("Set external address:port to get to this masternode (example: address:port)") + "\n" +
-        "  -masternodeminprotocol=<n> " + _("Ignore masternodes less than version (example: 70050; default : 0)") + "\n" +
-
-        "\n" + _("Darksend options:") + "\n" +
-        "  -disabledarksend=<n>      "   + _("Disable use of automated darksend for funds stored in this wallet (0-1, default: 1)") + "\n" +
-        "  -enabledaemondarksend=<n>      "   + _("Darksend is not usually enabled in daemon mode (0-1, default: 1)") + "\n" +
-        "  -darksendrounds=<n>      "   + _("Use N separate masternodes to anonymize funds  (2-8, default: 2)") + "\n" +
-        "  -anonymizebitgoldcoinamount=<n>      "   + _("Keep N bitgoldcoin anonymized (default: 0)") + "\n" +
-        "  -liquidityprovider=<n>      "   + _("Provide liquidity to Darksend by infrequently mixing coins on a continual basis (0-100, default: 0, 1=very frequent, high fees, 100=very infrequent, low fees)") + "\n" +
-
-        "\n" + _("InstantX options:") + "\n" +
-        "  -enableinstantx=<n>      "   + _("Disable instantx, do not show confirmations for locked transactions (bool, default: false)") + "\n" +
-        "  -instantxdepth=<n>      "   + _("Show N confirmations for a successfully locked transaciton (0-9999, default: 1)") + "\n" +
 
         "\n" + _("Block creation options:") + "\n" +
         "  -blockminsize=<n>      "   + _("Set minimum block size in bytes (default: 0)") + "\n" +
         "  -blockmaxsize=<n>      "   + _("Set maximum block size in bytes (default: 250000)") + "\n" +
         "  -blockprioritysize=<n> "   + _("Set maximum size of high-priority/low-fee transactions in bytes (default: 27000)") + "\n" +
 
-        "\n" + _("SSL options: (see the BitgoldCoin Wiki for SSL setup instructions)") + "\n" +
+        "\n" + _("SSL options: (see the Bitgoldcoin Wiki for SSL setup instructions)") + "\n" +
         "  -rpcssl                                  " + _("Use OpenSSL (https) for JSON-RPC connections") + "\n" +
         "  -rpcsslcertificatechainfile=<file.cert>  " + _("Server certificate file (default: server.cert)") + "\n" +
         "  -rpcsslprivatekeyfile=<file.pem>         " + _("Server private key (default: server.pem)") + "\n" +
@@ -445,13 +412,13 @@ void ThreadImport(std::vector<boost::filesystem::path> vImportFiles)
             FILE *file = OpenBlockFile(pos, true);
             if (!file)
                 break;
-            LogPrintf("Reindexing block file blk%05u.dat...\n", (unsigned int)nFile);
+            printf("Reindexing block file blk%05u.dat...\n", (unsigned int)nFile);
             LoadExternalBlockFile(file, &pos);
             nFile++;
         }
         pblocktree->WriteReindexing(false);
         fReindex = false;
-        LogPrintf("Reindexing finished\n");
+        printf("Reindexing finished\n");
         // To avoid ending up in a situation without genesis block, re-try initializing (no-op if reindexing worked):
         InitBlockIndex();
     }
@@ -463,7 +430,7 @@ void ThreadImport(std::vector<boost::filesystem::path> vImportFiles)
         if (file) {
             CImportingNow imp;
             filesystem::path pathBootstrapOld = GetDataDir() / "bootstrap.dat.old";
-            LogPrintf("Importing bootstrap.dat...\n");
+            printf("Importing bootstrap.dat...\n");
             LoadExternalBlockFile(file);
             RenameOver(pathBootstrap, pathBootstrapOld);
         }
@@ -474,7 +441,7 @@ void ThreadImport(std::vector<boost::filesystem::path> vImportFiles)
         FILE *file = fopen(path.string().c_str(), "rb");
         if (file) {
             CImportingNow imp;
-            LogPrintf("Importing %s...\n", path.string().c_str());
+            printf("Importing %s...\n", path.string().c_str());
             LoadExternalBlockFile(file);
         }
     }
@@ -500,8 +467,8 @@ bool AppInit2(boost::thread_group& threadGroup)
     // Minimum supported OS versions: WinXP SP3, WinVista >= SP1, Win Server 2008
     // A failure is non-critical and needs no further attention!
 #ifndef PROCESS_DEP_ENABLE
-// We define this here, because GCCs winbase.h limits this to _WIN32_WINNT >= 0x0601 (Windows 7),
-// which is not correct. Can be removed, when GCCs winbase.h is fixed!
+    // We define this here, because GCCs winbase.h limits this to _WIN32_WINNT >= 0x0601 (Windows 7),
+    // which is not correct. Can be removed, when GCCs winbase.h is fixed!
 #define PROCESS_DEP_ENABLE 0x00000001
 #endif
     typedef BOOL (WINAPI *PSETPROCDEPPOL)(DWORD);
@@ -573,12 +540,6 @@ bool AppInit2(boost::thread_group& threadGroup)
     if (GetBoolArg("-salvagewallet")) {
         // Rewrite just private keys: rescan to find transactions
         SoftSetBoolArg("-rescan", true);
-    }
-
-    // -zapwallettx implies a rescan
-    if (GetBoolArg("-zapwallettxes", false)) {
-        if (SoftSetBoolArg("-rescan", true))
-            LogPrintf("AppInit2 : parameter interaction: -zapwallettxes=<mode> -> setting -rescan=1\n");
     }
 
     // Make sure enough file descriptors are available
@@ -668,6 +629,7 @@ bool AppInit2(boost::thread_group& threadGroup)
         if (nTransactionFee > 0.25 * COIN)
             InitWarning(_("Warning: -paytxfee is set very high! This is the transaction fee you will pay if you send a transaction."));
     }
+    bSpendZeroConfChange = GetArg("-spendzeroconfchange", true);
 
     if (mapArgs.count("-mininput"))
     {
@@ -675,29 +637,9 @@ bool AppInit2(boost::thread_group& threadGroup)
             return InitError(strprintf(_("Invalid amount for -mininput=<amount>: '%s'"), mapArgs["-mininput"].c_str()));
     }
 
-	if (mapArgs.count("-checkpointkey")) // checkpoint master priv key
-    {
-        if (!SetCheckpointPrivKey(GetArg("-checkpointkey", "")))
-            return InitError(_("Unable to sign checkpoint, wrong checkpointkey?"));
-    }
-
-    if (mapArgs.count("-masternodepaymentskey")) // masternode payments priv key
-    {
-        if (!masternodePayments.SetPrivKey(GetArg("-masternodepaymentskey", "")))
-            return InitError(_("Unable to sign masternode payment winner, wrong key?"));
-    }
-
-    //ignore masternodes below protocol version
-    nMasternodeMinProtocol = GetArg("-masternodeminprotocol", 0);
-    std::string strWalletFile = GetArg("-wallet", "wallet.dat");
-
     // ********************************************************* Step 4: application initialization: dir lock, daemonize, pidfile, debug log
 
     std::string strDataDir = GetDataDir().string();
-
-    // Wallet file must be a plain filename without a directory
-    if (strWalletFile != boost::filesystem::basename(strWalletFile) + boost::filesystem::extension(strWalletFile))
-        return InitError(strprintf(_("Wallet %s resides outside data directory %s"), strWalletFile.c_str(), strDataDir.c_str()));
 
     // Make sure only a single Bitcoin process is using the data directory.
     boost::filesystem::path pathLockFile = GetDataDir() / ".lock";
@@ -705,25 +647,25 @@ bool AppInit2(boost::thread_group& threadGroup)
     if (file) fclose(file);
     static boost::interprocess::file_lock lock(pathLockFile.string().c_str());
     if (!lock.try_lock())
-        return InitError(strprintf(_("Cannot obtain a lock on data directory %s. BitgoldCoin is probably already running."), strDataDir.c_str()));
+        return InitError(strprintf(_("Cannot obtain a lock on data directory %s. Bitgoldcoin is probably already running."), strDataDir.c_str()));
 
     if (GetBoolArg("-shrinkdebugfile", !fDebug))
         ShrinkDebugFile();
-    LogPrintf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    LogPrintf("BitgoldCoin version %s (%s)\n", FormatFullVersion().c_str(), CLIENT_DATE.c_str());
-    LogPrintf("Using OpenSSL version %s\n", SSLeay_version(SSLEAY_VERSION));
+    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    printf("Bitgoldcoin version %s (%s)\n", FormatFullVersion().c_str(), CLIENT_DATE.c_str());
+    printf("Using OpenSSL version %s\n", SSLeay_version(SSLEAY_VERSION));
     if (!fLogTimestamps)
-        LogPrintf("Startup time: %s\n", DateTimeStrFormat("%Y-%m-%d %H:%M:%S", GetTime()).c_str());
-    LogPrintf("Default data directory %s\n", GetDefaultDataDir().string().c_str());
-    LogPrintf("Using data directory %s\n", strDataDir.c_str());
-    LogPrintf("Using at most %i connections (%i file descriptors available)\n", nMaxConnections, nFD);
+        printf("Startup time: %s\n", DateTimeStrFormat("%Y-%m-%d %H:%M:%S", GetTime()).c_str());
+    printf("Default data directory %s\n", GetDefaultDataDir().string().c_str());
+    printf("Using data directory %s\n", strDataDir.c_str());
+    printf("Using at most %i connections (%i file descriptors available)\n", nMaxConnections, nFD);
     std::ostringstream strErrors;
 
     if (fDaemon)
-        fprintf(stdout, "BitgoldCoin server starting\n");
+        fprintf(stdout, "Bitgoldcoin server starting\n");
 
     if (nScriptCheckThreads) {
-        LogPrintf("Using %u threads for script verification\n", nScriptCheckThreads);
+        printf("Using %u threads for script verification\n", nScriptCheckThreads);
         for (int i=0; i<nScriptCheckThreads-1; i++)
             threadGroup.create_thread(&ThreadScriptCheck);
     }
@@ -746,7 +688,7 @@ bool AppInit2(boost::thread_group& threadGroup)
             boost::filesystem::path pathDatabaseBak = GetDataDir() / strprintf("database.%"PRI64d".bak", GetTime());
             try {
                 boost::filesystem::rename(pathDatabase, pathDatabaseBak);
-                LogPrintf("Moved old %s to %s. Retrying.\n", pathDatabase.string().c_str(), pathDatabaseBak.string().c_str());
+                printf("Moved old %s to %s. Retrying.\n", pathDatabase.string().c_str(), pathDatabaseBak.string().c_str());
             } catch(boost::filesystem::filesystem_error &error) {
                  // failure is ok (well, not really, but it's not worse than what we started with)
             }
@@ -762,13 +704,13 @@ bool AppInit2(boost::thread_group& threadGroup)
         if (GetBoolArg("-salvagewallet"))
         {
             // Recover readable keypairs:
-            if (!CWalletDB::Recover(bitdb, strWalletFile.c_str(), true))
+            if (!CWalletDB::Recover(bitdb, "wallet.dat", true))
                 return false;
         }
 
-        if (filesystem::exists(GetDataDir() / strWalletFile.c_str()))
+        if (filesystem::exists(GetDataDir() / "wallet.dat"))
         {
-            CDBEnv::VerifyResult r = bitdb.Verify(strWalletFile.c_str(), CWalletDB::Recover);
+            CDBEnv::VerifyResult r = bitdb.Verify("wallet.dat", CWalletDB::Recover);
             if (r == CDBEnv::RECOVER_OK)
             {
                 string msg = strprintf(_("Warning: wallet.dat corrupt, data salvaged!"
@@ -780,7 +722,6 @@ bool AppInit2(boost::thread_group& threadGroup)
             if (r == CDBEnv::RECOVER_FAIL)
                 return InitError(_("wallet.dat corrupt, salvage failed"));
         }
-
     } // (!fDisableWallet)
 
     // ********************************************************* Step 6: network initialization
@@ -842,23 +783,6 @@ bool AppInit2(boost::thread_group& threadGroup)
         SetReachable(NET_TOR);
     }
 
-    if (mapArgs.count("-proxytoo")) {
-        fProxyToo = true;
-        CService addrProxy = CService(mapArgs["-proxytoo"], 9050);
-        if (!addrProxy.IsValid())
-            return InitError(strprintf(_("Invalid -proxytoo address: '%s'"), mapArgs["-proxytoo"].c_str()));
-
-        if (!IsLimited(NET_IPV4))
-            SetProxy(NET_IPV4, addrProxy, nSocksVersion);
-        if (nSocksVersion > 4) {
-#ifdef USE_IPV6
-            if (!IsLimited(NET_IPV6))
-                SetProxy(NET_IPV6, addrProxy, nSocksVersion);
-#endif
-            SetNameProxy(addrProxy, nSocksVersion);
-        }
-    }
-
     // see Step 2: parameter interactions for more information about these
     fNoListen = !GetBoolArg("-listen", true);
     fDiscover = GetBoolArg("-discover", true);
@@ -914,12 +838,12 @@ bool AppInit2(boost::thread_group& threadGroup)
             filesystem::path dest = blocksDir / strprintf("blk%05u.dat", i-1);
             try {
                 filesystem::create_hard_link(source, dest);
-                LogPrintf("Hardlinked %s -> %s\n", source.string().c_str(), dest.string().c_str());
+                printf("Hardlinked %s -> %s\n", source.string().c_str(), dest.string().c_str());
                 linked = true;
             } catch (filesystem::filesystem_error & e) {
                 // Note: hardlink creation failing is not a disaster, it just means
                 // blocks will get re-downloaded from peers.
-                LogPrintf("Error hardlinking blk%04u.dat : %s\n", i, e.what());
+                printf("Error hardlinking blk%04u.dat : %s\n", i, e.what());
                 break;
             }
         }
@@ -1022,10 +946,10 @@ bool AppInit2(boost::thread_group& threadGroup)
     // As the program has not fully started yet, Shutdown() is possibly overkill.
     if (fRequestShutdown)
     {
-        LogPrintf("Shutdown requested. Exiting.\n");
+        printf("Shutdown requested. Exiting.\n");
         return false;
     }
-    LogPrintf(" block index %15"PRI64d"ms\n", GetTimeMillis() - nStart);
+    printf(" block index %15"PRI64d"ms\n", GetTimeMillis() - nStart);
 
     if (GetBoolArg("-printblockindex") || GetBoolArg("-printblocktree"))
     {
@@ -1047,43 +971,26 @@ bool AppInit2(boost::thread_group& threadGroup)
                 block.ReadFromDisk(pindex);
                 block.BuildMerkleTree();
                 block.print();
-                LogPrintf("\n");
+                printf("\n");
                 nFound++;
             }
         }
         if (nFound == 0)
-            LogPrintf("No blocks matching %s were found\n", strMatch.c_str());
+            printf("No blocks matching %s were found\n", strMatch.c_str());
         return false;
     }
 
     // ********************************************************* Step 8: load wallet
 
     if (fDisableWallet) {
-        LogPrintf("Wallet disabled!\n");
+        printf("Wallet disabled!\n");
         pwalletMain = NULL;
     } else {
-        // needed to restore wallet transaction meta data after -zapwallettxes
-        std::vector<CWalletTx> vWtx;
-
-        if (GetBoolArg("-zapwallettxes", false)) {
-            uiInterface.InitMessage(_("Zapping all transactions from wallet..."));
-
-            pwalletMain = new CWallet(strWalletFile.c_str());
-            DBErrors nZapWalletRet = pwalletMain->ZapWalletTx(vWtx);
-            if (nZapWalletRet != DB_LOAD_OK) {
-                uiInterface.InitMessage(_("Error loading wallet.dat: Wallet corrupted"));
-                return false;
-            }
-
-            delete pwalletMain;
-            pwalletMain = NULL;
-        }
-
         uiInterface.InitMessage(_("Loading wallet..."));
 
         nStart = GetTimeMillis();
         bool fFirstRun = true;
-        pwalletMain = new CWallet(strWalletFile.c_str());
+        pwalletMain = new CWallet("wallet.dat");
         DBErrors nLoadWalletRet = pwalletMain->LoadWallet(fFirstRun);
         if (nLoadWalletRet != DB_LOAD_OK)
         {
@@ -1096,11 +1003,11 @@ bool AppInit2(boost::thread_group& threadGroup)
                 InitWarning(msg);
             }
             else if (nLoadWalletRet == DB_TOO_NEW)
-                strErrors << _("Error loading wallet.dat: Wallet requires newer version of BitgoldCoin") << "\n";
+                strErrors << _("Error loading wallet.dat: Wallet requires newer version of Bitgoldcoin") << "\n";
             else if (nLoadWalletRet == DB_NEED_REWRITE)
             {
-                strErrors << _("Wallet needed to be rewritten: restart BitgoldCoin to complete") << "\n";
-                LogPrintf("%s", strErrors.str().c_str());
+                strErrors << _("Wallet needed to be rewritten: restart Bitgoldcoin to complete") << "\n";
+                printf("%s", strErrors.str().c_str());
                 return InitError(strErrors.str());
             }
             else
@@ -1112,12 +1019,12 @@ bool AppInit2(boost::thread_group& threadGroup)
             int nMaxVersion = GetArg("-upgradewallet", 0);
             if (nMaxVersion == 0) // the -upgradewallet without argument case
             {
-                LogPrintf("Performing wallet upgrade to %i\n", FEATURE_LATEST);
+                printf("Performing wallet upgrade to %i\n", FEATURE_LATEST);
                 nMaxVersion = CLIENT_VERSION;
                 pwalletMain->SetMinVersion(FEATURE_LATEST); // permanently upgrade the wallet immediately
             }
             else
-                LogPrintf("Allowing wallet upgrade up to %i\n", nMaxVersion);
+                printf("Allowing wallet upgrade up to %i\n", nMaxVersion);
             if (nMaxVersion < pwalletMain->GetVersion())
                 strErrors << _("Cannot downgrade wallet") << "\n";
             pwalletMain->SetMaxVersion(nMaxVersion);
@@ -1138,8 +1045,8 @@ bool AppInit2(boost::thread_group& threadGroup)
             pwalletMain->SetBestChain(CBlockLocator(pindexBest));
         }
 
-        LogPrintf("%s", strErrors.str().c_str());
-        LogPrintf(" wallet      %15"PRI64d"ms\n", GetTimeMillis() - nStart);
+        printf("%s", strErrors.str().c_str());
+        printf(" wallet      %15"PRI64d"ms\n", GetTimeMillis() - nStart);
 
         RegisterWallet(pwalletMain);
 
@@ -1148,7 +1055,7 @@ bool AppInit2(boost::thread_group& threadGroup)
             pindexRescan = pindexGenesisBlock;
         else
         {
-            CWalletDB walletdb(strWalletFile.c_str());
+            CWalletDB walletdb("wallet.dat");
             CBlockLocator locator;
             if (walletdb.ReadBestBlock(locator))
                 pindexRescan = locator.GetBlockIndex();
@@ -1158,35 +1065,12 @@ bool AppInit2(boost::thread_group& threadGroup)
         if (pindexBest && pindexBest != pindexRescan)
         {
             uiInterface.InitMessage(_("Rescanning..."));
-            LogPrintf("Rescanning last %i blocks (from block %i)...\n", pindexBest->nHeight - pindexRescan->nHeight, pindexRescan->nHeight);
+            printf("Rescanning last %i blocks (from block %i)...\n", pindexBest->nHeight - pindexRescan->nHeight, pindexRescan->nHeight);
             nStart = GetTimeMillis();
             pwalletMain->ScanForWalletTransactions(pindexRescan, true);
-            LogPrintf(" rescan      %15"PRI64d"ms\n", GetTimeMillis() - nStart);
+            printf(" rescan      %15"PRI64d"ms\n", GetTimeMillis() - nStart);
             pwalletMain->SetBestChain(CBlockLocator(pindexBest));
             nWalletDBUpdated++;
-
-            // Restore wallet transaction metadata after -zapwallettxes=1
-            if (GetBoolArg("-zapwallettxes", false) && GetArg("-zapwallettxes", "1") != "2")
-            {
-                BOOST_FOREACH(const CWalletTx& wtxOld, vWtx)
-                {
-                    uint256 hash = wtxOld.GetHash();
-                    std::map<uint256, CWalletTx>::iterator mi = pwalletMain->mapWallet.find(hash);
-                    if (mi != pwalletMain->mapWallet.end())
-                    {
-                        const CWalletTx* copyFrom = &wtxOld;
-                        CWalletTx* copyTo = &mi->second;
-                        copyTo->mapValue = copyFrom->mapValue;
-                        copyTo->vOrderForm = copyFrom->vOrderForm;
-                        copyTo->nTimeReceived = copyFrom->nTimeReceived;
-                        copyTo->nTimeSmart = copyFrom->nTimeSmart;
-                        copyTo->fFromMe = copyFrom->fFromMe;
-                        copyTo->strFromAccount = copyFrom->strFromAccount;
-                        copyTo->nOrderPos = copyFrom->nOrderPos;
-                        copyTo->WriteToDisk();
-                    }
-                }
-            }
         }
     } // (!fDisableWallet)
 
@@ -1205,100 +1089,7 @@ bool AppInit2(boost::thread_group& threadGroup)
     }
     threadGroup.create_thread(boost::bind(&ThreadImport, vImportFiles));
 
-    // ********************************************************* Step 10: setup DarkSend
-
-    //string strNode = "23.23.186.131";
-    //CAddress addr;
-    //ConnectNode(addr, strNode.c_str(), true);
-
-    fMasterNode = GetBoolArg("-masternode");
-    if(fMasterNode) {
-        LogPrintf("IS DARKSEND MASTER NODE\n");
-        strMasterNodeAddr = GetArg("-masternodeaddr", "");
-
-        LogPrintf(" addr %s\n", strMasterNodeAddr.c_str());
-
-        if(!strMasterNodeAddr.empty()){
-            CService addrTest = CService(strMasterNodeAddr);
-            if (!addrTest.IsValid()) {
-                printf("Invalid -masternodeaddr address: '%s'\n", mapArgs["-strMasterNodeAddr"].c_str());
-                exit(0);
-            }
-        }
-
-        strMasterNodePrivKey = GetArg("-masternodeprivkey", "");
-        if(!strMasterNodePrivKey.empty()){
-            std::string errorMessage;
-
-            CKey key;
-            CPubKey pubkey;
-
-            if(!darkSendSigner.SetKey(strMasterNodePrivKey, errorMessage, key, pubkey))
-            {
-                return InitError(_("Invalid masternodeprivkey. Please see documenation."));
-            }
-
-            activeMasternode.pubKeyMasternode = pubkey;
-
-        } else {
-            return InitError(_("You must specify a masternodeprivkey in the configuration. Please see documentation for help."));
-        }
-    }
-
-    fEnableDarksend = GetBoolArg("-enabledarksend", false);
-
-    nDarksendRounds = GetArg("-darksendrounds", 2);
-    if(nDarksendRounds > 8) nDarksendRounds = 8;
-    if(nDarksendRounds < 1) nDarksendRounds = 1;
-
-    nLiquidityProvider = GetArg("-liquidityprovider", 0); //1-100
-    if(nLiquidityProvider != 0) {
-        darkSendPool.SetMinBlockSpacing(std::min(nLiquidityProvider,100)*15);
-        fEnableDarksend = true;
-        nDarksendRounds = 99999;
-    }
-
-    nAnonymizeBitgoldcoinAmount = GetArg("-anonymizebitgoldcoinamount", 0);
-    if(nAnonymizeBitgoldcoinAmount > 999999) nAnonymizeBitgoldcoinAmount = 999999;
-    if(nAnonymizeBitgoldcoinAmount < 2) nAnonymizeBitgoldcoinAmount = 2;
-
-    bool fEnableInstantX = GetBoolArg("-enableinstantx", true);
-    if(fEnableInstantX){
-        nInstantXDepth = GetArg("-instantxdepth", 1);
-        if(nInstantXDepth > 60) nInstantXDepth = 60;
-        if(nInstantXDepth < 0) nAnonymizeBitgoldcoinAmount = 0;
-    } else {
-        nInstantXDepth = 0;
-    }
-
-    LogPrintf("nInstantXDepth %d\n", nInstantXDepth);
-    LogPrintf("Darksend rounds %d\n", nDarksendRounds);
-    LogPrintf("Anonymize Bitgoldcoin Amount %d\n", nAnonymizeBitgoldcoinAmount);
-
-    darkSendDenominations.push_back( (100   * COIN)+1 );
-    darkSendDenominations.push_back( (10    * COIN)+1 );
-    darkSendDenominations.push_back( (1     * COIN)+1 );
-    darkSendDenominations.push_back( (.1     * COIN)+1 );
-
-    threadGroup.create_thread(boost::bind(&ThreadCheckDarkSendPool));
-
-
-/*  //any users effected by this should have updated by now
-    if (!fDisableWallet) {
-        int walletVersion = pwalletMain->GetVersion();
-
-        if(walletVersion < 60001){
-            if(pwalletMain->IsCrypted()){
-                InitWarning(_("Warning: There is an incompatibility in the new RC4+ wallet due to the larger keypool."
-                                    "It only effects encrypted wallets, but can cause a loss of data in rare situations. "
-                                    "Please create a new wallet and move the funds from this wallet."));
-                fEnableDarksend = false;
-            }
-        }
-    }*/
-
-
-    // ********************************************************* Step 11: load peers
+    // ********************************************************* Step 10: load peers
 
     uiInterface.InitMessage(_("Loading addresses..."));
 
@@ -1307,13 +1098,13 @@ bool AppInit2(boost::thread_group& threadGroup)
     {
         CAddrDB adb;
         if (!adb.Read(addrman))
-            LogPrintf("Invalid or missing peers.dat; recreating\n");
+            printf("Invalid or missing peers.dat; recreating\n");
     }
 
-    LogPrintf("Loaded %i addresses from peers.dat  %"PRI64d"ms\n",
+    printf("Loaded %i addresses from peers.dat  %"PRI64d"ms\n",
            addrman.size(), GetTimeMillis() - nStart);
 
-    // ********************************************************* Step 12: start node
+    // ********************************************************* Step 11: start node
 
     if (!CheckDiskSpace())
         return false;
@@ -1324,11 +1115,11 @@ bool AppInit2(boost::thread_group& threadGroup)
     RandAddSeedPerfmon();
 
     //// debug print
-    LogPrintf("mapBlockIndex.size() = %"PRIszu"\n",   mapBlockIndex.size());
-    LogPrintf("nBestHeight = %d\n",                   nBestHeight);
-    LogPrintf("setKeyPool.size() = %"PRIszu"\n",      pwalletMain ? pwalletMain->setKeyPool.size() : 0);
-    LogPrintf("mapWallet.size() = %"PRIszu"\n",       pwalletMain ? pwalletMain->mapWallet.size() : 0);
-    LogPrintf("mapAddressBook.size() = %"PRIszu"\n",  pwalletMain ? pwalletMain->mapAddressBook.size() : 0);
+    printf("mapBlockIndex.size() = %"PRIszu"\n",   mapBlockIndex.size());
+    printf("nBestHeight = %d\n",                   nBestHeight);
+    printf("setKeyPool.size() = %"PRIszu"\n",      pwalletMain ? pwalletMain->setKeyPool.size() : 0);
+    printf("mapWallet.size() = %"PRIszu"\n",       pwalletMain ? pwalletMain->mapWallet.size() : 0);
+    printf("mapAddressBook.size() = %"PRIszu"\n",  pwalletMain ? pwalletMain->mapAddressBook.size() : 0);
 
     StartNode(threadGroup);
 
@@ -1341,7 +1132,7 @@ bool AppInit2(boost::thread_group& threadGroup)
     if (pwalletMain)
         GenerateBitcoins(GetBoolArg("-gen", false), pwalletMain);
 
-    // ********************************************************* Step 13: finished
+    // ********************************************************* Step 12: finished
 
     uiInterface.InitMessage(_("Done loading"));
 
@@ -1352,8 +1143,6 @@ bool AppInit2(boost::thread_group& threadGroup)
         // Run a thread to flush wallet periodically
         threadGroup.create_thread(boost::bind(&ThreadFlushWalletDB, boost::ref(pwalletMain->strWalletFile)));
     }
-
-    fSucessfullyLoaded = true;
 
     return !fRequestShutdown;
 }

@@ -1,4 +1,4 @@
-BitgoldCoin-Qt: Qt4 GUI for BitgoldCoin
+Bitgoldcoin-Qt: Qt4 GUI for Bitgoldcoin
 ===============================
 
 Build instructions
@@ -68,24 +68,9 @@ Mac OS X
 	brew update
 	brew install boost miniupnpc openssl berkeley-db4
 
-- If using MacPorts,  edit `bitgoldcoin-qt.pro` to account for library location differences. 
+- If using HomeBrew,  edit `bitgoldcoin-qt.pro` to account for library location differences. There's a diff in `contrib/homebrew/bitcoin-qt-pro.patch` that shows what you need to change, or you can just patch by doing
 
-::
-
-  macx:BDB_LIB_PATH = /opt/local/lib/db48
-  macx:BDB_INCLUDE_PATH = /opt/local/include/db48
-  macx:BOOST_LIB_PATH = /opt/local/lib
-  macx:BOOST_INCLUDE_PATH = /opt/local/include
-
-  The following lines can also be removed.
-  
-  isEmpty(OPENSSL_LIB_PATH) {
-     macx:OPENSSL_LIB_PATH = /usr/local/opt/openssl/lib
-  }
- 
- isEmpty(OPENSSL_INCLUDE_PATH) {
-     macx:OPENSSL_INCLUDE_PATH = /usr/local/opt/openssl/include
-  }
+        patch -p1 < contrib/homebrew/bitcoin.qt.pro.patch
 
 - Open the bitgoldcoin-qt.pro file in Qt Creator and build as normal (cmd-B)
 
@@ -148,9 +133,9 @@ flag to qmake to control this:
 Berkely DB version warning
 ==========================
 
-A warning for people using the *static binary* version of BitgoldCoin on a Linux/UNIX-ish system (tl;dr: **Berkely DB databases are not forward compatible**).
+A warning for people using the *static binary* version of Bitgoldcoin on a Linux/UNIX-ish system (tl;dr: **Berkely DB databases are not forward compatible**).
 
-The static binary version of BitgoldCoin is linked against libdb4.8 (see also `this Debian issue`_).
+The static binary version of Bitgoldcoin is linked against libdb4.8 (see also `this Debian issue`_).
 
 Now the nasty thing is that databases from 5.X are not compatible with 4.X.
 

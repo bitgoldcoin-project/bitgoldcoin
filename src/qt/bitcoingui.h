@@ -1,3 +1,7 @@
+// Copyright (c) 2011-2013 The Bitcoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef BITCOINGUI_H
 #define BITCOINGUI_H
 
@@ -59,7 +63,6 @@ public:
     bool setCurrentWallet(const QString& name);
 
     void removeAllWallets();
-    void checkTOU();
 
     /** Used by WalletView to allow access to needed QActions */
     // Todo: Use Qt signals for these
@@ -101,8 +104,6 @@ private:
     QAction *encryptWalletAction;
     QAction *backupWalletAction;
     QAction *changePassphraseAction;
-    QAction *unlockWalletAction;
-    QAction *lockWalletAction;
     QAction *aboutQtAction;
     QAction *openRPCConsoleAction;
 

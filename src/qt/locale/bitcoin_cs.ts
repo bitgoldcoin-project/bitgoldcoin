@@ -4,13 +4,13 @@
     <name>AboutDialog</name>
     <message>
         <location filename="../forms/aboutdialog.ui" line="+14"/>
-        <source>About BitgoldCoin</source>
-        <translation>O BitgoldCoinu</translation>
+        <source>About Bitgoldcoin</source>
+        <translation>O Bitgoldcoinu</translation>
     </message>
     <message>
         <location line="+39"/>
-        <source>&lt;b&gt;BitgoldCoin&lt;/b&gt; version</source>
-        <translation>&lt;b&gt;BitgoldCoin&lt;/b&gt; verze</translation>
+        <source>&lt;b&gt;Bitgoldcoin&lt;/b&gt; version</source>
+        <translation>&lt;b&gt;Bitgoldcoin&lt;/b&gt; verze</translation>
     </message>
     <message>
         <location line="+57"/>
@@ -34,8 +34,8 @@ Tento produkt zahrnuje programy vyvinuté OpenSSL Projektem pro použití v Open
     </message>
     <message>
         <location line="+0"/>
-        <source>The BitgoldCoin developers</source>
-        <translation>Vývojáři BitgoldCoinu</translation>
+        <source>The Bitgoldcoin developers</source>
+        <translation>Vývojáři Bitgoldcoinu</translation>
     </message>
 </context>
 <context>
@@ -67,8 +67,8 @@ Tento produkt zahrnuje programy vyvinuté OpenSSL Projektem pro použití v Open
     </message>
     <message>
         <location filename="../addressbookpage.cpp" line="+63"/>
-        <source>These are your BitgoldCoin addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
-        <translation>Tohle jsou tvé BitgoldCoinové adresy pro příjem plateb. Můžeš dát pokaždé každému plátci novou adresu, abys věděl, kdo ti kdy kolik platil.</translation>
+        <source>These are your Bitgoldcoin addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
+        <translation>Tohle jsou tvé Bitgoldcoinové adresy pro příjem plateb. Můžeš dát pokaždé každému plátci novou adresu, abys věděl, kdo ti kdy kolik platil.</translation>
     </message>
     <message>
         <location filename="../forms/addressbookpage.ui" line="+14"/>
@@ -82,8 +82,8 @@ Tento produkt zahrnuje programy vyvinuté OpenSSL Projektem pro použití v Open
     </message>
     <message>
         <location line="+11"/>
-        <source>Sign a message to prove you own a BitgoldCoin address</source>
-        <translation>Podepiš zprávu, čímž prokážeš, že jsi vlastníkem BitgoldCoinové adresy</translation>
+        <source>Sign a message to prove you own a Bitgoldcoin address</source>
+        <translation>Podepiš zprávu, čímž prokážeš, že jsi vlastníkem Bitgoldcoinové adresy</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -107,8 +107,8 @@ Tento produkt zahrnuje programy vyvinuté OpenSSL Projektem pro použití v Open
     </message>
     <message>
         <location line="-44"/>
-        <source>Verify a message to ensure it was signed with a specified BitgoldCoin address</source>
-        <translation>Ověř zprávu, aby ses ujistil, že byla podepsána danou BitgoldCoinovou adresou</translation>
+        <source>Verify a message to ensure it was signed with a specified Bitgoldcoin address</source>
+        <translation>Ověř zprávu, aby ses ujistil, že byla podepsána danou Bitgoldcoinovou adresou</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -122,8 +122,8 @@ Tento produkt zahrnuje programy vyvinuté OpenSSL Projektem pro použití v Open
     </message>
     <message>
         <location filename="../addressbookpage.cpp" line="-5"/>
-        <source>These are your BitgoldCoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Tohle jsou tvé BitgoldCoinové adresy pro posílání plateb. Před odesláním mincí si vždy zkontroluj částku a cílovou adresu.</translation>
+        <source>These are your Bitgoldcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Tohle jsou tvé Bitgoldcoinové adresy pro posílání plateb. Před odesláním mincí si vždy zkontroluj částku a cílovou adresu.</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -248,8 +248,8 @@ Tento produkt zahrnuje programy vyvinuté OpenSSL Projektem pro použití v Open
     </message>
     <message>
         <location line="+1"/>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR DARKCOINS&lt;/b&gt;!</source>
-        <translation>Varování: Pokud si zašifruješ peněženku a ztratíš či zapomeneš heslo, &lt;b&gt;PŘIJDEŠ O VŠECHNY DARKCOINY&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITGOLDCOINS&lt;/b&gt;!</source>
+        <translation>Varování: Pokud si zašifruješ peněženku a ztratíš či zapomeneš heslo, &lt;b&gt;PŘIJDEŠ O VŠECHNY BITGOLDCOINY&lt;/b&gt;!</translation>
     </message>
     <message>
         <location line="+0"/>
@@ -275,8 +275,8 @@ Tento produkt zahrnuje programy vyvinuté OpenSSL Projektem pro použití v Open
     </message>
     <message>
         <location line="-56"/>
-        <source>BitgoldCoin will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your bitgoldcoins from being stolen by malware infecting your computer.</source>
-        <translation>BitgoldCoin se teď ukončí, aby dokončil zašifrování. Pamatuj však, že pouhé zašifrování peněženky úplně nezabraňuje krádeži tvých bitgoldcoinů malwarem, kterým se může počítač nakazit.</translation>
+        <source>Bitgoldcoin will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your bitgoldcoins from being stolen by malware infecting your computer.</source>
+        <translation>Bitgoldcoin se teď ukončí, aby dokončil zašifrování. Pamatuj však, že pouhé zašifrování peněženky úplně nezabraňuje krádeži tvých bitgoldcoinů malwarem, kterým se může počítač nakazit.</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -374,8 +374,8 @@ Tento produkt zahrnuje programy vyvinuté OpenSSL Projektem pro použití v Open
     </message>
     <message>
         <location line="+4"/>
-        <source>Show information about BitgoldCoin</source>
-        <translation>Zobraz informace o BitgoldCoinu</translation>
+        <source>Show information about Bitgoldcoin</source>
+        <translation>Zobraz informace o Bitgoldcoinu</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -419,13 +419,13 @@ Tento produkt zahrnuje programy vyvinuté OpenSSL Projektem pro použití v Open
     </message>
     <message>
         <location line="-347"/>
-        <source>Send coins to a BitgoldCoin address</source>
-        <translation>Pošli mince na BitgoldCoinovou adresu</translation>
+        <source>Send coins to a Bitgoldcoin address</source>
+        <translation>Pošli mince na Bitgoldcoinovou adresu</translation>
     </message>
     <message>
         <location line="+49"/>
-        <source>Modify configuration options for BitgoldCoin</source>
-        <translation>Uprav nastavení BitgoldCoinu</translation>
+        <source>Modify configuration options for Bitgoldcoin</source>
+        <translation>Uprav nastavení Bitgoldcoinu</translation>
     </message>
     <message>
         <location line="+9"/>
@@ -455,8 +455,8 @@ Tento produkt zahrnuje programy vyvinuté OpenSSL Projektem pro použití v Open
     <message>
         <location line="-165"/>
         <location line="+530"/>
-        <source>BitgoldCoin</source>
-        <translation>BitgoldCoin</translation>
+        <source>Bitgoldcoin</source>
+        <translation>Bitgoldcoin</translation>
     </message>
     <message>
         <location line="-530"/>
@@ -480,8 +480,8 @@ Tento produkt zahrnuje programy vyvinuté OpenSSL Projektem pro použití v Open
     </message>
     <message>
         <location line="+22"/>
-        <source>&amp;About BitgoldCoin</source>
-        <translation>O &amp;BitgoldCoinu</translation>
+        <source>&amp;About Bitgoldcoin</source>
+        <translation>O &amp;Bitgoldcoinu</translation>
     </message>
     <message>
         <location line="+9"/>
@@ -500,13 +500,13 @@ Tento produkt zahrnuje programy vyvinuté OpenSSL Projektem pro použití v Open
     </message>
     <message>
         <location line="+7"/>
-        <source>Sign messages with your BitgoldCoin addresses to prove you own them</source>
-        <translation>Podepiš zprávy svými BitgoldCoinovými adresami, čímž prokážeš, že jsi jejich vlastníkem</translation>
+        <source>Sign messages with your Bitgoldcoin addresses to prove you own them</source>
+        <translation>Podepiš zprávy svými Bitgoldcoinovými adresami, čímž prokážeš, že jsi jejich vlastníkem</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>Verify messages to ensure they were signed with specified BitgoldCoin addresses</source>
-        <translation>Ověř zprávy, aby ses ujistil, že byly podepsány danými BitgoldCoinovými adresami</translation>
+        <source>Verify messages to ensure they were signed with specified Bitgoldcoin addresses</source>
+        <translation>Ověř zprávy, aby ses ujistil, že byly podepsány danými Bitgoldcoinovými adresami</translation>
     </message>
     <message>
         <location line="+28"/>
@@ -536,13 +536,13 @@ Tento produkt zahrnuje programy vyvinuté OpenSSL Projektem pro použití v Open
     </message>
     <message>
         <location line="+47"/>
-        <source>BitgoldCoin client</source>
-        <translation>BitgoldCoin klient</translation>
+        <source>Bitgoldcoin client</source>
+        <translation>Bitgoldcoin klient</translation>
     </message>
     <message numerus="yes">
         <location line="+141"/>
-        <source>%n active connection(s) to BitgoldCoin network</source>
-        <translation><numerusform>%n aktivní spojení do BitgoldCoinové sítě</numerusform><numerusform>%n aktivní spojení do BitgoldCoinové sítě</numerusform><numerusform>%n aktivních spojení do BitgoldCoinové sítě</numerusform></translation>
+        <source>%n active connection(s) to Bitgoldcoin network</source>
+        <translation><numerusform>%n aktivní spojení do Bitgoldcoinové sítě</numerusform><numerusform>%n aktivní spojení do Bitgoldcoinové sítě</numerusform><numerusform>%n aktivních spojení do Bitgoldcoinové sítě</numerusform></translation>
     </message>
     <message>
         <location line="+22"/>
@@ -656,8 +656,8 @@ Adresa: %4
     <message>
         <location line="-23"/>
         <location line="+23"/>
-        <source>URI can not be parsed! This can be caused by an invalid BitgoldCoin address or malformed URI parameters.</source>
-        <translation>Nepodařilo se analyzovat URI! Důvodem může být neplatná BitgoldCoinová adresa nebo poškozené parametry URI.</translation>
+        <source>URI can not be parsed! This can be caused by an invalid Bitgoldcoin address or malformed URI parameters.</source>
+        <translation>Nepodařilo se analyzovat URI! Důvodem může být neplatná Bitgoldcoinová adresa nebo poškozené parametry URI.</translation>
     </message>
     <message>
         <location line="+17"/>
@@ -671,8 +671,8 @@ Adresa: %4
     </message>
     <message>
         <location filename="../bitcoin.cpp" line="+111"/>
-        <source>A fatal error occurred. BitgoldCoin can no longer continue safely and will quit.</source>
-        <translation>Stala se fatální chyba. BitgoldCoin nemůže bezpečně pokračovat v činnosti, a proto skončí.</translation>
+        <source>A fatal error occurred. Bitgoldcoin can no longer continue safely and will quit.</source>
+        <translation>Stala se fatální chyba. Bitgoldcoin nemůže bezpečně pokračovat v činnosti, a proto skončí.</translation>
     </message>
 </context>
 <context>
@@ -737,8 +737,8 @@ Adresa: %4
     </message>
     <message>
         <location line="-5"/>
-        <source>The entered address &quot;%1&quot; is not a valid BitgoldCoin address.</source>
-        <translation>Zadaná adresa &quot;%1&quot; není platná BitgoldCoinová adresa.</translation>
+        <source>The entered address &quot;%1&quot; is not a valid Bitgoldcoin address.</source>
+        <translation>Zadaná adresa &quot;%1&quot; není platná Bitgoldcoinová adresa.</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -756,8 +756,8 @@ Adresa: %4
     <message>
         <location filename="../guiutil.cpp" line="+424"/>
         <location line="+12"/>
-        <source>BitgoldCoin-Qt</source>
-        <translation>BitgoldCoin-Qt</translation>
+        <source>Bitgoldcoin-Qt</source>
+        <translation>Bitgoldcoin-Qt</translation>
     </message>
     <message>
         <location line="-12"/>
@@ -819,13 +819,13 @@ Adresa: %4
     </message>
     <message>
         <location line="+31"/>
-        <source>Automatically start BitgoldCoin after logging in to the system.</source>
-        <translation>Automaticky spustí BitgoldCoin po přihlášení do systému.</translation>
+        <source>Automatically start Bitgoldcoin after logging in to the system.</source>
+        <translation>Automaticky spustí Bitgoldcoin po přihlášení do systému.</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>&amp;Start BitgoldCoin on system login</source>
-        <translation>S&amp;pustit BitgoldCoin po přihlášení do systému</translation>
+        <source>&amp;Start Bitgoldcoin on system login</source>
+        <translation>S&amp;pustit Bitgoldcoin po přihlášení do systému</translation>
     </message>
     <message>
         <location line="+35"/>
@@ -844,7 +844,7 @@ Adresa: %4
     </message>
     <message>
         <location line="+6"/>
-        <source>Automatically open the BitgoldCoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <source>Automatically open the Bitgoldcoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
         <translation>Automaticky otevře potřebný port na routeru. Tohle funguje jen za předpokladu, že tvůj router podporuje UPnP a že je UPnP povolené.</translation>
     </message>
     <message>
@@ -854,8 +854,8 @@ Adresa: %4
     </message>
     <message>
         <location line="+7"/>
-        <source>Connect to the BitgoldCoin network through a SOCKS proxy (e.g. when connecting through Tor).</source>
-        <translation>Připojí se do BitgoldCoinové sítě přes SOCKS proxy (např. když se připojuje přes Tor).</translation>
+        <source>Connect to the Bitgoldcoin network through a SOCKS proxy (e.g. when connecting through Tor).</source>
+        <translation>Připojí se do Bitgoldcoinové sítě přes SOCKS proxy (např. když se připojuje přes Tor).</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -929,8 +929,8 @@ Adresa: %4
     </message>
     <message>
         <location line="+13"/>
-        <source>The user interface language can be set here. This setting will take effect after restarting BitgoldCoin.</source>
-        <translation>Tady lze nastavit jazyk uživatelského rozhraní. Nastavení se projeví až po restartování BitgoldCoinu.</translation>
+        <source>The user interface language can be set here. This setting will take effect after restarting Bitgoldcoin.</source>
+        <translation>Tady lze nastavit jazyk uživatelského rozhraní. Nastavení se projeví až po restartování Bitgoldcoinu.</translation>
     </message>
     <message>
         <location line="+11"/>
@@ -944,7 +944,7 @@ Adresa: %4
     </message>
     <message>
         <location line="+9"/>
-        <source>Whether to show BitgoldCoin addresses in the transaction list or not.</source>
+        <source>Whether to show Bitgoldcoin addresses in the transaction list or not.</source>
         <translation>Zda ukazovat bitgoldcoinové adresy ve výpisu transakcí nebo ne.</translation>
     </message>
     <message>
@@ -996,8 +996,8 @@ Adresa: %4
     <message>
         <location line="-9"/>
         <location line="+9"/>
-        <source>This setting will take effect after restarting BitgoldCoin.</source>
-        <translation>Nastavení se projeví až po restartování BitgoldCoinu.</translation>
+        <source>This setting will take effect after restarting Bitgoldcoin.</source>
+        <translation>Nastavení se projeví až po restartování Bitgoldcoinu.</translation>
     </message>
     <message>
         <location line="+29"/>
@@ -1015,8 +1015,8 @@ Adresa: %4
     <message>
         <location line="+50"/>
         <location line="+166"/>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the BitgoldCoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>Zobrazené informace nemusí být aktuální. Tvá peněženka se automaticky sesynchronizuje s BitgoldCoinovou sítí, jakmile se s ní spojí. Zatím ale ještě není synchronizace dokončena.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitgoldcoin network after a connection is established, but this process has not completed yet.</source>
+        <translation>Zobrazené informace nemusí být aktuální. Tvá peněženka se automaticky sesynchronizuje s Bitgoldcoinovou sítí, jakmile se s ní spojí. Zatím ale ještě není synchronizace dokončena.</translation>
     </message>
     <message>
         <location line="-124"/>
@@ -1219,8 +1219,8 @@ Adresa: %4
     </message>
     <message>
         <location line="+7"/>
-        <source>Show the BitgoldCoin-Qt help message to get a list with possible BitgoldCoin command-line options.</source>
-        <translation>Seznam parametrů BitgoldCoinu pro příkazovou řádku získáš v nápovědě BitgoldCoinu Qt.</translation>
+        <source>Show the Bitgoldcoin-Qt help message to get a list with possible Bitgoldcoin command-line options.</source>
+        <translation>Seznam parametrů Bitgoldcoinu pro příkazovou řádku získáš v nápovědě Bitgoldcoinu Qt.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1239,13 +1239,13 @@ Adresa: %4
     </message>
     <message>
         <location line="-104"/>
-        <source>BitgoldCoin - Debug window</source>
-        <translation>BitgoldCoin - ladicí okno</translation>
+        <source>Bitgoldcoin - Debug window</source>
+        <translation>Bitgoldcoin - ladicí okno</translation>
     </message>
     <message>
         <location line="+25"/>
-        <source>BitgoldCoin Core</source>
-        <translation>Jádro BitgoldCoinu</translation>
+        <source>Bitgoldcoin Core</source>
+        <translation>Jádro Bitgoldcoinu</translation>
     </message>
     <message>
         <location line="+279"/>
@@ -1254,8 +1254,8 @@ Adresa: %4
     </message>
     <message>
         <location line="+7"/>
-        <source>Open the BitgoldCoin debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Otevři soubor s ladicími záznamy BitgoldCoinu z aktuálního datového adresáře. U velkých logů to může pár vteřin zabrat.</translation>
+        <source>Open the Bitgoldcoin debug log file from the current data directory. This can take a few seconds for large log files.</source>
+        <translation>Otevři soubor s ladicími záznamy Bitgoldcoinu z aktuálního datového adresáře. U velkých logů to může pár vteřin zabrat.</translation>
     </message>
     <message>
         <location line="+102"/>
@@ -1264,8 +1264,8 @@ Adresa: %4
     </message>
     <message>
         <location filename="../rpcconsole.cpp" line="-30"/>
-        <source>Welcome to the BitgoldCoin RPC console.</source>
-        <translation>Vítej v BitgoldCoinové RPC konzoli.</translation>
+        <source>Welcome to the Bitgoldcoin RPC console.</source>
+        <translation>Vítej v Bitgoldcoinové RPC konzoli.</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -1407,8 +1407,8 @@ Adresa: %4
     </message>
     <message>
         <location line="+34"/>
-        <source>The address to send the payment to (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
-        <translation>Adresa příjemce (např. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</translation>
+        <source>The address to send the payment to (e.g. G3e4KFHDfwYskjdXcFP2Po1NpRU3483kdd)</source>
+        <translation>Adresa příjemce (např. G3e4KFHDfwYskjdXcFP2Po1NpRU3483kdd)</translation>
     </message>
     <message>
         <location line="+60"/>
@@ -1448,8 +1448,8 @@ Adresa: %4
     </message>
     <message>
         <location filename="../sendcoinsentry.cpp" line="+1"/>
-        <source>Enter a BitgoldCoin address (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
-        <translation>Zadej BitgoldCoinovou adresu (např. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</translation>
+        <source>Enter a Bitgoldcoin address (e.g. G3e4KFHDfwYskjdXcFP2Po1NpRU3483kdd)</source>
+        <translation>Zadej Bitgoldcoinovou adresu (např. G3e4KFHDfwYskjdXcFP2Po1NpRU3483kdd)</translation>
     </message>
 </context>
 <context>
@@ -1471,8 +1471,8 @@ Adresa: %4
     </message>
     <message>
         <location line="+18"/>
-        <source>The address to sign the message with (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
-        <translation>Adresa, kterou se zpráva podepíše (např. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</translation>
+        <source>The address to sign the message with (e.g. G3e4KFHDfwYskjdXcFP2Po1NpRU3483kdd)</source>
+        <translation>Adresa, kterou se zpráva podepíše (např. G3e4KFHDfwYskjdXcFP2Po1NpRU3483kdd)</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -1513,8 +1513,8 @@ Adresa: %4
     </message>
     <message>
         <location line="+21"/>
-        <source>Sign the message to prove you own this BitgoldCoin address</source>
-        <translation>Podepiš zprávu, čímž prokážeš, že jsi vlastníkem této BitgoldCoinové adresy</translation>
+        <source>Sign the message to prove you own this Bitgoldcoin address</source>
+        <translation>Podepiš zprávu, čímž prokážeš, že jsi vlastníkem této Bitgoldcoinové adresy</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1544,13 +1544,13 @@ Adresa: %4
     </message>
     <message>
         <location line="+21"/>
-        <source>The address the message was signed with (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
-        <translation>Adresa, kterou je zpráva podepsána (např. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</translation>
+        <source>The address the message was signed with (e.g. G3e4KFHDfwYskjdXcFP2Po1NpRU3483kdd)</source>
+        <translation>Adresa, kterou je zpráva podepsána (např. G3e4KFHDfwYskjdXcFP2Po1NpRU3483kdd)</translation>
     </message>
     <message>
         <location line="+40"/>
-        <source>Verify the message to ensure it was signed with the specified BitgoldCoin address</source>
-        <translation>Ověř zprávu, aby ses ujistil, že byla podepsána danou BitgoldCoinovou adresou</translation>
+        <source>Verify the message to ensure it was signed with the specified Bitgoldcoin address</source>
+        <translation>Ověř zprávu, aby ses ujistil, že byla podepsána danou Bitgoldcoinovou adresou</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1565,8 +1565,8 @@ Adresa: %4
     <message>
         <location filename="../signverifymessagedialog.cpp" line="+27"/>
         <location line="+3"/>
-        <source>Enter a BitgoldCoin address (e.g. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</source>
-        <translation>Zadej BitgoldCoinovou adresu (např. G31ca1SVLps7QepXfM5Fr6sLGbDHff9K7j)</translation>
+        <source>Enter a Bitgoldcoin address (e.g. G3e4KFHDfwYskjdXcFP2Po1NpRU3483kdd)</source>
+        <translation>Zadej Bitgoldcoinovou adresu (např. G3e4KFHDfwYskjdXcFP2Po1NpRU3483kdd)</translation>
     </message>
     <message>
         <location line="-2"/>
@@ -1575,8 +1575,8 @@ Adresa: %4
     </message>
     <message>
         <location line="+3"/>
-        <source>Enter BitgoldCoin signature</source>
-        <translation>Vlož BitgoldCoinový podpis</translation>
+        <source>Enter Bitgoldcoin signature</source>
+        <translation>Vlož Bitgoldcoinový podpis</translation>
     </message>
     <message>
         <location line="+82"/>
@@ -1649,8 +1649,8 @@ Adresa: %4
     <name>SplashScreen</name>
     <message>
         <location filename="../splashscreen.cpp" line="+22"/>
-        <source>The BitgoldCoin developers</source>
-        <translation>Vývojáři BitgoldCoinu</translation>
+        <source>The Bitgoldcoin developers</source>
+        <translation>Vývojáři Bitgoldcoinu</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -2187,8 +2187,8 @@ Adresa: %4
     <name>bitcoin-core</name>
     <message>
         <location filename="../bitcoinstrings.cpp" line="+94"/>
-        <source>BitgoldCoin version</source>
-        <translation>Verze BitgoldCoinu</translation>
+        <source>Bitgoldcoin version</source>
+        <translation>Verze Bitgoldcoinu</translation>
     </message>
     <message>
         <location line="+102"/>
@@ -2306,7 +2306,7 @@ rpcpassword=%s
 The username and password MUST NOT be the same.
 If the file does not exist, create it with owner-readable-only file permissions.
 It is also recommended to set alertnotify so you are notified of problems;
-for example: alertnotify=echo %%s | mail -s &quot;BitgoldCoin Alert&quot; admin@foo.com
+for example: alertnotify=echo %%s | mail -s &quot;Bitgoldcoin Alert&quot; admin@foo.com
 </source>
         <translation>%s, musíš nastavit rpcpassword v konfiguračním souboru:
 %s
@@ -2317,7 +2317,7 @@ rpcpassword=%s
 rpcuser a rpcpassword NESMÍ být stejné.
 Pokud konfigurační soubor ještě neexistuje, vytvoř ho tak, aby ho mohl číst pouze vlastník.
 Je také doporučeno si nastavit alertnotify, abys byl upozorněn na případné problémy;
-například: alertnotify=echo %%s | mail -s &quot;BitgoldCoin Alert&quot; admin@foo.com
+například: alertnotify=echo %%s | mail -s &quot;Bitgoldcoin Alert&quot; admin@foo.com
 </translation>
     </message>
     <message>
@@ -2332,8 +2332,8 @@ například: alertnotify=echo %%s | mail -s &quot;BitgoldCoin Alert&quot; admin@
     </message>
     <message>
         <location line="+3"/>
-        <source>Cannot obtain a lock on data directory %s. BitgoldCoin is probably already running.</source>
-        <translation>Nedaří se mi získat zámek na datový adresář %s. BitgoldCoin pravděpodobně už jednou běží.</translation>
+        <source>Cannot obtain a lock on data directory %s. Bitgoldcoin is probably already running.</source>
+        <translation>Nedaří se mi získat zámek na datový adresář %s. Bitgoldcoin pravděpodobně už jednou běží.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2377,8 +2377,8 @@ například: alertnotify=echo %%s | mail -s &quot;BitgoldCoin Alert&quot; admin@
     </message>
     <message>
         <location line="+3"/>
-        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong BitgoldCoin will not work properly.</source>
-        <translation>Upozornění: Zkontroluj, že máš v počítači správně nastavený datum a čas! Pokud jsou nastaveny špatně, BitgoldCoin nebude fungovat správně.</translation>
+        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Bitgoldcoin will not work properly.</source>
+        <translation>Upozornění: Zkontroluj, že máš v počítači správně nastavený datum a čas! Pokud jsou nastaveny špatně, Bitgoldcoin nebude fungovat správně.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2627,8 +2627,8 @@ například: alertnotify=echo %%s | mail -s &quot;BitgoldCoin Alert&quot; admin@
     </message>
     <message>
         <location line="+5"/>
-        <source>SSL options: (see the BitgoldCoin Wiki for SSL setup instructions)</source>
-        <translation>Možnosti SSL: (viz instrukce nastavení SSL v BitgoldCoin Wiki)</translation>
+        <source>SSL options: (see the Bitgoldcoin Wiki for SSL setup instructions)</source>
+        <translation>Možnosti SSL: (viz instrukce nastavení SSL v Bitgoldcoin Wiki)</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -2817,13 +2817,13 @@ například: alertnotify=echo %%s | mail -s &quot;BitgoldCoin Alert&quot; admin@
     </message>
     <message>
         <location line="+1"/>
-        <source>Error loading wallet.dat: Wallet requires newer version of BitgoldCoin</source>
-        <translation>Chyba při načítání wallet.dat: peněženka vyžaduje novější verzi BitgoldCoinu</translation>
+        <source>Error loading wallet.dat: Wallet requires newer version of Bitgoldcoin</source>
+        <translation>Chyba při načítání wallet.dat: peněženka vyžaduje novější verzi Bitgoldcoinu</translation>
     </message>
     <message>
         <location line="+93"/>
-        <source>Wallet needed to be rewritten: restart BitgoldCoin to complete</source>
-        <translation>Soubor s peněženkou potřeboval přepsat: restartuj BitgoldCoin, aby se operace dokončila</translation>
+        <source>Wallet needed to be rewritten: restart Bitgoldcoin to complete</source>
+        <translation>Soubor s peněženkou potřeboval přepsat: restartuj Bitgoldcoin, aby se operace dokončila</translation>
     </message>
     <message>
         <location line="-95"/>
@@ -2882,8 +2882,8 @@ například: alertnotify=echo %%s | mail -s &quot;BitgoldCoin Alert&quot; admin@
     </message>
     <message>
         <location line="-25"/>
-        <source>Unable to bind to %s on this computer. BitgoldCoin is probably already running.</source>
-        <translation>Nedaří se mi připojit na %s na tomhle počítači. BitgoldCoin už pravděpodobně jednou běží.</translation>
+        <source>Unable to bind to %s on this computer. Bitgoldcoin is probably already running.</source>
+        <translation>Nedaří se mi připojit na %s na tomhle počítači. Bitgoldcoin už pravděpodobně jednou běží.</translation>
     </message>
     <message>
         <location line="+64"/>

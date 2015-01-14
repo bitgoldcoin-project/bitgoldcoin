@@ -458,7 +458,7 @@
       <bool>false</bool>
      </property>
      <property name="columnCount">
-      <number>12</number>
+      <number>11</number>
      </property>
      <attribute name="headerShowSortIndicator" stdset="0">
       <bool>true</bool>
@@ -484,11 +484,6 @@
      <column>
       <property name="text">
        <string>Address</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Darksend Rounds</string>
       </property>
      </column>
      <column>

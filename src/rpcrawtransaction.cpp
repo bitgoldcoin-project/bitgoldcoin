@@ -10,7 +10,6 @@
 #include "db.h"
 #include "init.h"
 #include "main.h"
-#include "core.h"
 #include "net.h"
 #include "wallet.h"
 
@@ -133,42 +132,6 @@ void TxToJSON(const CTransaction& tx, const uint256 hashBlock, Object& entry)
     }
 }
 
-Value erasetransaction(const Array& params, bool fHelp)
-{
-    if (fHelp || params.size() != 1)
-        throw runtime_error(
-            "erasetransaction <txid>\n"
-            "Remove transaction from wallet.");
-
-    uint256 hash = ParseHashV(params[0], "parameter 1");
-
-    CTransaction tx;
-    uint256 hashBlock = 0;
-    if (!GetTransaction(hash, tx, hashBlock, true))
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "No information available about transaction");
-
-    return pwalletMain->EraseFromWallet(hash);
-}
-
-Value resendtransaction(const Array& params, bool fHelp)
-{
-    if (fHelp || params.size() != 1)
-        throw runtime_error(
-            "erasetransaction <txid>\n"
-            "Remove transaction from wallet.");
-
-    uint256 hash = ParseHashV(params[0], "parameter 1");
-
-    CTransaction tx;
-    uint256 hashBlock = 0;
-    if (!GetTransaction(hash, tx, hashBlock, true))
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "No information available about transaction");
-
-    pwalletMain->ResendWalletTransactions(hash);
-
-    return "";
-}
-
 Value getrawtransaction(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() < 1 || params.size() > 2)
@@ -232,7 +195,7 @@ Value listunspent(const Array& params, bool fHelp)
         {
             CBitcoinAddress address(input.get_str());
             if (!address.IsValid())
-                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, string("Invalid BitgoldCoin address: ")+input.get_str());
+                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, string("Invalid Bitgoldcoin address: ")+input.get_str());
             if (setAddress.count(address))
                 throw JSONRPCError(RPC_INVALID_PARAMETER, string("Invalid parameter, duplicated address: ")+input.get_str());
            setAddress.insert(address);
@@ -331,7 +294,7 @@ Value createrawtransaction(const Array& params, bool fHelp)
     {
         CBitcoinAddress address(s.name_);
         if (!address.IsValid())
-            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, string("Invalid BitgoldCoin address: ")+s.name_);
+            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, string("Invalid Bitgoldcoin address: ")+s.name_);
 
         if (setAddress.count(address))
             throw JSONRPCError(RPC_INVALID_PARAMETER, string("Invalid parameter, duplicated address: ")+s.name_);
@@ -566,15 +529,19 @@ Value signrawtransaction(const Array& params, bool fHelp)
 
 Value sendrawtransaction(const Array& params, bool fHelp)
 {
-    if (fHelp || params.size() < 1 || params.size() > 1)
+    if (fHelp || params.size() < 1 || params.size() > 2)
         throw runtime_error(
-            "sendrawtransaction <hex string>\n"
+            "sendrawtransaction <hex string> [allowhighfees=false]\n"
             "Submits raw transaction (serialized, hex-encoded) to local node and network.");
 
     // parse hex string from parameter
     vector<unsigned char> txData(ParseHexV(params[0], "parameter"));
     CDataStream ssData(txData, SER_NETWORK, PROTOCOL_VERSION);
     CTransaction tx;
+
+    bool fOverrideFees = false;
+    if (params.size() > 1)
+        fOverrideFees = params[1].get_bool();
 
     // deserialize binary data stream
     try {
@@ -593,7 +560,7 @@ Value sendrawtransaction(const Array& params, bool fHelp)
         if (!fHave) {
             // push to local node
             CValidationState state;
-            if (!tx.AcceptToMemoryPool(state, true, false))
+            if (!tx.AcceptToMemoryPool(state, true, false, NULL, !fOverrideFees))
                 throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "TX rejected"); // TODO: report validation state
         }
     }
@@ -608,4 +575,28 @@ Value sendrawtransaction(const Array& params, bool fHelp)
     RelayTransaction(tx, hashTx);
 
     return hashTx.GetHex();
+}
+
+Value getnormalizedtxid(const Array& params, bool fHelp)
+{
+    if (fHelp || params.size() != 1)
+        throw runtime_error(
+            "getnormalizedtxid <hex string>\n"
+            "Return the normalized transaction ID.");
+
+    // parse hex string from parameter
+    vector<unsigned char> txData(ParseHexV(params[0], "parameter"));
+    CDataStream ssData(txData, SER_NETWORK, PROTOCOL_VERSION);
+    CTransaction tx;
+
+    // deserialize binary data stream
+    try {
+        ssData >> tx;
+    }
+    catch (std::exception &e) {
+        throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "TX decode failed");
+    }
+    uint256 hashNormalized = tx.GetNormalizedHash();
+
+    return hashNormalized.GetHex();
 }

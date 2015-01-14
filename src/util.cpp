@@ -70,18 +70,6 @@ using namespace std;
 
 map<string, string> mapArgs;
 map<string, vector<string> > mapMultiArgs;
-bool fMasterNode = false;
-string strMasterNodePrivKey = "";
-string strMasterNodeAddr = "";
-int nInstantXDepth = 1;
-int nDarksendRounds = 2;
-int nAnonymizeBitgoldcoinAmount = 1000;
-int nLiquidityProvider = 0;
-/** Spork enforcement enabled time */
-int64 enforceMasternodePaymentsTime = 4085657524;
-int nMasternodeMinProtocol = 0;
-bool fSucessfullyLoaded = false;
-bool fEnableDarksend = false;
 bool fDebug = false;
 bool fDebugNet = false;
 bool fPrintToConsole = false;
@@ -179,7 +167,7 @@ void RandAddSeedPerfmon()
     {
         RAND_add(pdata, nSize, nSize/100.0);
         OPENSSL_cleanse(pdata, nSize);
-        LogPrintf("RandAddSeed() %lu bytes\n", nSize);
+        printf("RandAddSeed() %lu bytes\n", nSize);
     }
 #endif
 }
@@ -212,25 +200,14 @@ uint256 GetRandHash()
 }
 
 
-int64 roundUp64(int64 numToRound, int64 multiple)
-{ 
- if(multiple == 0) 
- { 
-  return numToRound; 
- } 
-
- int remainder = numToRound % multiple;
- if (remainder == 0)
-  return numToRound;
- return numToRound + multiple - remainder;
-} 
 
 
 
 
 
 //
-// LogPrintf() has been broken a couple of times now
+// OutputDebugStringF (aka printf -- there is a #define that we really
+// should get rid of one day) has been broken a couple of times now
 // by well-meaning people adding mutexes in the most straightforward way.
 // It breaks because it may be called by global destructors during shutdown.
 // Since the order of destruction of static/global objects is undefined,
@@ -257,14 +234,8 @@ static void DebugPrintInit()
     mutexDebugLog = new boost::mutex();
 }
 
-int LogPrint(const char* category, const char* pszFormat, ...)
+int OutputDebugStringF(const char* pszFormat, ...)
 {
-    if (category != NULL) {
-        const vector<string>& categories = mapMultiArgs["-debug"];
-        if (find(categories.begin(), categories.end(), string(category)) == categories.end())
-            return 0;
-    }
-
     int ret = 0; // Returns total number of characters written
     if (fPrintToConsole)
     {
@@ -390,7 +361,7 @@ bool error(const char *format, ...)
     va_start(arg_ptr, format);
     std::string str = vstrprintf(format, arg_ptr);
     va_end(arg_ptr);
-    LogPrintf("ERROR: %s\n", str.c_str());
+    printf("ERROR: %s\n", str.c_str());
     return false;
 }
 
@@ -1037,13 +1008,13 @@ static std::string FormatException(std::exception* pex, const char* pszThread)
 void LogException(std::exception* pex, const char* pszThread)
 {
     std::string message = FormatException(pex, pszThread);
-    LogPrintf("\n%s", message.c_str());
+    printf("\n%s", message.c_str());
 }
 
 void PrintException(std::exception* pex, const char* pszThread)
 {
     std::string message = FormatException(pex, pszThread);
-    LogPrintf("\n\n************************\n%s\n", message.c_str());
+    printf("\n\n************************\n%s\n", message.c_str());
     fprintf(stderr, "\n\n************************\n%s\n", message.c_str());
     strMiscWarning = message;
     throw;
@@ -1052,7 +1023,7 @@ void PrintException(std::exception* pex, const char* pszThread)
 void PrintExceptionContinue(std::exception* pex, const char* pszThread)
 {
     std::string message = FormatException(pex, pszThread);
-    LogPrintf("\n\n************************\n%s\n", message.c_str());
+    printf("\n\n************************\n%s\n", message.c_str());
     fprintf(stderr, "\n\n************************\n%s\n", message.c_str());
     strMiscWarning = message;
 }
@@ -1066,7 +1037,7 @@ boost::filesystem::path GetDefaultDataDir()
     // Unix: ~/.bitcoin
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "BitgoldCoin";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "Bitgoldcoin";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -1078,7 +1049,7 @@ boost::filesystem::path GetDefaultDataDir()
     // Mac
     pathRet /= "Library/Application Support";
     fs::create_directory(pathRet);
-    return pathRet / "BitgoldCoin";
+    return pathRet / "Bitgoldcoin";
 #else
     // Unix
     return pathRet / ".bitgoldcoin";
@@ -1095,7 +1066,7 @@ const boost::filesystem::path &GetDataDir(bool fNetSpecific)
 
     fs::path &path = pathCached[fNetSpecific];
 
-    // This can be called during exceptions by LogPrintf(), so we cache the
+    // This can be called during exceptions by printf, so we cache the
     // value so we don't have to do memory allocations after that.
     if (fCachedPath[fNetSpecific])
         return path;
@@ -1123,13 +1094,6 @@ const boost::filesystem::path &GetDataDir(bool fNetSpecific)
 boost::filesystem::path GetConfigFile()
 {
     boost::filesystem::path pathConfigFile(GetArg("-conf", "bitgoldcoin.conf"));
-    if (!pathConfigFile.is_complete()) pathConfigFile = GetDataDir(false) / pathConfigFile;
-    return pathConfigFile;
-}
-
-boost::filesystem::path GetMasternodeConfigFile()
-{
-    boost::filesystem::path pathConfigFile(GetArg("-mnconf", "masternode.conf"));
     if (!pathConfigFile.is_complete()) pathConfigFile = GetDataDir(false) / pathConfigFile;
     return pathConfigFile;
 }
@@ -1366,13 +1330,13 @@ void AddTimeData(const CNetAddr& ip, int64 nTime)
 
     // Add data
     vTimeOffsets.input(nOffsetSample);
-    LogPrintf("Added time data, samples %d, offset %+"PRI64d" (%+"PRI64d" minutes)\n", vTimeOffsets.size(), nOffsetSample, nOffsetSample/60);
+    printf("Added time data, samples %d, offset %+"PRI64d" (%+"PRI64d" minutes)\n", vTimeOffsets.size(), nOffsetSample, nOffsetSample/60);
     if (vTimeOffsets.size() >= 5 && vTimeOffsets.size() % 2 == 1)
     {
         int64 nMedian = vTimeOffsets.median();
         std::vector<int64> vSorted = vTimeOffsets.sorted();
         // Only let other nodes change our time by so much
-        if (abs64(nMedian) < 14 * 60) // BitgoldCoin: changed maximum adjust to 35 mins to avoid letting peers change our time too much in case of an attack.
+        if (abs64(nMedian) < 35 * 60) // Bitgoldcoin: changed maximum adjust to 35 mins to avoid letting peers change our time too much in case of an attack.
         {
             nTimeOffset = nMedian;
         }
@@ -1392,19 +1356,19 @@ void AddTimeData(const CNetAddr& ip, int64 nTime)
                 if (!fMatch)
                 {
                     fDone = true;
-                    string strMessage = _("Warning: Please check that your computer's date and time are correct! If your clock is wrong BitgoldCoin will not work properly.");
+                    string strMessage = _("Warning: Please check that your computer's date and time are correct! If your clock is wrong Bitgoldcoin will not work properly.");
                     strMiscWarning = strMessage;
-                    LogPrintf("*** %s\n", strMessage.c_str());
+                    printf("*** %s\n", strMessage.c_str());
                     uiInterface.ThreadSafeMessageBox(strMessage, "", CClientUIInterface::MSG_WARNING);
                 }
             }
         }
         if (fDebug) {
             BOOST_FOREACH(int64 n, vSorted)
-                LogPrintf("%+"PRI64d"  ", n);
-            LogPrintf("|  ");
+                printf("%+"PRI64d"  ", n);
+            printf("|  ");
         }
-        LogPrintf("nTimeOffset = %+"PRI64d"  (%+"PRI64d" minutes)\n", nTimeOffset, nTimeOffset/60);
+        printf("nTimeOffset = %+"PRI64d"  (%+"PRI64d" minutes)\n", nTimeOffset, nTimeOffset/60);
     }
 }
 
@@ -1466,7 +1430,7 @@ boost::filesystem::path GetSpecialFolderPath(int nFolder, bool fCreate)
         return fs::path(pszPath);
     }
 
-    LogPrintf("SHGetSpecialFolderPathA() failed, could not obtain requested path.\n");
+    printf("SHGetSpecialFolderPathA() failed, could not obtain requested path.\n");
     return fs::path("");
 }
 #endif
@@ -1486,7 +1450,7 @@ boost::filesystem::path GetTempPath() {
     path = boost::filesystem::path("/tmp");
 #endif
     if (path.empty() || !boost::filesystem::is_directory(path)) {
-        LogPrintf("GetTempPath(): failed to find temp path\n");
+        printf("GetTempPath(): failed to find temp path\n");
         return boost::filesystem::path("");
     }
     return path;
@@ -1497,7 +1461,7 @@ void runCommand(std::string strCommand)
 {
     int nErr = ::system(strCommand.c_str());
     if (nErr)
-        LogPrintf("runCommand error: system(%s) returned %d\n", strCommand.c_str(), nErr);
+        printf("runCommand error: system(%s) returned %d\n", strCommand.c_str(), nErr);
 }
 
 void RenameThread(const char* name)
@@ -1530,7 +1494,7 @@ bool NewThread(void(*pfn)(void*), void* parg)
     {
         boost::thread(pfn, parg); // thread detaches when out of scope
     } catch(boost::thread_resource_error &e) {
-        LogPrintf("Error creating thread: %s\n", e.what());
+        printf("Error creating thread: %s\n", e.what());
         return false;
     }
     return true;

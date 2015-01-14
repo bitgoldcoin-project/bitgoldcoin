@@ -1,9 +1,8 @@
 Bitgoldcoin 0.8.x BETA
 ====================
 
-Copyright (c) 2009-2013 Bitcoin Developers
-Copyright (c) 2011-2013 DarkCoin Developers
-Copyright (c) 2015 Bitgoldcoin Developers
+Copyright (c) 2009-2014 Bitcoin Developers
+Copyright (c) 2011-2014 Bitgoldcoin Developers
 
 Distributed under the MIT/X11 software license, see the accompanying
 file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -26,12 +25,12 @@ You need the Qt4 run-time libraries to run Bitgoldcoin-Qt. On Debian or Ubuntu:
 
 Unpack the files into a directory and run:
 
-- bin/32/Bitgoldcoin-qt (GUI, 32-bit)
-- bin/32/Bitgoldcoind (headless, 32-bit)
-- bin/64/Bitgoldcoin-qt (GUI, 64-bit)
-- bin/64/Bitgoldcoind (headless, 64-bit)
+- bin/32/bitgoldcoin-qt (GUI, 32-bit)
+- bin/32/bitgoldcoind (headless, 32-bit)
+- bin/64/bitgoldcoin-qt (GUI, 64-bit)
+- bin/64/bitgoldcoind (headless, 64-bit)
 
-See the documentation at the [Bitgoldcoin Wiki](http://darkcoin.info)
+See the documentation at the [Bitgoldcoin Wiki](http://bitgoldcoin.info)
 for help and more information.
 
 

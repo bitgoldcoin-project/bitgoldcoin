@@ -1,4 +1,4 @@
-#define BOOST_TEST_MODULE BitgoldCoin Test Suite
+#define BOOST_TEST_MODULE Bitgoldcoin Test Suite
 #include <boost/test/unit_test.hpp>
 #include <boost/filesystem.hpp>
 
@@ -8,6 +8,7 @@
 #include "wallet.h"
 #include "util.h"
 
+CWallet* pwalletMain;
 CClientUIInterface uiInterface;
 
 extern bool fPrintToConsole;

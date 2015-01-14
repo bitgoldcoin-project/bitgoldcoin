@@ -161,6 +161,7 @@ Value getmininginfo(const Array& params, bool fHelp)
     return obj;
 }
 
+
 Value getworkex(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() > 2)
@@ -170,10 +171,10 @@ Value getworkex(const Array& params, bool fHelp)
         );
 
     if (vNodes.empty())
-        throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "BitgoldCoin is not connected!");
+        throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "Bitgoldcoin is not connected!");
 
     if (IsInitialBlockDownload())
-        throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "BitgoldCoin is downloading blocks...");
+        throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "Bitgoldcoin is downloading blocks...");
 
     typedef map<uint256, pair<CBlock*, CScript> > mapNewBlock_t;
     static mapNewBlock_t mapNewBlock;    // FIXME: thread safety
@@ -251,7 +252,7 @@ Value getworkex(const Array& params, bool fHelp)
         Array merkle_arr;
 
         BOOST_FOREACH(uint256 merkleh, merkle) {
-            LogPrintf("%s\n", merkleh.ToString().c_str());
+            printf("%s\n", merkleh.ToString().c_str());
             merkle_arr.push_back(HexStr(BEGIN(merkleh), END(merkleh)));
         }
 
@@ -310,10 +311,10 @@ Value getwork(const Array& params, bool fHelp)
             "If [data] is specified, tries to solve the block and returns true if it was successful.");
 
     if (vNodes.empty())
-        throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "BitgoldCoin is not connected!");
+        throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "Bitgoldcoin is not connected!");
 
     if (IsInitialBlockDownload())
-        throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "BitgoldCoin is downloading blocks...");
+        throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "Bitgoldcoin is downloading blocks...");
 
     typedef map<uint256, pair<CBlock*, CScript> > mapNewBlock_t;
     static mapNewBlock_t mapNewBlock;    // FIXME: thread safety
@@ -431,11 +432,6 @@ Value getblocktemplate(const Array& params, bool fHelp)
             "  \"sizelimit\" : limit of block size\n"
             "  \"bits\" : compressed target of next block\n"
             "  \"height\" : height of the next block\n"
-            "  \"payee\" : required payee\n"
-            "  \"payee_amount\" : required amount to pay\n"
-            "  \"votes\" : show vote candidates for this block\n"
-            "  \"masternode_payments\" : if masternode payments are active\n"
-            "  \"masternode_payments_enforcing\" : if masternode payments are being actively enforced by the network\n"
             "See https://en.bitcoin.it/wiki/BIP_0022 for full specification.");
 
     std::string strMode = "template";
@@ -457,10 +453,10 @@ Value getblocktemplate(const Array& params, bool fHelp)
         throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid mode");
 
     if (vNodes.empty())
-        throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "BitgoldCoin is not connected!");
+        throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "Bitgoldcoin is not connected!");
 
     if (IsInitialBlockDownload())
-        throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "BitgoldCoin is downloading blocks...");
+        throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "Bitgoldcoin is downloading blocks...");
 
     // Update block
     static unsigned int nTransactionsUpdatedLast;
@@ -537,7 +533,7 @@ Value getblocktemplate(const Array& params, bool fHelp)
 
     uint256 hashTarget = CBigNum().SetCompact(pblock->nBits).getuint256();
 
-    Array aMutable;
+    static Array aMutable;
     if (aMutable.empty())
     {
         aMutable.push_back("time");
@@ -545,14 +541,12 @@ Value getblocktemplate(const Array& params, bool fHelp)
         aMutable.push_back("prevblock");
     }
 
-    Array aVotes;
- 
     Object result;
     result.push_back(Pair("version", pblock->nVersion));
     result.push_back(Pair("previousblockhash", pblock->hashPrevBlock.GetHex()));
     result.push_back(Pair("transactions", transactions));
     result.push_back(Pair("coinbaseaux", aux));
-    result.push_back(Pair("coinbasevalue", (int64_t)pblock->vtx[0].GetValueOut()));
+    result.push_back(Pair("coinbasevalue", (int64_t)pblock->vtx[0].vout[0].nValue));
     result.push_back(Pair("target", hashTarget.GetHex()));
     result.push_back(Pair("mintime", (int64_t)pindexPrev->GetMedianTimePast()+1));
     result.push_back(Pair("mutable", aMutable));
@@ -562,21 +556,6 @@ Value getblocktemplate(const Array& params, bool fHelp)
     result.push_back(Pair("curtime", (int64_t)pblock->nTime));
     result.push_back(Pair("bits", HexBits(pblock->nBits)));
     result.push_back(Pair("height", (int64_t)(pindexPrev->nHeight+1)));
-    result.push_back(Pair("votes", aVotes));
-
-
-    if(pblock->payee != CScript()){
-        CTxDestination address1;
-        ExtractDestination(pblock->payee, address1);
-        CBitcoinAddress address2(address1);
-        result.push_back(Pair("payee", address2.ToString().c_str()));
-        result.push_back(Pair("payee_amount", (int64_t)GetMasternodePayment(pindexPrev->nHeight+1, pblock->vtx[0].GetValueOut())));
-    } else {
-        result.push_back(Pair("payee", ""));
-        result.push_back(Pair("payee_amount", ""));
-    }
-    result.push_back(Pair("masternode_payments", pblock->MasterNodePaymentsOn()));
-    result.push_back(Pair("enforce_masternode_payments", pblock->MasterNodePaymentsEnforcing()));
 
     return result;
 }
@@ -602,8 +581,8 @@ Value submitblock(const Array& params, bool fHelp)
 
     CValidationState state;
     bool fAccepted = ProcessBlock(state, NULL, &pblock);
-    if (!fAccepted){
+    if (!fAccepted)
         return "rejected"; // TODO: report validation state
-    }
+
     return Value::null;
 }

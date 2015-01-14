@@ -1,3 +1,7 @@
+// Copyright (c) 2011-2013 The Bitcoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef OPTIONSMODEL_H
 #define OPTIONSMODEL_H
 
@@ -30,8 +34,7 @@ public:
         DisplayAddresses,  // bool
         Language,          // QString
         CoinControlFeatures, // bool
-        DarksendRounds,    // int
-        AnonymizeBitgoldcoinAmount, //int
+        SpendZeroConfChange,    // bool
         OptionIDRowCount,
     };
 
@@ -65,8 +68,6 @@ private:
 signals:
     void displayUnitChanged(int unit);
     void transactionFeeChanged(qint64);
-    void darksendRoundsChanged(int);
-    void anonymizeBitgoldcoinAmountChanged(int);
     void coinControlFeaturesChanged(bool);
 };
 

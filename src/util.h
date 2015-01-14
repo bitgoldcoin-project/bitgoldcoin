@@ -127,19 +127,14 @@ inline void MilliSleep(int64 n)
 #endif
 
 
+
+
+
+
+
+
 extern std::map<std::string, std::string> mapArgs;
 extern std::map<std::string, std::vector<std::string> > mapMultiArgs;
-extern bool fMasterNode;
-extern int nInstantXDepth;
-extern int nDarksendRounds;
-extern int nAnonymizeBitgoldcoinAmount;
-extern int nLiquidityProvider;
-extern bool fEnableDarksend;
-extern int64 enforceMasternodePaymentsTime;
-extern std::string strMasterNodeAddr;
-extern int nMasternodeMinProtocol;
-extern int keysLoaded;
-extern bool fSucessfullyLoaded;
 extern bool fDebug;
 extern bool fDebugNet;
 extern bool fPrintToConsole;
@@ -156,10 +151,7 @@ extern volatile bool fReopenDebugLog;
 
 void RandAddSeed();
 void RandAddSeedPerfmon();
-
-// Print to debug.log if -debug=category switch is given OR category is NULL.
-int ATTR_WARN_PRINTF(2,3) LogPrint(const char* category, const char* pszFormat, ...);
-#define LogPrintf(...) LogPrint(NULL, __VA_ARGS__)
+int ATTR_WARN_PRINTF(1,2) OutputDebugStringF(const char* pszFormat, ...);
 
 /*
   Rationale for the real_strprintf / strprintf construction:
@@ -178,6 +170,14 @@ std::string real_strprintf(const std::string &format, int dummy, ...);
 std::string vstrprintf(const char *format, va_list ap);
 
 bool ATTR_WARN_PRINTF(1,2) error(const char *format, ...);
+
+/* Redefine printf so that it directs output to debug.log
+ *
+ * Do this *after* defining the other printf-like functions, because otherwise the
+ * __attribute__((format(printf,X,Y))) gets expanded to __attribute__((format(OutputDebugStringF,X,Y)))
+ * which confuses gcc.
+ */
+#define printf OutputDebugStringF
 
 void LogException(std::exception* pex, const char* pszThread);
 void PrintException(std::exception* pex, const char* pszThread);
@@ -210,7 +210,6 @@ bool RenameOver(boost::filesystem::path src, boost::filesystem::path dest);
 boost::filesystem::path GetDefaultDataDir();
 const boost::filesystem::path &GetDataDir(bool fNetSpecific = true);
 boost::filesystem::path GetConfigFile();
-boost::filesystem::path GetMasternodeConfigFile();
 boost::filesystem::path GetPidFile();
 #ifndef WIN32
 void CreatePidFile(const boost::filesystem::path &path, pid_t pid);
@@ -233,7 +232,13 @@ std::string FormatSubVersion(const std::string& name, int nClientVersion, const 
 void AddTimeData(const CNetAddr& ip, int64 nTime);
 void runCommand(std::string strCommand);
 
-int64 roundUp64(int64 numToRound, int64 multiple);
+
+
+
+
+
+
+
 
 inline std::string i64tostr(int64 n)
 {
@@ -311,12 +316,12 @@ inline std::string HexStr(const T& vch, bool fSpaces=false)
 template<typename T>
 void PrintHex(const T pbegin, const T pend, const char* pszFormat="%s", bool fSpaces=true)
 {
-    LogPrintf(pszFormat, HexStr(pbegin, pend, fSpaces).c_str());
+    printf(pszFormat, HexStr(pbegin, pend, fSpaces).c_str());
 }
 
 inline void PrintHex(const std::vector<unsigned char>& vch, const char* pszFormat="%s", bool fSpaces=true)
 {
-    LogPrintf(pszFormat, HexStr(vch, fSpaces).c_str());
+    printf(pszFormat, HexStr(vch, fSpaces).c_str());
 }
 
 inline int64 GetPerformanceCounter()
@@ -557,7 +562,7 @@ template <typename Callable> void LoopForever(const char* name,  Callable func, 
 {
     std::string s = strprintf("bitcoin-%s", name);
     RenameThread(s.c_str());
-    LogPrintf("%s thread start\n", name);
+    printf("%s thread start\n", name);
     try
     {
         while (1)
@@ -568,7 +573,7 @@ template <typename Callable> void LoopForever(const char* name,  Callable func, 
     }
     catch (boost::thread_interrupted)
     {
-        LogPrintf("%s thread stop\n", name);
+        printf("%s thread stop\n", name);
         throw;
     }
     catch (std::exception& e) {
@@ -585,13 +590,13 @@ template <typename Callable> void TraceThread(const char* name,  Callable func)
     RenameThread(s.c_str());
     try
     {
-        LogPrintf("%s thread start\n", name);
+        printf("%s thread start\n", name);
         func();
-        LogPrintf("%s thread exit\n", name);
+        printf("%s thread exit\n", name);
     }
     catch (boost::thread_interrupted)
     {
-        LogPrintf("%s thread interrupt\n", name);
+        printf("%s thread interrupt\n", name);
         throw;
     }
     catch (std::exception& e) {

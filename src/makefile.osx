@@ -25,12 +25,10 @@ USE_IPV6:=1
 LIBS= -dead_strip
 
 TESTDEFS = -DTEST_DATA_DIR=$(abspath test/data)
-ifdef UNIT_TEST
-DEFS+=-DUNIT_TEST=1
-endif
 
 ifdef STATIC
-# Build STATIC if you are redistributing the bitcoinf
+# Build STATIC if you are redistributing the bitcoind binary
+TESTLIBS += \
  $(DEPSDIR)/lib/libboost_unit_test_framework-mt.a
 LIBS += \
  $(DEPSDIR)/lib/db48/libdb_cxx-4.8.a \
@@ -87,26 +85,19 @@ OBJS= \
     obj/key.o \
     obj/db.o \
     obj/init.o \
-    obj/core.o \
-    obj/masternode.o \
-    obj/activemasternode.o \
-    obj/masternodeconfig.o \
-    obj/instantx.o \
     obj/keystore.o \
     obj/main.o \
-    obj/darksend.o \
     obj/net.o \
     obj/protocol.o \
     obj/bitcoinrpc.o \
-    obj/rpcdarksend.o \
     obj/rpcdump.o \
     obj/rpcnet.o \
     obj/rpcmining.o \
-    obj/rpcdarksend.o \
     obj/rpcwallet.o \
     obj/rpcblockchain.o \
     obj/rpcrawtransaction.o \
     obj/script.o \
+    obj/scrypt.o \
     obj/sync.o \
     obj/util.o \
     obj/wallet.o \
@@ -115,20 +106,13 @@ OBJS= \
     obj/bloom.o \
     obj/noui.o \
     obj/leveldb.o \
-    obj/txdb.o\
-    obj/cubehash.o \
-    obj/luffa.o \
-    obj/aes_helper.o \
-    obj/echo.o \
-    obj/shavite.o \
-    obj/simd.o \
-    obj/blake.o\
-    obj/bmw.o\
-    obj/groestl.o\
-    obj/jh.o\
-    obj/keccak.o\
-    obj/skein.o \
-    obj/checkpointsync.o
+    obj/txdb.o
+
+ifdef USE_SSE2
+DEFS += -DUSE_SSE2
+OBJS_SSE2= obj/scrypt-sse2.o
+OBJS += $(OBJS_SSE2)
+endif
 
 ifndef USE_UPNP
 	override USE_UPNP = -
@@ -169,15 +153,15 @@ obj/build.h: FORCE
 version.cpp: obj/build.h
 DEFS += -DHAVE_BUILD_INFO
 
-obj/%.o: %.cpp
-	$(CXX) -c $(CFLAGS) -MMD -MF $(@:%.o=%.d) -o $@ $<
+obj/%-sse2.o: %-sse2.cpp
+	$(CXX) -c $(CFLAGS) -msse2 -MMD -MF $(@:%.o=%.d) -o $@ $<
 	@cp $(@:%.o=%.d) $(@:%.o=%.P); \
 	  sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
 	      -e '/^$$/ d' -e 's/$$/ :/' < $(@:%.o=%.d) >> $(@:%.o=%.P); \
 	  rm -f $(@:%.o=%.d)
 
-obj/%.o: %.c
-	$(CXX) -c $(CFLAGS) -fpermissive -MMD -MF $(@:%.o=%.d) -o $@ $<
+obj/%.o: %.cpp
+	$(CXX) -c $(CFLAGS) -MMD -MF $(@:%.o=%.d) -o $@ $<
 	@cp $(@:%.o=%.d) $(@:%.o=%.P); \
 	  sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
 	      -e '/^$$/ d' -e 's/$$/ :/' < $(@:%.o=%.d) >> $(@:%.o=%.P); \

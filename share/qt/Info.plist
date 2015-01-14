@@ -3,11 +3,11 @@
 <plist version="0.9">
 <dict>
 	<key>CFBundleIconFile</key>
-	<string>darkcoin.icns</string>
+	<string>bitgoldcoin.icns</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleGetInfoString</key>
-	<string>$VERSION, Copyright © 2014 The Darkcoin developers</string>
+	<string>$VERSION, Copyright © 2009-$YEAR The Bitcoin developers</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$VERSION</string>
 	<key>CFBundleVersion</key>
@@ -15,19 +15,19 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleExecutable</key>
-	<string>DarkCoin-Qt</string>
+	<string>Bitgoldcoin-Qt</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.darkcoin.DarkCoin-Qt</string>
+	<string>org.bitgoldcoin.Bitgoldcoin-Qt</string>
         <key>CFBundleURLTypes</key>
         <array>
           <dict>
             <key>CFBundleTypeRole</key>
             <string>Editor</string>
             <key>CFBundleURLName</key>
-            <string>org.darkcoin.DarkCoinPayment</string>
+            <string>org.bitgoldcoin.BitgoldcoinPayment</string>
             <key>CFBundleURLSchemes</key>
             <array>
-              <string>darkcoin</string>
+              <string>bitgoldcoin</string>
             </array>
           </dict>
         </array>

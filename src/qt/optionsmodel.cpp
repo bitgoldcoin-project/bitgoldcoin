@@ -1,3 +1,7 @@
+// Copyright (c) 2011-2013 The Bitcoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include "optionsmodel.h"
 
 #include "bitcoinunits.h"
@@ -47,10 +51,9 @@ void OptionsModel::Init()
     fMinimizeToTray = settings.value("fMinimizeToTray", false).toBool();
     fMinimizeOnClose = settings.value("fMinimizeOnClose", false).toBool();
     nTransactionFee = settings.value("nTransactionFee").toLongLong();
+    bSpendZeroConfChange = settings.value("bSpendZeroConfChange").toBool();
     language = settings.value("language", "").toString();
     fCoinControlFeatures = settings.value("fCoinControlFeatures", false).toBool();
-    nDarksendRounds = settings.value("nDarksendRounds").toLongLong();
-    nAnonymizeBitgoldcoinAmount = settings.value("nAnonymizeBitgoldcoinAmount").toLongLong();
 
     // These are shared with core Bitcoin; we want
     // command-line options to override the GUI settings:
@@ -62,11 +65,6 @@ void OptionsModel::Init()
         SoftSetArg("-socks", settings.value("nSocksVersion").toString().toStdString());
     if (!language.isEmpty())
         SoftSetArg("-lang", language.toStdString());
-    if (settings.contains("nDarksendRounds"))
-        SoftSetArg("-darksendrounds", settings.value("nDarksendRounds").toString().toStdString());
-    if (settings.contains("nAnonymizeBitgoldcoinAmount"))
-        SoftSetArg("-anonymizebitgoldcoinamount", settings.value("nAnonymizeBitgoldcoinAmount").toString().toStdString());
-
 }
 
 void OptionsModel::Reset()
@@ -100,7 +98,7 @@ bool OptionsModel::Upgrade()
     CWalletDB walletdb("wallet.dat");
 
     QList<QString> intOptions;
-    intOptions << "nDisplayUnit" << "nTransactionFee" << "nAnonymizeBitgoldcoinAmount" << "nDarksendRounds";
+    intOptions << "nDisplayUnit" << "nTransactionFee";
     foreach(QString key, intOptions)
     {
         int value = 0;
@@ -111,7 +109,7 @@ bool OptionsModel::Upgrade()
         }
     }
     QList<QString> boolOptions;
-    boolOptions << "bDisplayAddresses" << "fMinimizeToTray" << "fMinimizeOnClose" << "fUseProxy" << "fUseUPnP" ;
+    boolOptions << "bDisplayAddresses" << "fMinimizeToTray" << "fMinimizeOnClose" << "fUseProxy" << "fUseUPnP";
     foreach(QString key, boolOptions)
     {
         bool value = false;
@@ -198,16 +196,14 @@ QVariant OptionsModel::data(const QModelIndex & index, int role) const
         }
         case Fee:
             return QVariant(nTransactionFee);
+        case SpendZeroConfChange:
+            return bSpendZeroConfChange;
         case DisplayUnit:
             return QVariant(nDisplayUnit);
         case DisplayAddresses:
             return QVariant(bDisplayAddresses);
         case Language:
             return settings.value("language", "");
-        case DarksendRounds:
-            return QVariant(nDarksendRounds);
-        case AnonymizeBitgoldcoinAmount:
-            return QVariant(nAnonymizeBitgoldcoinAmount);
         case CoinControlFeatures:
             return QVariant(fCoinControlFeatures);
         default:
@@ -280,6 +276,12 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
             settings.setValue("nTransactionFee", nTransactionFee);
             emit transactionFeeChanged(nTransactionFee);
             break;
+        case SpendZeroConfChange:
+            if (settings.value("bSpendZeroConfChange") != value) {
+                bSpendZeroConfChange = value.toBool();
+                settings.setValue("bSpendZeroConfChange", value);
+            }
+            break;
         case DisplayUnit:
             nDisplayUnit = value.toInt();
             settings.setValue("nDisplayUnit", nDisplayUnit);
@@ -291,16 +293,6 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
             break;
         case Language:
             settings.setValue("language", value);
-            break;
-        case DarksendRounds:
-            nDarksendRounds = value.toInt();
-            settings.setValue("nDarksendRounds", nDarksendRounds);
-            emit darksendRoundsChanged(nDarksendRounds);
-            break;
-        case AnonymizeBitgoldcoinAmount:
-            nAnonymizeBitgoldcoinAmount = value.toInt();
-            settings.setValue("nAnonymizeBitgoldcoinAmount", nAnonymizeBitgoldcoinAmount);
-            emit anonymizeBitgoldcoinAmountChanged(nAnonymizeBitgoldcoinAmount);
             break;
         case CoinControlFeatures: {
             fCoinControlFeatures = value.toBool();
@@ -326,3 +318,4 @@ bool OptionsModel::getCoinControlFeatures()
 {
     return fCoinControlFeatures;
 }
+

@@ -6,7 +6,7 @@
 #include "util.h"
 #include "wallet.h"
 
-/*extern void SHA256Transform(void* pstate, void* pinput, const void* pinit);
+extern void SHA256Transform(void* pstate, void* pinput, const void* pinit);
 
 BOOST_AUTO_TEST_SUITE(miner_tests)
 
@@ -82,6 +82,7 @@ BOOST_AUTO_TEST_CASE(CreateNewBlock_validity)
 
     // Just to make sure we can still make simple blocks
     BOOST_CHECK(pblocktemplate = CreateNewBlockWithKey(reservekey));
+    delete pblocktemplate;
 
     // block sigops > limit: 1000 CHECKMULTISIG + 1
     tx.vin.resize(1);
@@ -199,6 +200,9 @@ BOOST_AUTO_TEST_CASE(CreateNewBlock_validity)
     BOOST_CHECK(pblocktemplate = CreateNewBlockWithKey(reservekey));
     delete pblocktemplate;
     pindexBest->nHeight = nHeight;
+
+    BOOST_FOREACH(CTransaction *tx, txFirst)
+        delete tx;
 }
 
 BOOST_AUTO_TEST_CASE(sha256transform_equality)
@@ -228,4 +232,3 @@ BOOST_AUTO_TEST_CASE(sha256transform_equality)
 }
 
 BOOST_AUTO_TEST_SUITE_END()
-*/

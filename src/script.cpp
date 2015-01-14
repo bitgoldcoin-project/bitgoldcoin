@@ -13,7 +13,6 @@ using namespace boost;
 #include "bignum.h"
 #include "key.h"
 #include "main.h"
-#include "core.h"
 #include "sync.h"
 #include "util.h"
 
@@ -229,7 +228,7 @@ const char* GetOpName(opcodetype opcode)
 }
 
 bool IsCanonicalPubKey(const valtype &vchPubKey) {
-    if (vchPubKey.size() < 25)
+    if (vchPubKey.size() < 33)
         return error("Non-canonical public key: too short");
     if (vchPubKey[0] == 0x04) {
         if (vchPubKey.size() != 65)
@@ -238,7 +237,7 @@ bool IsCanonicalPubKey(const valtype &vchPubKey) {
         if (vchPubKey.size() != 33)
             return error("Non-canonical public key: invalid length for compressed key");
     } else {
-        return error("Non-canonical public key: compressed nor uncompressed : size %d", (int)vchPubKey.size());
+        return error("Non-canonical public key: compressed nor uncompressed");
     }
     return true;
 }
@@ -968,7 +967,7 @@ uint256 SignatureHash(CScript scriptCode, const CTransaction& txTo, unsigned int
 {
     if (nIn >= txTo.vin.size())
     {
-        LogPrintf("ERROR: SignatureHash() : nIn=%d out of range\n", nIn);
+        printf("ERROR: SignatureHash() : nIn=%d out of range\n", nIn);
         return 1;
     }
     CTransaction txTmp(txTo);
@@ -999,7 +998,7 @@ uint256 SignatureHash(CScript scriptCode, const CTransaction& txTo, unsigned int
         unsigned int nOut = nIn;
         if (nOut >= txTmp.vout.size())
         {
-            LogPrintf("ERROR: SignatureHash() : nOut=%d out of range\n", nOut);
+            printf("ERROR: SignatureHash() : nOut=%d out of range\n", nOut);
             return 1;
         }
         txTmp.vout.resize(nOut+1);
@@ -1119,42 +1118,26 @@ bool CheckSig(vector<unsigned char> vchSig, const vector<unsigned char> &vchPubK
 
 
 
-typedef struct {
-    txnouttype      txType;
-    CScript         *tScript;
-} SScriptPairRec;
+
+
 
 //
 // Return public keys or hashes from scriptPubKey, for 'standard' transaction types.
 //
 bool Solver(const CScript& scriptPubKey, txnouttype& typeRet, vector<vector<unsigned char> >& vSolutionsRet)
 {
-    static SScriptPairRec       *sTemplates = NULL;
-    SScriptPairRec              *curTemplate;
-    
-    if (sTemplates == NULL) {
-        CScript     *tScript;
-        
-        sTemplates = (SScriptPairRec *)malloc(sizeof(SScriptPairRec) * 4);
-        
-        // order templates such that most common transaction types are checked first
-        tScript = new CScript();
-        *tScript << OP_DUP << OP_HASH160 << OP_PUBKEYHASH << OP_EQUALVERIFY << OP_CHECKSIG;
-        sTemplates[0].txType = TX_PUBKEYHASH;
-        sTemplates[0].tScript = tScript;
-        
-        tScript = new CScript();
-        *tScript << OP_PUBKEY << OP_CHECKSIG;
-        sTemplates[1].txType = TX_PUBKEY;
-        sTemplates[1].tScript = tScript;
-        
-        tScript = new CScript();
-        *tScript << OP_SMALLINTEGER << OP_PUBKEYS << OP_SMALLINTEGER << OP_CHECKMULTISIG;
-        sTemplates[2].txType = TX_MULTISIG;
-        sTemplates[2].tScript = tScript;
-        
-        sTemplates[3].txType = (txnouttype)-1;
-        sTemplates[3].tScript = NULL;
+    // Templates
+    static map<txnouttype, CScript> mTemplates;
+    if (mTemplates.empty())
+    {
+        // Standard tx, sender provides pubkey, receiver adds signature
+        mTemplates.insert(make_pair(TX_PUBKEY, CScript() << OP_PUBKEY << OP_CHECKSIG));
+
+        // Bitcoin address tx, sender provides hash of pubkey, receiver provides signature and pubkey
+        mTemplates.insert(make_pair(TX_PUBKEYHASH, CScript() << OP_DUP << OP_HASH160 << OP_PUBKEYHASH << OP_EQUALVERIFY << OP_CHECKSIG));
+
+        // Sender provides N pubkeys, receivers provides M signatures
+        mTemplates.insert(make_pair(TX_MULTISIG, CScript() << OP_SMALLINTEGER << OP_PUBKEYS << OP_SMALLINTEGER << OP_CHECKMULTISIG));
     }
 
     // Shortcut for pay-to-script-hash, which are more constrained than the other types:
@@ -1169,26 +1152,23 @@ bool Solver(const CScript& scriptPubKey, txnouttype& typeRet, vector<vector<unsi
 
     // Scan templates
     const CScript& script1 = scriptPubKey;
-    curTemplate = &sTemplates[0];
-    while (curTemplate->tScript != NULL) {
-        const CScript           *testScript = curTemplate->tScript;
-        opcodetype              opcode1, opcode2;
-        vector<unsigned char>   vch1;
-
+    BOOST_FOREACH(const PAIRTYPE(txnouttype, CScript)& tplate, mTemplates)
+    {
+        const CScript& script2 = tplate.second;
         vSolutionsRet.clear();
+
+        opcodetype opcode1, opcode2;
+        vector<unsigned char> vch1, vch2;
 
         // Compare
         CScript::const_iterator pc1 = script1.begin();
-        CScript::const_iterator pc2 = testScript->begin();
-        CScript::const_iterator end1 = script1.end();
-        CScript::const_iterator end2 = testScript->end();
-
+        CScript::const_iterator pc2 = script2.begin();
         loop
         {
-            if (pc1 == end1 && pc2 == end2)
+            if (pc1 == script1.end() && pc2 == script2.end())
             {
                 // Found a match
-                typeRet = curTemplate->txType;
+                typeRet = tplate.first;
                 if (typeRet == TX_MULTISIG)
                 {
                     // Additional checks for TX_MULTISIG:
@@ -1199,9 +1179,9 @@ bool Solver(const CScript& scriptPubKey, txnouttype& typeRet, vector<vector<unsi
                 }
                 return true;
             }
-            if (!script1.GetOp2(pc1, opcode1, &vch1))
+            if (!script1.GetOp(pc1, opcode1, vch1))
                 break;
-            if (!testScript->GetOp2(pc2, opcode2, NULL))    // templates push no data, no need to get vch
+            if (!script2.GetOp(pc2, opcode2, vch2))
                 break;
 
             // Template matching opcodes:
@@ -1210,10 +1190,10 @@ bool Solver(const CScript& scriptPubKey, txnouttype& typeRet, vector<vector<unsi
                 while (vch1.size() >= 33 && vch1.size() <= 120)
                 {
                     vSolutionsRet.push_back(vch1);
-                    if (!script1.GetOp2(pc1, opcode1, &vch1))
+                    if (!script1.GetOp(pc1, opcode1, vch1))
                         break;
                 }
-                if (!testScript->GetOp2(pc2, opcode2, NULL))
+                if (!script2.GetOp(pc2, opcode2, vch2))
                     break;
                 // Normal situation is to fall through
                 // to other if/else statements
@@ -1242,15 +1222,14 @@ bool Solver(const CScript& scriptPubKey, txnouttype& typeRet, vector<vector<unsi
                 else
                     break;
             }
-            else if (opcode1 != opcode2)
+            else if (opcode1 != opcode2 || vch1 != vch2)
             {
                 // Others must match exactly
                 break;
             }
         }
-        curTemplate++;
     }
-    
+
     vSolutionsRet.clear();
     typeRet = TX_NONSTANDARD;
     return false;
@@ -1464,67 +1443,6 @@ bool ExtractDestination(const CScript& scriptPubKey, CTxDestination& addressRet)
     }
     // Multisig txns have more than one address...
     return false;
-}
-
-// ExtractDestinationAndMine is an amalgam of ExtractDestination and IsMine. Since they do very
-// similar work and are both called from CWalletTx::GetAmounts we can reduce kill two birds with
-// one stone by combining them and speed CWalletTx::GetAmounts considerably.
-
-bool ExtractDestinationAndMine(const CKeyStore &keystore, const CScript& scriptPubKey, CTxDestination& addressRet, bool *outIsMine)
-{
-    vector<valtype> vSolutions;
-    txnouttype      whichType;
-    bool            hasDestination = false;
-    
-    *outIsMine = false;
-    
-    if (Solver(scriptPubKey, whichType, vSolutions)) {
-        CKeyID      keyID;
-        
-        switch (whichType) {
-            case TX_NONSTANDARD:
-                break;
-
-            case TX_PUBKEY:
-                keyID = CPubKey(vSolutions[0]).GetID();
-                addressRet = keyID;
-                *outIsMine = keystore.HaveKey(keyID);
-                hasDestination = true;
-                break;
-                
-            case TX_PUBKEYHASH:
-                keyID = CKeyID(uint160(vSolutions[0]));
-                addressRet = keyID;
-                *outIsMine = keystore.HaveKey(keyID);
-                hasDestination = true;
-                break;
-
-            case TX_SCRIPTHASH: {
-                    CScript     subscript;
-                    CScriptID   scriptID = CScriptID(uint160(vSolutions[0]));
-                    
-                    addressRet = scriptID;
-                    hasDestination = true;
-                    
-                    if (keystore.GetCScript(scriptID, subscript))
-                        *outIsMine = IsMine(keystore, subscript);
-                }
-                break;
-                
-            case TX_MULTISIG:
-            {
-                // Only consider transactions "mine" if we own ALL the
-                // keys involved. multi-signature transactions that are
-                // partially owned (somebody else has a key that can spend
-                // them) enable spend-out-from-under-you attacks, especially
-                // in shared-wallet situations.
-                vector<valtype> keys(vSolutions.begin()+1, vSolutions.begin()+vSolutions.size()-1);
-                *outIsMine = HaveKeys(keys, keystore) == keys.size();
-            }
-        }
-    }
-
-    return hasDestination;
 }
 
 bool ExtractDestinations(const CScript& scriptPubKey, txnouttype& typeRet, vector<CTxDestination>& addressRet, int& nRequiredRet)
@@ -1813,30 +1731,6 @@ unsigned int CScript::GetSigOpCount(const CScript& scriptSig) const
     return subscript.GetSigOpCount(true);
 }
 
-bool CScript::IsNormalPaymentScript() const
-{
-    if(this->size() != 25) return false;
-
-    std::string str;
-    opcodetype opcode;
-    const_iterator pc = begin();
-    int i = 0;
-    while (pc < end())
-    {
-        GetOp(pc, opcode);
-
-        if(     i == 0 && opcode != OP_DUP) return false;
-        else if(i == 1 && opcode != OP_HASH160) return false;
-        else if(i == 3 && opcode != OP_EQUALVERIFY) return false;
-        else if(i == 4 && opcode != OP_CHECKSIG) return false;
-        else if(i == 5) return false;
-
-        i++;
-    }
-
-    return true;
-}
-
 bool CScript::IsPayToScriptHash() const
 {
     // Extra-fast test for pay-to-script-hash CScripts:
@@ -1844,6 +1738,33 @@ bool CScript::IsPayToScriptHash() const
             this->at(0) == OP_HASH160 &&
             this->at(1) == 0x14 &&
             this->at(22) == OP_EQUAL);
+}
+
+bool CScript::HasCanonicalPushes() const
+{
+    const_iterator pc = begin();
+    while (pc < end())
+    {
+        opcodetype opcode;
+        std::vector<unsigned char> data;
+        if (!GetOp(pc, opcode, data))
+            return false;
+        if (opcode > OP_16)
+            continue;
+        if (opcode < OP_PUSHDATA1 && opcode > OP_0 && (data.size() == 1 && data[0] <= 16))
+            // Could have used an OP_n code, rather than a 1-byte push.
+            return false;
+        if (opcode == OP_PUSHDATA1 && data.size() < OP_PUSHDATA1)
+            // Could have used a normal n-byte push, rather than OP_PUSHDATA1.
+            return false;
+        if (opcode == OP_PUSHDATA2 && data.size() <= 0xFF)
+            // Could have used an OP_PUSHDATA1.
+            return false;
+        if (opcode == OP_PUSHDATA4 && data.size() <= 0xFFFF)
+            // Could have used an OP_PUSHDATA2.
+            return false;
+    }
+    return true;
 }
 
 class CScriptVisitor : public boost::static_visitor<bool>

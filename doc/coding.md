@@ -5,7 +5,8 @@ Please be consistent with the existing coding style.
 
 Block style:
 
-	bool Function(char* psz, int n) {
+	bool Function(char* psz, int n)
+	{
 	    // Comment summarising what this section of code does
 	    for (int i = 0; i < n; i++)
 	    {
@@ -64,11 +65,9 @@ Threads
 
 - StartNode : Starts other threads.
 
-- ThreadCheckDarkSendPool : Builds and update Masternode list, starts auto-denomination
-
 - ThreadGetMyExternalIP : Determines outside-the-firewall IP address, sends addr message to connected peers when it determines it. 
 
-- ThreadSocketHandler : Sends/Receives data from peers on port 9999.
+- ThreadSocketHandler : Sends/Receives data from peers on port 8333.
  
 - ThreadMessageHandler : Higher-level message handling (sending and receiving).
  
@@ -84,9 +83,9 @@ Threads
 
 - ThreadFlushWalletDB : Close the wallet.dat file if it hasn't been used in 500ms.
  
-- ThreadRPCServer : Remote procedure call handler, listens on port 9998 for connections and services them.
+- ThreadRPCServer : Remote procedure call handler, listens on port 8332 for connections and services them.
  
-- BitgoldcoinMiner : Generates Bitgoldcoins
+- ThreadBitcoinMiner : Generates bitcoins
   
 - ThreadMapPort : Universal plug-and-play startup/shutdown
  

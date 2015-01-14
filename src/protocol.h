@@ -21,7 +21,8 @@ static inline unsigned short GetDefaultPort(const bool testnet = fTestNet)
     return testnet ? 19989 : 9989;
 }
 
-void GetMessageStart(unsigned char pchMessageStart[], bool fPersistent = false);
+
+extern unsigned char pchMessageStart[4];
 
 /** Message header.
  * (4) message start.
@@ -49,7 +50,7 @@ class CMessageHeader
     // TODO: make private (improves encapsulation)
     public:
         enum {
-            MESSAGE_START_SIZE=sizeof(unsigned char [4]),
+            MESSAGE_START_SIZE=sizeof(::pchMessageStart),
             COMMAND_SIZE=12,
             MESSAGE_SIZE_SIZE=sizeof(int),
             CHECKSUM_SIZE=sizeof(int),
@@ -58,7 +59,7 @@ class CMessageHeader
             CHECKSUM_OFFSET=MESSAGE_SIZE_OFFSET+MESSAGE_SIZE_SIZE,
             HEADER_SIZE=MESSAGE_START_SIZE+COMMAND_SIZE+MESSAGE_SIZE_SIZE+CHECKSUM_SIZE
         };
-        unsigned char pchMessageStart[4];
+        char pchMessageStart[MESSAGE_START_SIZE];
         char pchCommand[COMMAND_SIZE];
         unsigned int nMessageSize;
         unsigned int nChecksum;
@@ -142,8 +143,6 @@ enum
     // Nodes may always request a MSG_FILTERED_BLOCK in a getdata, however,
     // MSG_FILTERED_BLOCK should not appear in any invs except as a part of getdata.
     MSG_FILTERED_BLOCK,
-    MSG_TXLOCK_REQUEST,
-    MSG_TXLOCK,
 };
 
 #endif // __INCLUDED_PROTOCOL_H__

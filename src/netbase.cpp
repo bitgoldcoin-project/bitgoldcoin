@@ -21,7 +21,6 @@ using namespace std;
 static proxyType proxyInfo[NET_MAX];
 static proxyType nameproxyInfo;
 static CCriticalSection cs_proxyInfos;
-int fProxyToo = false;
 int nConnectTimeout = 5000;
 bool fNameLookup = false;
 
@@ -166,7 +165,7 @@ bool LookupNumeric(const char *pszName, CService& addr, int portDefault)
 
 bool static Socks4(const CService &addrDest, SOCKET& hSocket)
 {
-    LogPrintf("SOCKS4 connecting %s\n", addrDest.ToString().c_str());
+    printf("SOCKS4 connecting %s\n", addrDest.ToString().c_str());
     if (!addrDest.IsIPv4())
     {
         closesocket(hSocket);
@@ -201,16 +200,16 @@ bool static Socks4(const CService &addrDest, SOCKET& hSocket)
     {
         closesocket(hSocket);
         if (pchRet[1] != 0x5b)
-            LogPrintf("ERROR: Proxy returned error %d\n", pchRet[1]);
+            printf("ERROR: Proxy returned error %d\n", pchRet[1]);
         return false;
     }
-    LogPrintf("SOCKS4 connected %s\n", addrDest.ToString().c_str());
+    printf("SOCKS4 connected %s\n", addrDest.ToString().c_str());
     return true;
 }
 
 bool static Socks5(string strDest, int port, SOCKET& hSocket)
 {
-    LogPrintf("SOCKS5 connecting %s\n", strDest.c_str());
+    printf("SOCKS5 connecting %s\n", strDest.c_str());
     if (strDest.size() > 255)
     {
         closesocket(hSocket);
@@ -306,7 +305,7 @@ bool static Socks5(string strDest, int port, SOCKET& hSocket)
         closesocket(hSocket);
         return error("Error reading from proxy");
     }
-    LogPrintf("SOCKS5 connected %s\n", strDest.c_str());
+    printf("SOCKS5 connected %s\n", strDest.c_str());
     return true;
 }
 
@@ -321,7 +320,7 @@ bool static ConnectSocketDirectly(const CService &addrConnect, SOCKET& hSocketRe
 #endif
     socklen_t len = sizeof(sockaddr);
     if (!addrConnect.GetSockAddr((struct sockaddr*)&sockaddr, &len)) {
-        LogPrintf("Cannot connect to %s: unsupported network\n", addrConnect.ToString().c_str());
+        printf("Cannot connect to %s: unsupported network\n", addrConnect.ToString().c_str());
         return false;
     }
 
@@ -360,13 +359,13 @@ bool static ConnectSocketDirectly(const CService &addrConnect, SOCKET& hSocketRe
             int nRet = select(hSocket + 1, NULL, &fdset, NULL, &timeout);
             if (nRet == 0)
             {
-                LogPrintf("connection timeout\n");
+                printf("connection timeout\n");
                 closesocket(hSocket);
                 return false;
             }
             if (nRet == SOCKET_ERROR)
             {
-                LogPrintf("select() for connection failed: %i\n",WSAGetLastError());
+                printf("select() for connection failed: %i\n",WSAGetLastError());
                 closesocket(hSocket);
                 return false;
             }
@@ -377,13 +376,13 @@ bool static ConnectSocketDirectly(const CService &addrConnect, SOCKET& hSocketRe
             if (getsockopt(hSocket, SOL_SOCKET, SO_ERROR, &nRet, &nRetSize) == SOCKET_ERROR)
 #endif
             {
-                LogPrintf("getsockopt() for connection failed: %i\n",WSAGetLastError());
+                printf("getsockopt() for connection failed: %i\n",WSAGetLastError());
                 closesocket(hSocket);
                 return false;
             }
             if (nRet != 0)
             {
-                LogPrintf("connect() failed after select(): %s\n",strerror(nRet));
+                printf("connect() failed after select(): %s\n",strerror(nRet));
                 closesocket(hSocket);
                 return false;
             }
@@ -394,7 +393,7 @@ bool static ConnectSocketDirectly(const CService &addrConnect, SOCKET& hSocketRe
         else
 #endif
         {
-            LogPrintf("connect() failed: %i\n",WSAGetLastError());
+            printf("connect() failed: %i\n",WSAGetLastError());
             closesocket(hSocket);
             return false;
         }
@@ -476,7 +475,7 @@ bool ConnectSocket(const CService &addrDest, SOCKET& hSocketRet, int nTimeout)
     proxyType proxy;
 
     // no proxy needed
-    if (!GetProxy(addrDest.GetNetwork(), proxy) || (fProxyToo && rand() %2 == 0))
+    if (!GetProxy(addrDest.GetNetwork(), proxy))
         return ConnectSocketDirectly(addrDest, hSocketRet, nTimeout);
 
     SOCKET hSocket = INVALID_SOCKET;
@@ -890,7 +889,7 @@ uint64 CNetAddr::GetHash() const
 
 void CNetAddr::print() const
 {
-    LogPrintf("CNetAddr(%s)\n", ToString().c_str());
+    printf("CNetAddr(%s)\n", ToString().c_str());
 }
 
 // private extensions to enum Network, only returned by GetExtNetwork,
@@ -1131,7 +1130,7 @@ std::string CService::ToString() const
 
 void CService::print() const
 {
-    LogPrintf("CService(%s)\n", ToString().c_str());
+    printf("CService(%s)\n", ToString().c_str());
 }
 
 void CService::SetPort(unsigned short portIn)

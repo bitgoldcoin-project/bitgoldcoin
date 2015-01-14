@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>BitgoldCoin - Debug window</string>
+   <string>Bitgoldcoin - Debug window</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
@@ -36,7 +36,7 @@
           </font>
          </property>
          <property name="text">
-          <string>BitgoldCoin Core</string>
+          <string>Bitgoldcoin Core</string>
          </property>
         </widget>
        </item>
@@ -322,7 +322,7 @@
        <item row="15" column="0">
         <widget class="QPushButton" name="openDebugLogfileButton">
          <property name="toolTip">
-          <string>Open the BitgoldCoin debug log file from the current data directory. This can take a few seconds for large log files.</string>
+          <string>Open the Bitgoldcoin debug log file from the current data directory. This can take a few seconds for large log files.</string>
          </property>
          <property name="text">
           <string>&amp;Open</string>
@@ -348,7 +348,7 @@
        <item row="17" column="0">
         <widget class="QPushButton" name="showCLOptionsButton">
          <property name="toolTip">
-          <string>Show the BitgoldCoin-Qt help message to get a list with possible BitgoldCoin command-line options.</string>
+          <string>Show the Bitgoldcoin-Qt help message to get a list with possible Bitgoldcoin command-line options.</string>
          </property>
          <property name="text">
           <string>&amp;Show</string>

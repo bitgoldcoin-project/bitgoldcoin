@@ -7,7 +7,7 @@ use the Boost::Test unit-testing framework.
 To compile and run the tests:
 
 	cd src
-	make -f makefile.unix test_bitgoldcoin UNIT_TEST=1  # Replace makefile.unix if you're not on unix
+	make -f makefile.unix test_bitgoldcoin  # Replace makefile.unix if you're not on unix
 	./test_bitgoldcoin   # Runs the unit tests
 
 If all tests succeed the last line of output will be:
@@ -19,7 +19,7 @@ implement new BOOST_AUTO_TEST_SUITE sections (the makefiles are
 set up to add test/*.cpp to test_bitgoldcoin automatically).
 
 
-Compiling/running BitgoldCoin-Qt unit tests
+Compiling/running Bitgoldcoin-Qt unit tests
 ---------------------------------------
 
 Bitcoin-Qt unit tests are in the src/qt/test/ directory; they

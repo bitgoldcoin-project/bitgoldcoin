@@ -1,9 +1,7 @@
-/*
- * Qt4 bitcoin GUI.
- *
- * W.J. van der Laan 2011-2012
- * The Bitcoin Developers 2011-2013
- */
+// Copyright (c) 2011-2013 The Bitcoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef WALLETFRAME_H
 #define WALLETFRAME_H
 
@@ -66,8 +64,6 @@ public slots:
     void changePassphrase();
     /** Ask for passphrase to unlock wallet temporarily */
     void unlockWallet();
-    /** Lock wallet */
-    void lockWallet();
 
     /** Set the encryption status as shown in the UI.
      @param[in] status            current encryption status
