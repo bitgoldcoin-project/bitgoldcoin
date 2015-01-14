@@ -62,8 +62,11 @@ How to Build Wallet
 <Windows> 
 
 set PATH=%PATH%;C:\Qt\4.8.6\bin
+
 cd C:\bitgoldcoin\
+
 qmake "USE_QRCODE=1" "USE_UPNP=1" "USE_IPV6=1" bitgoldcoin-qt.pro
+
 mingw32-make -f Makefile.Release
 
 
