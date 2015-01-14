@@ -56,6 +56,18 @@ requests than we can review and test. Please be patient and help out, and
 remember this is a security-critical project where any mistake might cost people
 lots of money.
 
+How to Build Wallet 
+-------------------
+
+<Windows> 
+
+set PATH=%PATH%;C:\Qt\4.8.6\bin
+cd C:\bitgoldcoin\
+qmake "USE_QRCODE=1" "USE_UPNP=1" "USE_IPV6=1" bitgoldcoin-qt.pro
+mingw32-make -f Makefile.Release
+
+
+
 ### Automated Testing
 
 Developers are strongly encouraged to write unit tests for new code, and to
