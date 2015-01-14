@@ -4,15 +4,15 @@ Bitgoldcoin integration/staging tree
 http://www.bitgoldcoin.org
 
 Copyright (c) 2009-2014 Bitcoin Developers
-Copyright (c) 2011-2014 Bitgoldcoin Developers
+Copyright (c) 2015 Bitgoldcoin Developers
 
 What is Bitgoldcoin?
 ----------------
 
 Bitgoldcoin is a lite version of Bitcoin using scrypt as a proof-of-work algorithm.
- - 2.5 minute block targets
- - subsidy halves in 840k blocks (~4 years)
- - ~84 million total coins
+ - 1 minute block targets
+ - subsidy halves in 2100k blocks (~4 years)
+ - ~ 168 million total coins
 
 The rest is the same as Bitcoin.
  - 50 coins per block
@@ -67,7 +67,7 @@ Unit tests for the core code are in `src/test/`. To compile and run them:
 
 Unit tests for the GUI code are in `src/qt/test/`. To compile and run them:
 
-    qmake BITCOIN_QT_TEST=1 -o Makefile.test bitcoin-qt.pro
+    qmake BITCOIN_QT_TEST=1 -o Makefile.test bitgoldcoin-qt.pro
     make -f Makefile.test
     ./bitgoldcoin-qt_test
 
