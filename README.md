@@ -60,29 +60,26 @@ How to Build Wallet
 -------------------
 PreBuild
 
-Install Dependency & QT Compiler
+- Install Dependency & QT Compiler
 
-1 MinGW
-2 OpenSSL
-3 Berkeley DB
-4 Boost
-5 MiniUPNP
-6 Protoc and Libprotobuf
-7 Libpng
-8 qrencode
-9 QT
+1. MinGW
+2. OpenSSL
+3. Berkeley DB
+4. Boost
+5. MiniUPNP
+6. Protoc and Libprotobuf
+7. Libpng
+8. qrencode
+9. QT
 
-Windows 
+- Windows 
 
-set PATH=%PATH%;C:\Qt\4.8.6\bin
+msys.bat 
 
-cd C:\bitgoldcoin\
-
-qmake "USE_QRCODE=1" "USE_UPNP=1" "USE_IPV6=1" bitgoldcoin-qt.pro
-
-mingw32-make -f Makefile.Release
-
-
+1. set PATH=%PATH%;C:\Qt\4.8.6\bin
+2. cd C:\bitgoldcoin\
+3. qmake "USE_QRCODE=1" "USE_UPNP=1" "USE_IPV6=1" bitgoldcoin-qt.pro
+4. mingw32-make -f Makefile.Release
 
 ### Automated Testing
 
