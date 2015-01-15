@@ -58,8 +58,21 @@ lots of money.
 
 How to Build Wallet 
 -------------------
+PreBuild
 
-<Windows> 
+Install Dependency & QT Compiler
+
+1 MinGW
+2 OpenSSL
+3 Berkeley DB
+4 Boost
+5 MiniUPNP
+6 Protoc and Libprotobuf
+7 Libpng
+8 qrencode
+9 QT
+
+Windows 
 
 set PATH=%PATH%;C:\Qt\4.8.6\bin
 
