@@ -65,6 +65,8 @@ sections below.
 
 Instructions: MacPorts
 ----------------------
+Note: compiler error occured with this method in OSX 10.9+. 
+"brew" recommend.
 
 ### Install dependencies
 
