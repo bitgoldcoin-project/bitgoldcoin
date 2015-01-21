@@ -11,9 +11,7 @@ CONFIG += thread
 
 # for boost 1.37, add -mt to the boost libraries
 # use: qmake BOOST_LIB_SUFFIX=-mt
-# for boost thread win32 with _win32 sufix
-# use: BOOST_THREAD_LIB_SUFFIX=_win32-...
-# or when linking against a specific BerkelyDB version: BDB_LIB_SUFFIX=-4.8
+
 
 # Dependency library locations can be customized with:
 #    BOOST_INCLUDE_PATH, BOOST_LIB_PATH, BDB_INCLUDE_PATH,
@@ -25,10 +23,6 @@ UI_DIR = build
 
 # use: qmake "RELEASE=1"
 contains(RELEASE, 1) {
-    # Mac: compile for maximum compatibility (10.5, 32-bit)
-    macx:QMAKE_CXXFLAGS += -mmacosx-version-min=10.5 -arch i386 -isysroot /Developer/SDKs/MacOSX10.5.sdk
-    macx:QMAKE_CFLAGS += -mmacosx-version-min=10.5 -arch i386 -isysroot /Developer/SDKs/MacOSX10.5.sdk
-    macx:QMAKE_OBJECTIVE_CFLAGS += -mmacosx-version-min=10.5 -arch i386 -isysroot /Developer/SDKs/MacOSX10.5.sdk
 
     !win32:!macx {
         # Linux: static link and extra security (see: https://wiki.debian.org/Hardening)
@@ -43,14 +37,9 @@ contains(RELEASE, 1) {
     # Exclude on Windows cross compile with MinGW 4.2.x, as it will result in a non-working executable!
     # This can be enabled for Windows, when we switch to MinGW >= 4.4.x.
 }
+
 # for extra security (see: https://wiki.debian.org/Hardening): this flag is GCC compiler-specific
 QMAKE_CXXFLAGS *= -D_FORTIFY_SOURCE=2
-# for extra security on Windows: enable ASLR and DEP via GCC linker flags
-win32:QMAKE_LFLAGS *= -Wl,--dynamicbase -Wl,--nxcompat
-# on Windows: enable GCC large address aware linker flag
-win32:QMAKE_LFLAGS *= -Wl,--large-address-aware
-# i686-w64-mingw32
-win32:QMAKE_LFLAGS *= -static-libgcc -static-libstdc++
 
 # use: qmake "USE_QRCODE=1"
 # libqrencode (http://fukuchi.org/works/qrencode/index.en.html) must be installed for support
@@ -365,60 +354,20 @@ OTHER_FILES += README.md \
     src/qt/test/*.h
 
 # platform specific defaults, if not overridden on command line
-isEmpty(BOOST_LIB_SUFFIX) {
-    macx:BOOST_LIB_SUFFIX = -mt
-    win32:BOOST_LIB_SUFFIX = -mgw44-mt-s-1_50
-}
+
 
 isEmpty(BOOST_THREAD_LIB_SUFFIX) {
     BOOST_THREAD_LIB_SUFFIX = $$BOOST_LIB_SUFFIX
 }
 
-isEmpty(BDB_LIB_PATH) {
-    macx:BDB_LIB_PATH = /usr/local/opt/berkeley-db4/lib
-}
-
-isEmpty(BDB_LIB_SUFFIX) {
-    macx:BDB_LIB_SUFFIX = -4.8
-}
 
 isEmpty(BDB_INCLUDE_PATH) {
 # For linux builds
     !win32:!macx {
         BDB_INCLUDE_PATH = /usr/include/db4
     }
-    macx:BDB_INCLUDE_PATH = /usr/local/opt/berkeley-db4/include
 }
 
-isEmpty(BOOST_LIB_PATH) {
-    macx:BOOST_LIB_PATH = /usr/local/opt/boost/lib
-}
-
-isEmpty(BOOST_INCLUDE_PATH) {
-    macx:BOOST_INCLUDE_PATH = /usr/local/opt/boost/include
-}
-
-isEmpty(OPENSSL_LIB_PATH) {
-    macx:OPENSSL_LIB_PATH = /usr/local/opt/openssl/lib
-}
-
-isEmpty(OPENSSL_INCLUDE_PATH) {
-    macx:OPENSSL_INCLUDE_PATH = /usr/local/opt/openssl/include
-}
-
-win32:DEFINES += WIN32
-win32:RC_FILE = src/qt/res/bitcoin-qt.rc
-
-win32:!contains(MINGW_THREAD_BUGFIX, 0) {
-    # At least qmake's win32-g++-cross profile is missing the -lmingwthrd
-    # thread-safety flag. GCC has -mthreads to enable this, but it doesn't
-    # work with static linking. -lmingwthrd must come BEFORE -lmingw, so
-    # it is prepended to QMAKE_LIBS_QT_ENTRY.
-    # It can be turned off with MINGW_THREAD_BUGFIX=0, just in case it causes
-    # any problems on some untested qmake profile now or in the future.
-    DEFINES += _MT
-    QMAKE_LIBS_QT_ENTRY = -lmingwthrd $$QMAKE_LIBS_QT_ENTRY
-}
 
 !win32:!macx {
     DEFINES += LINUX

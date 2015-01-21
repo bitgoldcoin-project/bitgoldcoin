@@ -5,7 +5,7 @@
 # :=0 --> UPnP support turned off by default at runtime
 # :=1 --> UPnP support turned on by default at runtime
 # :=- --> No UPnP support - miniupnp not required
-USE_UPNP:=0
+USE_UPNP:=-
 
 # :=1 --> Enable IPv6 support
 # :=0 --> Disable IPv6 support
@@ -20,16 +20,20 @@ LIBS = $(addprefix -L,$(BOOST_LIB_PATH) $(BDB_LIB_PATH) $(OPENSSL_LIB_PATH))
 
 TESTDEFS = -DTEST_DATA_DIR=$(abspath test/data)
 
-LMODE = dynamic
+LMODE = static  
 LMODE2 = dynamic
-ifdef STATIC
-	LMODE = static
-	ifeq (${STATIC}, all)
-		LMODE2 = static
-	endif
-else
-	TESTDEFS += -DBOOST_TEST_DYN_LINK
-endif
+#TESTDEFS += -DBOOST_TEST_DYN_LINK
+
+#LMODE = dynamic
+#LMODE2 = dynamic
+#ifdef STATIC
+#	LMODE = static
+#	ifeq (${STATIC}, all)
+#		LMODE2 = static
+#	endif
+#else
+#	TESTDEFS += -DBOOST_TEST_DYN_LINK
+#endif
 
 # for boost 1.37, add -mt to the boost libraries
 LIBS += \
