@@ -74,10 +74,12 @@ Mac OS X
 
 - Open the bitgoldcoin-qt.pro file in Qt Creator and build as normal (cmd-B)
 
+20150123 : To avoid Linking Error, Please install Boost 1.52 (Recommend) 
+
 .. _`Qt Mac OS X SDK`: http://qt-project.org/downloads/
 .. _`MacPorts`: http://www.macports.org/install.php
 .. _`HomeBrew`: http://mxcl.github.io/homebrew/
-
+.. _'Boost 1.52' http://sourceforge.net/projects/boost/?source=typ_redirect
 
 Build configuration options
 ============================
