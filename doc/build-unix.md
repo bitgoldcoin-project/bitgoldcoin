@@ -68,7 +68,7 @@ for Ubuntu 12.04:
  but using these will break binary wallet compatibility, and is not recommended.
 
 for other Ubuntu & Debian:
-
+	sudo apt-get install libdb++-dev (added 2015/01/26)
 	sudo apt-get install libdb4.8-dev
 	sudo apt-get install libdb4.8++-dev
 	sudo apt-get install libboost1.37-dev
