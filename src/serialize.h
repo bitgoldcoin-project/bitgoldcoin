@@ -2,6 +2,7 @@
 // Copyright (c) 2009-2012 The Bitcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef BITCOIN_SERIALIZE_H
 #define BITCOIN_SERIALIZE_H
 
@@ -24,6 +25,11 @@
 
 typedef long long  int64;
 typedef unsigned long long  uint64;
+
+#ifdef _MSC_VER
+#undef max
+#undef min
+#endif
 
 class CScript;
 class CDataStream;
