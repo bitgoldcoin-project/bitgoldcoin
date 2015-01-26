@@ -1,0 +1,89 @@
+﻿빌드 시작: 2015-01-26 오전 12:29:33
+     1>2 노드의 "D:\MyProjects\bitgold-vs2013\MSVC\lib-leveldb\lib-leveldb.vcxproj" 프로젝트(Build 대상)입니다.
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"D:\MyProjects\bitgold-vs2013\src\leveldb\include" /I"D:\MyProjects\bitgold-vs2013\src\leveldb" /Zi /nologo /W1 /WX- /MP /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /D LEVELDB_PLATFORM_WINDOWS /Gm- /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t- /Zc:forScope /Fo"D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\\" /Fd"D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\src\leveldb\db\builder.cc ..\..\src\leveldb\db\c.cc ..\..\src\leveldb\db\dbformat.cc ..\..\src\leveldb\db\db_impl.cc ..\..\src\leveldb\db\db_iter.cc ..\..\src\leveldb\db\filename.cc ..\..\src\leveldb\db\log_reader.cc ..\..\src\leveldb\db\log_writer.cc ..\..\src\leveldb\db\memtable.cc ..\..\src\leveldb\db\repair.cc ..\..\src\leveldb\db\table_cache.cc ..\..\src\leveldb\db\version_edit.cc ..\..\src\leveldb\db\version_set.cc ..\..\src\leveldb\db\write_batch.cc ..\..\src\leveldb\helpers\memenv\memenv.cc ..\..\src\leveldb\port\port_win.cc ..\..\src\leveldb\table\block.cc ..\..\src\leveldb\table\block_builder.cc ..\..\src\leveldb\table\filter_block.cc ..\..\src\leveldb\table\format.cc ..\..\src\leveldb\table\iterator.cc ..\..\src\leveldb\table\merger.cc ..\..\src\leveldb\table\table.cc ..\..\src\leveldb\table\table_builder.cc ..\..\src\leveldb\table\two_level_iterator.cc ..\..\src\leveldb\util\arena.cc ..\..\src\leveldb\util\bloom.cc ..\..\src\leveldb\util\cache.cc ..\..\src\leveldb\util\coding.cc ..\..\src\leveldb\util\comparator.cc ..\..\src\leveldb\util\crc32c.cc ..\..\src\leveldb\util\env.cc ..\..\src\leveldb\util\env_win.cc ..\..\src\leveldb\util\filter_policy.cc ..\..\src\leveldb\util\hash.cc ..\..\src\leveldb\util\histogram.cc ..\..\src\leveldb\util\logging.cc ..\..\src\leveldb\util\options.cc ..\..\src\leveldb\util\status.cc
+         builder.cc
+         c.cc
+         dbformat.cc
+         db_impl.cc
+         db_iter.cc
+         filename.cc
+         log_reader.cc
+         log_writer.cc
+         memtable.cc
+         repair.cc
+         table_cache.cc
+         version_edit.cc
+         version_set.cc
+         write_batch.cc
+         memenv.cc
+         port_win.cc
+         block.cc
+         block_builder.cc
+         filter_block.cc
+         format.cc
+         iterator.cc
+         merger.cc
+         table.cc
+         table_builder.cc
+         two_level_iterator.cc
+         arena.cc
+         bloom.cc
+         cache.cc
+         coding.cc
+         comparator.cc
+         crc32c.cc
+         env.cc
+         env_win.cc
+         filter_policy.cc
+         hash.cc
+         histogram.cc
+         logging.cc
+         options.cc
+         status.cc
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\lib-leveldb.lib" /NOLOGO "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\builder.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\c.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\dbformat.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\db_impl.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\db_iter.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\filename.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\log_reader.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\log_writer.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\memtable.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\repair.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\table_cache.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\version_edit.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\version_set.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\write_batch.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\memenv.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\port_win.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\block.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\block_builder.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\filter_block.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\format.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\iterator.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\merger.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\table.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\table_builder.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\two_level_iterator.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\arena.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\bloom.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\cache.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\coding.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\comparator.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\crc32c.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\env.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\env_win.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\filter_policy.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\hash.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\histogram.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\logging.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\options.obj"
+         "D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\status.obj"
+         lib-leveldb.vcxproj -> D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-leveldb\lib-leveldb.lib
+     1>"D:\MyProjects\bitgold-vs2013\MSVC\lib-leveldb\lib-leveldb.vcxproj" 프로젝트를 빌드했습니다(Build 대상).
+
+빌드했습니다.
+
+경과 시간: 00:00:06.22

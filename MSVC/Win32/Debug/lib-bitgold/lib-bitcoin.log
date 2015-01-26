@@ -1,0 +1,605 @@
+﻿빌드 시작: 2015-01-26 오전 12:36:36
+     1>2 노드의 "D:\MyProjects\bitgold-vs2013\MSVC\lib-bitgold\lib-bitcoin.vcxproj" 프로젝트(Build 대상)입니다.
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ID:\MyProjects\bitcoindeps /I"D:\MyProjects\bitcoindeps\openssl-1.0.1e\inc32" /I"D:\MyProjects\bitgold-vs2013\src\leveldb\helpers\memenv" /I"D:\MyProjects\bitgold-vs2013\src\leveldb\helpers" /I"D:\MyProjects\bitgold-vs2013\src\leveldb\include" /I"D:\MyProjects\bitcoindeps\db-4.7.25.NC\build_windows" /ID:\MyProjects\bitcoindeps\boost_1_55_0 /ID:\MyProjects\bitcoindeps\boost_1_55_0\boost /I.\GeneratedFiles /I.\GeneratedFiles\Debug /I.\ /Zi /nologo /W1 /WX- /MP /Od /Oy- /D STATICLIB /D USE_UPNP /D _CRT_SECURE_NO_WARNINGS /D UNICODE /D WIN32 /D _SCL_SECURE_NO_WARNINGS /D _WIN32_WINNT=0x0501 /D HAVE_WORKING_BOOST_SLEEP_FOR /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t- /Zc:forScope /Fo"D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-bitgold\\" /Fd"D:\MyProjects\bitgold-vs2013\MSVC\Win32\Debug\lib-bitgold\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\src\addrman.cpp ..\..\src\alert.cpp ..\..\src\bitcoinrpc.cpp ..\..\src\bloom.cpp ..\..\src\checkpoints.cpp ..\..\src\crypter.cpp ..\..\src\db.cpp ..\..\src\hash.cpp ..\..\src\key.cpp ..\..\src\keystore.cpp ..\..\src\leveldb.cpp ..\..\src\main.cpp ..\..\src\net.cpp ..\..\src\netbase.cpp ..\..\src\noui.cpp ..\..\src\protocol.cpp ..\..\src\rpcblockchain.cpp ..\..\src\rpcdump.cpp ..\..\src\rpcmining.cpp ..\..\src\rpcnet.cpp ..\..\src\rpcrawtransaction.cpp ..\..\src\rpcwallet.cpp ..\..\src\script.cpp ..\..\src\sync.cpp ..\..\src\txdb.cpp ..\..\src\util.cpp ..\..\src\wallet.cpp ..\..\src\walletdb.cpp
+         addrman.cpp
+         alert.cpp
+         bitcoinrpc.cpp
+         bloom.cpp
+         checkpoints.cpp
+         crypter.cpp
+         db.cpp
+         hash.cpp
+         key.cpp
+         keystore.cpp
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\type_traits(572): error C2139: 'CBlockIndexWorkComparator' : 정의되지 않은 클래스는 컴파일러 내장 형식 특성 '__is_empty'에 대한 인수로 사용할 수 없습니다. (..\..\src\db.cpp)
+                 d:\myprojects\bitgold-vs2013\src\main.h(26) : 'CBlockIndexWorkComparator' 선언을 참조하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1023) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::is_empty<CBlockIndexWorkComparator>'에 대한 참조를 확인하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\set(44) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree<std::_Tset_traits<_Kty,_Pr,_Alloc,false>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+         ,            _Pr=CBlockIndexWorkComparator
+         ,            _Alloc=std::allocator<CBlockIndex *>
+                 ]
+                 d:\myprojects\bitgold-vs2013\src\main.h(79) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::set<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<_Kty>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+                 ]
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(984): error C2079: 'std::_Tree_comp<true,_Traits>::comp'은(는) 정의되지 않은 struct 'CBlockIndexWorkComparator'을(를) 사용합니다.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ] (..\..\src\db.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1024) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree_comp<true,_Traits>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ]
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\type_traits(572): error C2139: 'CBlockIndexWorkComparator' : 정의되지 않은 클래스는 컴파일러 내장 형식 특성 '__is_empty'에 대한 인수로 사용할 수 없습니다. (..\..\src\bloom.cpp)
+                 d:\myprojects\bitgold-vs2013\src\main.h(26) : 'CBlockIndexWorkComparator' 선언을 참조하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1023) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::is_empty<CBlockIndexWorkComparator>'에 대한 참조를 확인하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\set(44) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree<std::_Tset_traits<_Kty,_Pr,_Alloc,false>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+         ,            _Pr=CBlockIndexWorkComparator
+         ,            _Alloc=std::allocator<CBlockIndex *>
+                 ]
+                 d:\myprojects\bitgold-vs2013\src\main.h(79) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::set<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<_Kty>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+                 ]
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2059: 구문 오류 : '{' (..\..\src\db.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) '{' 앞에 없습니다. (..\..\src\db.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) ')' 앞에 없습니다. (..\..\src\db.cpp)
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(984): error C2079: 'std::_Tree_comp<true,_Traits>::comp'은(는) 정의되지 않은 struct 'CBlockIndexWorkComparator'을(를) 사용합니다.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ] (..\..\src\bloom.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1024) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree_comp<true,_Traits>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ]
+     1>d:\myprojects\bitgold-vs2013\src\main.h(831): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\db.cpp)
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\type_traits(572): error C2139: 'CBlockIndexWorkComparator' : 정의되지 않은 클래스는 컴파일러 내장 형식 특성 '__is_empty'에 대한 인수로 사용할 수 없습니다. (..\..\src\bitcoinrpc.cpp)
+                 d:\myprojects\bitgold-vs2013\src\main.h(26) : 'CBlockIndexWorkComparator' 선언을 참조하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1023) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::is_empty<CBlockIndexWorkComparator>'에 대한 참조를 확인하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\set(44) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree<std::_Tset_traits<_Kty,_Pr,_Alloc,false>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+         ,            _Pr=CBlockIndexWorkComparator
+         ,            _Alloc=std::allocator<CBlockIndex *>
+                 ]
+                 d:\myprojects\bitgold-vs2013\src\main.h(79) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::set<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<_Kty>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+                 ]
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(984): error C2079: 'std::_Tree_comp<true,_Traits>::comp'은(는) 정의되지 않은 struct 'CBlockIndexWorkComparator'을(를) 사용합니다.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ] (..\..\src\bitcoinrpc.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1024) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree_comp<true,_Traits>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ]
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2059: 구문 오류 : '{' (..\..\src\bloom.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) '{' 앞에 없습니다. (..\..\src\bloom.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) ')' 앞에 없습니다. (..\..\src\bloom.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(831): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\bloom.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(1489): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\db.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2059: 구문 오류 : '{' (..\..\src\bitcoinrpc.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) '{' 앞에 없습니다. (..\..\src\bitcoinrpc.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) ')' 앞에 없습니다. (..\..\src\bitcoinrpc.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(831): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\bitcoinrpc.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(1489): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\bloom.cpp)
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\type_traits(572): error C2139: 'CBlockIndexWorkComparator' : 정의되지 않은 클래스는 컴파일러 내장 형식 특성 '__is_empty'에 대한 인수로 사용할 수 없습니다. (..\..\src\checkpoints.cpp)
+                 d:\myprojects\bitgold-vs2013\src\main.h(26) : 'CBlockIndexWorkComparator' 선언을 참조하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1023) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::is_empty<CBlockIndexWorkComparator>'에 대한 참조를 확인하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\set(44) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree<std::_Tset_traits<_Kty,_Pr,_Alloc,false>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+         ,            _Pr=CBlockIndexWorkComparator
+         ,            _Alloc=std::allocator<CBlockIndex *>
+                 ]
+                 d:\myprojects\bitgold-vs2013\src\main.h(79) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::set<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<_Kty>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+                 ]
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(984): error C2079: 'std::_Tree_comp<true,_Traits>::comp'은(는) 정의되지 않은 struct 'CBlockIndexWorkComparator'을(를) 사용합니다.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ] (..\..\src\checkpoints.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1024) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree_comp<true,_Traits>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ]
+     1>d:\myprojects\bitgold-vs2013\src\main.h(1489): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\bitcoinrpc.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2059: 구문 오류 : '{' (..\..\src\checkpoints.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) '{' 앞에 없습니다. (..\..\src\checkpoints.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) ')' 앞에 없습니다. (..\..\src\checkpoints.cpp)
+         leveldb.cpp
+         main.cpp
+     1>d:\myprojects\bitgold-vs2013\src\main.h(831): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\checkpoints.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(1489): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\checkpoints.cpp)
+         net.cpp
+         netbase.cpp
+         noui.cpp
+     1>..\..\src\netbase.cpp(219): error C2065: 'ssize_t' : 선언되지 않은 식별자입니다.
+     1>..\..\src\netbase.cpp(219): error C2146: 구문 오류 : ';'이(가) 'nSize' 식별자 앞에 없습니다.
+     1>..\..\src\netbase.cpp(219): error C2065: 'nSize' : 선언되지 않은 식별자입니다.
+     1>..\..\src\netbase.cpp(221): error C2065: 'ssize_t' : 선언되지 않은 식별자입니다.
+     1>..\..\src\netbase.cpp(221): error C2146: 구문 오류 : ';'이(가) 'ret' 식별자 앞에 없습니다.
+     1>..\..\src\netbase.cpp(221): error C2065: 'ret' : 선언되지 않은 식별자입니다.
+     1>..\..\src\netbase.cpp(221): error C2065: 'nSize' : 선언되지 않은 식별자입니다.
+     1>..\..\src\netbase.cpp(222): error C2065: 'ret' : 선언되지 않은 식별자입니다.
+     1>..\..\src\netbase.cpp(222): error C2065: 'nSize' : 선언되지 않은 식별자입니다.
+     1>..\..\src\netbase.cpp(244): error C2065: 'ret' : 선언되지 않은 식별자입니다.
+     1>..\..\src\netbase.cpp(245): error C2065: 'ret' : 선언되지 않은 식별자입니다.
+     1>..\..\src\netbase.cpp(245): error C2065: 'ssize_t' : 선언되지 않은 식별자입니다.
+     1>..\..\src\netbase.cpp(245): error C2146: 구문 오류 : ')'이(가) 'strSocks5' 식별자 앞에 없습니다.
+     1>..\..\src\netbase.cpp(245): error C2059: 구문 오류 : ')'
+     1>..\..\src\netbase.cpp(247): error C2143: 구문 오류 : '}'이(가) ';' 앞에 없습니다.
+     1>..\..\src\netbase.cpp(247): error C2064: 항은 1개의 인수를 받아들이는 함수로 계산되지 않습니다.
+     1>..\..\src\netbase.cpp(251): error C2059: 구문 오류 : 'if'
+     1>..\..\src\netbase.cpp(252): error C2143: 구문 오류 : ';'이(가) '{' 앞에 없습니다.
+     1>..\..\src\netbase.cpp(252): error C2447: '{' : 함수 헤더가 없습니다. 이전 스타일의 형식 목록입니까?
+     1>..\..\src\netbase.cpp(256): error C2059: 구문 오류 : 'if'
+     1>..\..\src\netbase.cpp(257): error C2143: 구문 오류 : ';'이(가) '{' 앞에 없습니다.
+     1>..\..\src\netbase.cpp(257): error C2447: '{' : 함수 헤더가 없습니다. 이전 스타일의 형식 목록입니까?
+     1>..\..\src\netbase.cpp(261): error C2059: 구문 오류 : 'if'
+     1>..\..\src\netbase.cpp(262): error C2143: 구문 오류 : ';'이(가) '{' 앞에 없습니다.
+     1>..\..\src\netbase.cpp(262): error C2447: '{' : 함수 헤더가 없습니다. 이전 스타일의 형식 목록입니까?
+     1>..\..\src\netbase.cpp(277): error C2059: 구문 오류 : 'if'
+     1>..\..\src\netbase.cpp(278): error C2143: 구문 오류 : ';'이(가) '{' 앞에 없습니다.
+     1>..\..\src\netbase.cpp(278): error C2447: '{' : 함수 헤더가 없습니다. 이전 스타일의 형식 목록입니까?
+     1>..\..\src\netbase.cpp(283): error C2059: 구문 오류 : 'switch'
+     1>..\..\src\netbase.cpp(284): error C2143: 구문 오류 : ';'이(가) '{' 앞에 없습니다.
+     1>..\..\src\netbase.cpp(284): error C2447: '{' : 함수 헤더가 없습니다. 이전 스타일의 형식 목록입니까?
+     1>..\..\src\netbase.cpp(298): error C2059: 구문 오류 : 'if'
+     1>..\..\src\netbase.cpp(299): error C2143: 구문 오류 : ';'이(가) '{' 앞에 없습니다.
+     1>..\..\src\netbase.cpp(299): error C2447: '{' : 함수 헤더가 없습니다. 이전 스타일의 형식 목록입니까?
+     1>..\..\src\netbase.cpp(303): error C2059: 구문 오류 : 'if'
+     1>..\..\src\netbase.cpp(304): error C2143: 구문 오류 : ';'이(가) '{' 앞에 없습니다.
+     1>..\..\src\netbase.cpp(304): error C2447: '{' : 함수 헤더가 없습니다. 이전 스타일의 형식 목록입니까?
+     1>..\..\src\netbase.cpp(308): error C2065: 'strDest' : 선언되지 않은 식별자입니다.
+     1>..\..\src\netbase.cpp(308): error C2228: '.c_str' 왼쪽에는 클래스/구조체/공용 구조체가 있어야 합니다.
+                 'unknown-type' 형식입니다.
+     1>..\..\src\netbase.cpp(308): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+     1>..\..\src\netbase.cpp(308): error C2365: 'OutputDebugStringF' : 재정의: 이전 정의는 '함수'입니다.
+                 d:\myprojects\bitgold-vs2013\src\util.h(155) : 'OutputDebugStringF' 선언을 참조하십시오.
+     1>..\..\src\netbase.cpp(308): error C2440: '초기화 중' : 'const char [21]'에서 'int'(으)로 변환할 수 없습니다.
+                 이 변환이 가능한 컨텍스트가 없습니다.
+     1>..\..\src\netbase.cpp(309): error C2059: 구문 오류 : 'return'
+     1>..\..\src\netbase.cpp(310): error C2059: 구문 오류 : '}'
+     1>..\..\src\netbase.cpp(310): error C2143: 구문 오류 : ';'이(가) '}' 앞에 없습니다.
+     1>..\..\src\netbase.cpp(313): error C2143: 구문 오류 : ';'이(가) '{' 앞에 없습니다.
+     1>..\..\src\netbase.cpp(313): error C2447: '{' : 함수 헤더가 없습니다. 이전 스타일의 형식 목록입니까?
+     1>..\..\src\netbase.cpp(479): error C3861: 'ConnectSocketDirectly': 식별자를 찾을 수 없습니다.
+     1>..\..\src\netbase.cpp(484): error C3861: 'ConnectSocketDirectly': 식별자를 찾을 수 없습니다.
+     1>..\..\src\netbase.cpp(524): error C3861: 'ConnectSocketDirectly': 식별자를 찾을 수 없습니다.
+         protocol.cpp
+         rpcblockchain.cpp
+         rpcdump.cpp
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\type_traits(572): error C2139: 'CBlockIndexWorkComparator' : 정의되지 않은 클래스는 컴파일러 내장 형식 특성 '__is_empty'에 대한 인수로 사용할 수 없습니다. (..\..\src\main.cpp)
+                 d:\myprojects\bitgold-vs2013\src\main.h(26) : 'CBlockIndexWorkComparator' 선언을 참조하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1023) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::is_empty<CBlockIndexWorkComparator>'에 대한 참조를 확인하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\set(44) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree<std::_Tset_traits<_Kty,_Pr,_Alloc,false>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+         ,            _Pr=CBlockIndexWorkComparator
+         ,            _Alloc=std::allocator<CBlockIndex *>
+                 ]
+                 d:\myprojects\bitgold-vs2013\src\main.h(79) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::set<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<_Kty>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+                 ]
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(984): error C2079: 'std::_Tree_comp<true,_Traits>::comp'은(는) 정의되지 않은 struct 'CBlockIndexWorkComparator'을(를) 사용합니다.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ] (..\..\src\main.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1024) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree_comp<true,_Traits>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ]
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2059: 구문 오류 : '{' (..\..\src\main.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) '{' 앞에 없습니다. (..\..\src\main.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) ')' 앞에 없습니다. (..\..\src\main.cpp)
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\type_traits(572): error C2139: 'CBlockIndexWorkComparator' : 정의되지 않은 클래스는 컴파일러 내장 형식 특성 '__is_empty'에 대한 인수로 사용할 수 없습니다. (..\..\src\net.cpp)
+                 d:\myprojects\bitgold-vs2013\src\main.h(26) : 'CBlockIndexWorkComparator' 선언을 참조하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1023) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::is_empty<CBlockIndexWorkComparator>'에 대한 참조를 확인하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\set(44) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree<std::_Tset_traits<_Kty,_Pr,_Alloc,false>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+         ,            _Pr=CBlockIndexWorkComparator
+         ,            _Alloc=std::allocator<CBlockIndex *>
+                 ]
+                 d:\myprojects\bitgold-vs2013\src\main.h(79) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::set<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<_Kty>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+                 ]
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(984): error C2079: 'std::_Tree_comp<true,_Traits>::comp'은(는) 정의되지 않은 struct 'CBlockIndexWorkComparator'을(를) 사용합니다.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ] (..\..\src\net.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1024) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree_comp<true,_Traits>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ]
+     1>d:\myprojects\bitgold-vs2013\src\main.h(831): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\main.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(1489): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\main.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2059: 구문 오류 : '{' (..\..\src\net.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) '{' 앞에 없습니다. (..\..\src\net.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) ')' 앞에 없습니다. (..\..\src\net.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(831): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\net.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(1489): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\net.cpp)
+         rpcmining.cpp
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\type_traits(572): error C2139: 'CBlockIndexWorkComparator' : 정의되지 않은 클래스는 컴파일러 내장 형식 특성 '__is_empty'에 대한 인수로 사용할 수 없습니다. (..\..\src\noui.cpp)
+                 d:\myprojects\bitgold-vs2013\src\main.h(26) : 'CBlockIndexWorkComparator' 선언을 참조하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1023) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::is_empty<CBlockIndexWorkComparator>'에 대한 참조를 확인하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\set(44) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree<std::_Tset_traits<_Kty,_Pr,_Alloc,false>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+         ,            _Pr=CBlockIndexWorkComparator
+         ,            _Alloc=std::allocator<CBlockIndex *>
+                 ]
+                 d:\myprojects\bitgold-vs2013\src\main.h(79) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::set<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<_Kty>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+                 ]
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(984): error C2079: 'std::_Tree_comp<true,_Traits>::comp'은(는) 정의되지 않은 struct 'CBlockIndexWorkComparator'을(를) 사용합니다.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ] (..\..\src\noui.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1024) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree_comp<true,_Traits>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ]
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2059: 구문 오류 : '{' (..\..\src\noui.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) '{' 앞에 없습니다. (..\..\src\noui.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) ')' 앞에 없습니다. (..\..\src\noui.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(831): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\noui.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(1489): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\noui.cpp)
+         rpcnet.cpp
+         rpcrawtransaction.cpp
+     1>..\..\src\main.cpp(1005): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다.
+     1>..\..\src\main.cpp(1009): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다.
+         rpcwallet.cpp
+     1>..\..\src\main.cpp(2998): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다.
+         script.cpp
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\type_traits(572): error C2139: 'CBlockIndexWorkComparator' : 정의되지 않은 클래스는 컴파일러 내장 형식 특성 '__is_empty'에 대한 인수로 사용할 수 없습니다. (..\..\src\rpcblockchain.cpp)
+                 d:\myprojects\bitgold-vs2013\src\main.h(26) : 'CBlockIndexWorkComparator' 선언을 참조하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1023) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::is_empty<CBlockIndexWorkComparator>'에 대한 참조를 확인하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\set(44) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree<std::_Tset_traits<_Kty,_Pr,_Alloc,false>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+         ,            _Pr=CBlockIndexWorkComparator
+         ,            _Alloc=std::allocator<CBlockIndex *>
+                 ]
+                 d:\myprojects\bitgold-vs2013\src\main.h(79) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::set<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<_Kty>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+                 ]
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(984): error C2079: 'std::_Tree_comp<true,_Traits>::comp'은(는) 정의되지 않은 struct 'CBlockIndexWorkComparator'을(를) 사용합니다.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ] (..\..\src\rpcblockchain.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1024) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree_comp<true,_Traits>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ]
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2059: 구문 오류 : '{' (..\..\src\rpcblockchain.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) '{' 앞에 없습니다. (..\..\src\rpcblockchain.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) ')' 앞에 없습니다. (..\..\src\rpcblockchain.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(831): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\rpcblockchain.cpp)
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\type_traits(572): error C2139: 'CBlockIndexWorkComparator' : 정의되지 않은 클래스는 컴파일러 내장 형식 특성 '__is_empty'에 대한 인수로 사용할 수 없습니다. (..\..\src\protocol.cpp)
+                 d:\myprojects\bitgold-vs2013\src\main.h(26) : 'CBlockIndexWorkComparator' 선언을 참조하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1023) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::is_empty<CBlockIndexWorkComparator>'에 대한 참조를 확인하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\set(44) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree<std::_Tset_traits<_Kty,_Pr,_Alloc,false>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+         ,            _Pr=CBlockIndexWorkComparator
+         ,            _Alloc=std::allocator<CBlockIndex *>
+                 ]
+                 d:\myprojects\bitgold-vs2013\src\main.h(79) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::set<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<_Kty>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+                 ]
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(984): error C2079: 'std::_Tree_comp<true,_Traits>::comp'은(는) 정의되지 않은 struct 'CBlockIndexWorkComparator'을(를) 사용합니다.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ] (..\..\src\protocol.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1024) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree_comp<true,_Traits>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ]
+     1>d:\myprojects\bitgold-vs2013\src\main.h(1489): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\rpcblockchain.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2059: 구문 오류 : '{' (..\..\src\protocol.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) '{' 앞에 없습니다. (..\..\src\protocol.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) ')' 앞에 없습니다. (..\..\src\protocol.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(831): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\protocol.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(1489): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\protocol.cpp)
+         sync.cpp
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\type_traits(572): error C2139: 'CBlockIndexWorkComparator' : 정의되지 않은 클래스는 컴파일러 내장 형식 특성 '__is_empty'에 대한 인수로 사용할 수 없습니다. (..\..\src\rpcdump.cpp)
+                 d:\myprojects\bitgold-vs2013\src\main.h(26) : 'CBlockIndexWorkComparator' 선언을 참조하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1023) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::is_empty<CBlockIndexWorkComparator>'에 대한 참조를 확인하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\set(44) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree<std::_Tset_traits<_Kty,_Pr,_Alloc,false>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+         ,            _Pr=CBlockIndexWorkComparator
+         ,            _Alloc=std::allocator<CBlockIndex *>
+                 ]
+                 d:\myprojects\bitgold-vs2013\src\main.h(79) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::set<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<_Kty>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+                 ]
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(984): error C2079: 'std::_Tree_comp<true,_Traits>::comp'은(는) 정의되지 않은 struct 'CBlockIndexWorkComparator'을(를) 사용합니다.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ] (..\..\src\rpcdump.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1024) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree_comp<true,_Traits>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ]
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2059: 구문 오류 : '{' (..\..\src\rpcdump.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) '{' 앞에 없습니다. (..\..\src\rpcdump.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) ')' 앞에 없습니다. (..\..\src\rpcdump.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(831): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\rpcdump.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(1489): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\rpcdump.cpp)
+         txdb.cpp
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\type_traits(572): error C2139: 'CBlockIndexWorkComparator' : 정의되지 않은 클래스는 컴파일러 내장 형식 특성 '__is_empty'에 대한 인수로 사용할 수 없습니다. (..\..\src\rpcmining.cpp)
+                 d:\myprojects\bitgold-vs2013\src\main.h(26) : 'CBlockIndexWorkComparator' 선언을 참조하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1023) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::is_empty<CBlockIndexWorkComparator>'에 대한 참조를 확인하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\set(44) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree<std::_Tset_traits<_Kty,_Pr,_Alloc,false>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+         ,            _Pr=CBlockIndexWorkComparator
+         ,            _Alloc=std::allocator<CBlockIndex *>
+                 ]
+                 d:\myprojects\bitgold-vs2013\src\main.h(79) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::set<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<_Kty>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+                 ]
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(984): error C2079: 'std::_Tree_comp<true,_Traits>::comp'은(는) 정의되지 않은 struct 'CBlockIndexWorkComparator'을(를) 사용합니다.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ] (..\..\src\rpcmining.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1024) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree_comp<true,_Traits>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ]
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2059: 구문 오류 : '{' (..\..\src\rpcmining.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) '{' 앞에 없습니다. (..\..\src\rpcmining.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) ')' 앞에 없습니다. (..\..\src\rpcmining.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(831): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\rpcmining.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(1489): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\rpcmining.cpp)
+         util.cpp
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\type_traits(572): error C2139: 'CBlockIndexWorkComparator' : 정의되지 않은 클래스는 컴파일러 내장 형식 특성 '__is_empty'에 대한 인수로 사용할 수 없습니다. (..\..\src\rpcwallet.cpp)
+                 d:\myprojects\bitgold-vs2013\src\main.h(26) : 'CBlockIndexWorkComparator' 선언을 참조하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1023) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::is_empty<CBlockIndexWorkComparator>'에 대한 참조를 확인하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\set(44) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree<std::_Tset_traits<_Kty,_Pr,_Alloc,false>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+         ,            _Pr=CBlockIndexWorkComparator
+         ,            _Alloc=std::allocator<CBlockIndex *>
+                 ]
+                 d:\myprojects\bitgold-vs2013\src\main.h(79) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::set<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<_Kty>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+                 ]
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(984): error C2079: 'std::_Tree_comp<true,_Traits>::comp'은(는) 정의되지 않은 struct 'CBlockIndexWorkComparator'을(를) 사용합니다.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ] (..\..\src\rpcwallet.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1024) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree_comp<true,_Traits>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ]
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2059: 구문 오류 : '{' (..\..\src\rpcwallet.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) '{' 앞에 없습니다. (..\..\src\rpcwallet.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) ')' 앞에 없습니다. (..\..\src\rpcwallet.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(831): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\rpcwallet.cpp)
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\type_traits(572): error C2139: 'CBlockIndexWorkComparator' : 정의되지 않은 클래스는 컴파일러 내장 형식 특성 '__is_empty'에 대한 인수로 사용할 수 없습니다. (..\..\src\rpcrawtransaction.cpp)
+                 d:\myprojects\bitgold-vs2013\src\main.h(26) : 'CBlockIndexWorkComparator' 선언을 참조하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1023) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::is_empty<CBlockIndexWorkComparator>'에 대한 참조를 확인하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\set(44) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree<std::_Tset_traits<_Kty,_Pr,_Alloc,false>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+         ,            _Pr=CBlockIndexWorkComparator
+         ,            _Alloc=std::allocator<CBlockIndex *>
+                 ]
+                 d:\myprojects\bitgold-vs2013\src\main.h(79) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::set<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<_Kty>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+                 ]
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(984): error C2079: 'std::_Tree_comp<true,_Traits>::comp'은(는) 정의되지 않은 struct 'CBlockIndexWorkComparator'을(를) 사용합니다.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ] (..\..\src\rpcrawtransaction.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1024) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree_comp<true,_Traits>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ]
+     1>d:\myprojects\bitgold-vs2013\src\main.h(1489): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\rpcwallet.cpp)
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\type_traits(572): error C2139: 'CBlockIndexWorkComparator' : 정의되지 않은 클래스는 컴파일러 내장 형식 특성 '__is_empty'에 대한 인수로 사용할 수 없습니다. (..\..\src\script.cpp)
+                 d:\myprojects\bitgold-vs2013\src\main.h(26) : 'CBlockIndexWorkComparator' 선언을 참조하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1023) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::is_empty<CBlockIndexWorkComparator>'에 대한 참조를 확인하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\set(44) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree<std::_Tset_traits<_Kty,_Pr,_Alloc,false>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+         ,            _Pr=CBlockIndexWorkComparator
+         ,            _Alloc=std::allocator<CBlockIndex *>
+                 ]
+                 d:\myprojects\bitgold-vs2013\src\main.h(79) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::set<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<_Kty>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+                 ]
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(984): error C2079: 'std::_Tree_comp<true,_Traits>::comp'은(는) 정의되지 않은 struct 'CBlockIndexWorkComparator'을(를) 사용합니다.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ] (..\..\src\script.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1024) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree_comp<true,_Traits>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ]
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2059: 구문 오류 : '{' (..\..\src\rpcrawtransaction.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) '{' 앞에 없습니다. (..\..\src\rpcrawtransaction.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) ')' 앞에 없습니다. (..\..\src\rpcrawtransaction.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(831): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\rpcrawtransaction.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(1489): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\rpcrawtransaction.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2059: 구문 오류 : '{' (..\..\src\script.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) '{' 앞에 없습니다. (..\..\src\script.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) ')' 앞에 없습니다. (..\..\src\script.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(831): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\script.cpp)
+         wallet.cpp
+     1>d:\myprojects\bitgold-vs2013\src\main.h(1489): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\script.cpp)
+         walletdb.cpp
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\type_traits(572): error C2139: 'CBlockIndexWorkComparator' : 정의되지 않은 클래스는 컴파일러 내장 형식 특성 '__is_empty'에 대한 인수로 사용할 수 없습니다. (..\..\src\txdb.cpp)
+                 d:\myprojects\bitgold-vs2013\src\main.h(26) : 'CBlockIndexWorkComparator' 선언을 참조하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1023) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::is_empty<CBlockIndexWorkComparator>'에 대한 참조를 확인하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\set(44) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree<std::_Tset_traits<_Kty,_Pr,_Alloc,false>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+         ,            _Pr=CBlockIndexWorkComparator
+         ,            _Alloc=std::allocator<CBlockIndex *>
+                 ]
+                 d:\myprojects\bitgold-vs2013\src\main.h(79) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::set<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<_Kty>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+                 ]
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(984): error C2079: 'std::_Tree_comp<true,_Traits>::comp'은(는) 정의되지 않은 struct 'CBlockIndexWorkComparator'을(를) 사용합니다.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ] (..\..\src\txdb.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1024) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree_comp<true,_Traits>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ]
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2059: 구문 오류 : '{' (..\..\src\txdb.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) '{' 앞에 없습니다. (..\..\src\txdb.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) ')' 앞에 없습니다. (..\..\src\txdb.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(831): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\txdb.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(1489): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\txdb.cpp)
+     1>..\..\src\txdb.cpp(155): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다.
+     1>..\..\src\txdb.cpp(237): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다.
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\type_traits(572): error C2139: 'CBlockIndexWorkComparator' : 정의되지 않은 클래스는 컴파일러 내장 형식 특성 '__is_empty'에 대한 인수로 사용할 수 없습니다. (..\..\src\wallet.cpp)
+                 d:\myprojects\bitgold-vs2013\src\main.h(26) : 'CBlockIndexWorkComparator' 선언을 참조하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1023) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::is_empty<CBlockIndexWorkComparator>'에 대한 참조를 확인하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\set(44) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree<std::_Tset_traits<_Kty,_Pr,_Alloc,false>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+         ,            _Pr=CBlockIndexWorkComparator
+         ,            _Alloc=std::allocator<CBlockIndex *>
+                 ]
+                 d:\myprojects\bitgold-vs2013\src\main.h(79) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::set<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<_Kty>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+                 ]
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(984): error C2079: 'std::_Tree_comp<true,_Traits>::comp'은(는) 정의되지 않은 struct 'CBlockIndexWorkComparator'을(를) 사용합니다.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ] (..\..\src\wallet.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1024) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree_comp<true,_Traits>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ]
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2059: 구문 오류 : '{' (..\..\src\wallet.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) '{' 앞에 없습니다. (..\..\src\wallet.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) ')' 앞에 없습니다. (..\..\src\wallet.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(831): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\wallet.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(1489): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\wallet.cpp)
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\type_traits(572): error C2139: 'CBlockIndexWorkComparator' : 정의되지 않은 클래스는 컴파일러 내장 형식 특성 '__is_empty'에 대한 인수로 사용할 수 없습니다. (..\..\src\walletdb.cpp)
+                 d:\myprojects\bitgold-vs2013\src\main.h(26) : 'CBlockIndexWorkComparator' 선언을 참조하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1023) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::is_empty<CBlockIndexWorkComparator>'에 대한 참조를 확인하십시오.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\set(44) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree<std::_Tset_traits<_Kty,_Pr,_Alloc,false>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+         ,            _Pr=CBlockIndexWorkComparator
+         ,            _Alloc=std::allocator<CBlockIndex *>
+                 ]
+                 d:\myprojects\bitgold-vs2013\src\main.h(79) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::set<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<_Kty>>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Kty=CBlockIndex *
+                 ]
+     1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(984): error C2079: 'std::_Tree_comp<true,_Traits>::comp'은(는) 정의되지 않은 struct 'CBlockIndexWorkComparator'을(를) 사용합니다.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ] (..\..\src\walletdb.cpp)
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xtree(1024) : 컴파일 중인 클래스 템플릿 인스턴스화 'std::_Tree_comp<true,_Traits>'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Traits=std::_Tset_traits<CBlockIndex *,CBlockIndexWorkComparator,std::allocator<CBlockIndex *>,false>
+                 ]
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2059: 구문 오류 : '{' (..\..\src\walletdb.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) '{' 앞에 없습니다. (..\..\src\walletdb.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(717): error C2143: 구문 오류 : ';'이(가) ')' 앞에 없습니다. (..\..\src\walletdb.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(831): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\walletdb.cpp)
+     1>d:\myprojects\bitgold-vs2013\src\main.h(1489): error C2065: '__PRETTY_FUNCTION__' : 선언되지 않은 식별자입니다. (..\..\src\walletdb.cpp)
+     1>"D:\MyProjects\bitgold-vs2013\MSVC\lib-bitgold\lib-bitcoin.vcxproj" 프로젝트를 빌드했습니다(Build 대상). - 실패
+
+빌드하지 못했습니다.
+
+경과 시간: 00:00:19.00
