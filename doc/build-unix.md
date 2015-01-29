@@ -57,10 +57,8 @@ Build requirements:
 
 	sudo apt-get install build-essential
 	sudo apt-get install libssl-dev
-
-for Ubuntu 12.04:
-
 	sudo apt-get install libboost-all-dev
+	sudo apt-get install libdb++-dev 
 
  db4.8 packages are available [here](https://launchpad.net/~bitcoin/+archive/bitcoin).
 
@@ -69,7 +67,6 @@ for Ubuntu 12.04:
 
 for other Ubuntu & Debian:
 
-	sudo apt-get install libdb++-dev (added 2015/01/26)
 	sudo apt-get install libdb4.8-dev
 	sudo apt-get install libdb4.8++-dev
 	sudo apt-get install libboost1.37-dev
