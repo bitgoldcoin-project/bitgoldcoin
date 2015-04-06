@@ -1,0 +1,44 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:          bgc-service.sh
+# Required-Start:    $local_fs $syslog $remote_fs
+# Required-Stop:     $local_fs $syslog $remote_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start bitgoldcoin daemon
+### END INIT INFO
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+DAEMON=/home/limyg612/coin-projects/bitgoldcoin/src/
+NAME=bgc-service
+DESC=bgc-service
+
+BGCSERVER=/home/limyg612/coin-projects/bitgoldcoin/src/bitgoldcoind
+BGCCLIENT=/home/limyg612/coin-projects/bitgoldcoin/src/bitgoldcoind
+BGCSERVER_PID=$(ps auxf | grep bitgoldcoind | grep -v grep | awk '{print $2}')
+
+BGCDIR="/data/.bitgoldcoin"
+
+case "$1" in
+        start)
+                if [ -z "${BGCSERVER_PID}" ]; then
+                        echo "starting bitgoldcoin server"
+                        ${BGCSERVER} -datadir=${BGCDIR} -conf=${BGCDIR}/bitgoldcoin.conf
+                        echo "bitgoldcoin server started"
+                else
+                        echo ${BGCDIR}
+                        echo "bitgoldcoin server is running"
+                fi
+        ;;
+        stop)
+                if [ -n "${BGCSERVER_PID}" ]; then
+                        ${BGCCLIENT} -datadir=${BGCDIR} -conf=${BGCDIR}/bitgoldcoin.conf stop
+                        echo "bitgoldcoin server stopped"
+                else
+                        echo "bitgoldcoin server is not running"
+                fi
+        ;;
+esac
+
+exit 0
