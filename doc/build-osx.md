@@ -63,7 +63,7 @@ Homebrew is a little more popular among those newer to OS X.
 The installation of the actual dependencies is covered in the Instructions
 sections below.
 
-Instructions: MacPorts
+Instructions: HomeBrew
 ----------------------
 
 #### Install dependencies using Homebrew
