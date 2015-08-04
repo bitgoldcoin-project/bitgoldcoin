@@ -68,11 +68,22 @@ Instructions: MacPorts
 Note: compiler error occured with this method in OSX 10.9+. 
 "brew" recommend.
 
-### Install dependencies
+#### Install dependencies using Homebrew
 
-Installing the dependencies using MacPorts is very straightforward.
+        brew install boost miniupnpc openssl berkeley-db4
 
-    sudo port install boost db48@+no_java openssl miniupnpc
+Note: After you have installed the dependencies, you should check that the Brew installed version of OpenSSL is the one available for compilation. You can check this by typing
+
+        openssl version
+
+into Terminal. You should see OpenSSL 1.0.1e 11 Feb 2013.
+
+If not, you can ensure that the Brew OpenSSL is correctly linked by running
+
+        brew link openssl --force
+
+Rerunning "openssl version" should now return the correct version.
+
 
 ### Building `bitgoldcoind`
 
@@ -90,24 +101,9 @@ Installing the dependencies using MacPorts is very straightforward.
 
         make -f makefile.osx test
 
-Instructions: HomeBrew
-----------------------
 
-#### Install dependencies using Homebrew
 
-        brew install boost miniupnpc openssl berkeley-db4
 
-Note: After you have installed the dependencies, you should check that the Brew installed version of OpenSSL is the one available for compilation. You can check this by typing
-
-        openssl version
-
-into Terminal. You should see OpenSSL 1.0.1e 11 Feb 2013.
-
-If not, you can ensure that the Brew OpenSSL is correctly linked by running
-
-        brew link openssl --force
-
-Rerunning "openssl version" should now return the correct version.
 
 ### Building `bitgoldcoind`
 
