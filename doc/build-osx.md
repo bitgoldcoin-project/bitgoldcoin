@@ -65,8 +65,6 @@ sections below.
 
 Instructions: MacPorts
 ----------------------
-Note: compiler error occured with this method in OSX 10.9+. 
-"brew" recommend.
 
 #### Install dependencies using Homebrew
 
@@ -100,9 +98,6 @@ Rerunning "openssl version" should now return the correct version.
 3.  It is a good idea to build and run the unit tests, too:
 
         make -f makefile.osx test
-
-
-
 
 
 ### Building `bitgoldcoind`
