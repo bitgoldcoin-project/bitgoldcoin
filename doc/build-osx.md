@@ -63,33 +63,6 @@ Homebrew is a little more popular among those newer to OS X.
 The installation of the actual dependencies is covered in the Instructions
 sections below.
 
-Instructions: MacPorts
-----------------------
-Note: compiler error occured with this method in OSX 10.9+. 
-"brew" recommend.
-
-### Install dependencies
-
-Installing the dependencies using MacPorts is very straightforward.
-
-    sudo port install boost db48@+no_java openssl miniupnpc
-
-### Building `bitgoldcoind`
-
-1. Clone the github tree to get the source code and go into the directory.
-
-        git clone git@github.com:bitgoldcoin-project/bitgoldcoin.git bitgoldcoin
-        cd bitgoldcoin
-
-2.  Build bitgoldcoind:
-
-        cd src
-        make -f makefile.osx
-
-3.  It is a good idea to build and run the unit tests, too:
-
-        make -f makefile.osx test
-
 Instructions: HomeBrew
 ----------------------
 
@@ -108,6 +81,24 @@ If not, you can ensure that the Brew OpenSSL is correctly linked by running
         brew link openssl --force
 
 Rerunning "openssl version" should now return the correct version.
+
+
+### Building `bitgoldcoind`
+
+1. Clone the github tree to get the source code and go into the directory.
+
+        git clone git@github.com:bitgoldcoin-project/bitgoldcoin.git bitgoldcoin
+        cd bitgoldcoin
+
+2.  Build bitgoldcoind:
+
+        cd src
+        make -f makefile.osx
+
+3.  It is a good idea to build and run the unit tests, too:
+
+        make -f makefile.osx test
+
 
 ### Building `bitgoldcoind`
 
