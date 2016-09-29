@@ -19,6 +19,12 @@
 > 
 > miniupnpc-1.9.20140911 => minupnpc
 
+> mingw-64 설치시 버전을 4.9.1로 설치
+
+> makefile.mingw
+
+65: DEFS += -DMINIUPNP_STATICLIB -DUSE_UPNP=$(USE_UPNP)
+
 > Qt 4.8.6
 
 - configureapp.cpp
@@ -43,11 +49,7 @@ endsWith => contains
         };
 ```
 
-- makefile.mingw
-```
-BOOST_SUFFIX?=-mgw49-mt-s-1_55 => BOOST_SUFFIX?=-mgw62-mt-s-1_55
 
-```
 
 
 * Daemon
