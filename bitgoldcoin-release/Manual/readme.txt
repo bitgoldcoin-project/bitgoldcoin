@@ -1,56 +1,36 @@
-* Dependancy / QT ¼³Ä¡*
+* Dependancy / QT ì„¤ì¹˜*
 
-°¢ ÇÃ·§Æûº° ¹®¼­ Âü°í
+ê° í”Œëž«í¼ë³„ ë¬¸ì„œ ì°¸ê³ 
 
-1. À©µµ¿ìÁî
-¼³Ä¡µÈ ÇÁ·Î±×·¥¿¡ µû¶ó °øÀ¯ ¶óÀÌºê·¯¸® Ãæµ¹ ¶§¹®¿¡
-¸®´ª½º ·±Å¸ÀÓ(MinGW)¿ë ¶óÀÌºê·¯¸®°¡ ¼³Ä¡°¡ µÇÁö ¾Ê´Â °æ¿ì°¡ ¹ß»ýÇÏ±â ¶§¹®¿¡
-Å¬¸° ¼³Ä¡µÈ À©µµ¿ì¿¡¼­ ºôµåÇÏ´Â °ÍÀ» ±ÇÀå
-(Dependancy°¡ ¼³Ä¡ µÈ Virtual PC »ç¿ë)
+1. ìœˆë„ìš°ì¦ˆ
+ì„¤ì¹˜ëœ í”„ë¡œê·¸ëž¨ì— ë”°ë¼ ê³µìœ  ë¼ì´ë¸ŒëŸ¬ë¦¬ ì¶©ëŒ ë•Œë¬¸ì—
+ë¦¬ëˆ…ìŠ¤ ëŸ°íƒ€ìž„(MinGW)ìš© ë¼ì´ë¸ŒëŸ¬ë¦¬ê°€ ì„¤ì¹˜ê°€ ë˜ì§€ ì•ŠëŠ” ê²½ìš°ê°€ ë°œìƒí•˜ê¸° ë•Œë¬¸ì—
+í´ë¦° ì„¤ì¹˜ëœ ìœˆë„ìš°ì—ì„œ ë¹Œë“œí•˜ëŠ” ê²ƒì„ ê¶Œìž¥
+(Dependancyê°€ ì„¤ì¹˜ ëœ Virtual PC ì‚¬ìš©)
 
-2. ¸®´ª½º / ¸Æ
-¸Å´º¾ó ÂüÁ¶
+2. ë¦¬ëˆ…ìŠ¤ / ë§¥
+ë§¤ë‰´ì–¼ ì°¸ì¡°
 
 
-* DAEMON ºôµå ¹æ¹ý
+* DAEMON ë¹Œë“œ ë°©ë²•
 
-1. WINDOWS (ÀÚ¼¼ÇÑ ³»¿ëÀº Ã·ºÎµÈ À¥¹®¼­¸¦ Âü°í.)
+1. WINDOWS (ìžì„¸í•œ ë‚´ìš©ì€ ì²¨ë¶€ëœ ì›¹ë¬¸ì„œë¥¼ ì°¸ê³ .)
 
-> 
-> miniupnpc-1.9.20140911 => minupnpc
+> miniupnpc-1.9.20140911 => minupnpc rename
 
-> mingw-64 ¼³Ä¡½Ã ¹öÀüÀ» 4.9.1·Î ¼³Ä¡
+> mingw-64 ì„¤ì¹˜ì‹œ ë²„ì „ì„ 4.9.1ë¡œ ì„¤ì¹˜
 
-> makefile.mingw
+> makefile.mingw ìˆ˜ì •
 
-65: DEFS += -DMINIUPNP_STATICLIB -DUSE_UPNP=$(USE_UPNP)
+  - DEFS += -DMINIUPNP_STATICLIB -DUSE_UPNP=$(USE_UPNP)
 
 > Qt 4.8.6
 
 - configureapp.cpp
 ```
-
 2180, 2262
 endsWith => contains
-
 ```
-
-- qcoloroutput_p.h
-```c++
-    enum
-        {
-            ForegroundShift = 10,
-            BackgroundShift = 20,
-            SpecialShift    = 20,
-//            ForegroundMask  = ((1 << ForegroundShift) - 1) << ForegroundShift,
-//            BackgroundMask  = ((1 << BackgroundShift) - 1) << BackgroundShift
-            ForegroundMask  = 0x1f << ForegroundShift,
-            BackgroundMask  = 0x07 << BackgroundShift
-        };
-```
-
-
-
 
 * Daemon
 make -f makefile.mingw
@@ -67,8 +47,8 @@ make -f makefile.unix
 strip bitgoldcoind
 
 * QT (Devian / Ubuntu)
-QT5 Creator (GUI) ½ÇÇà (sudo qtcreator)
-bitgoldcoin-qt_linux.pro ¿­±â
+QT5 Creator (GUI) ì‹¤í–‰ (sudo qtcreator)
+bitgoldcoin-qt_linux.pro ì—´ê¸°
 Build
 
 3. Mac
@@ -78,7 +58,7 @@ make -f makefile.osx
 strip bitgoldcoind
 
 * QT 
-QT5 Creator (GUI) ½ÇÇà 
-bitgoldcoin-qt_linux.pro ¿­±â
+QT5 Creator (GUI) ì‹¤í–‰ 
+bitgoldcoin-qt_linux.pro ì—´ê¸°
 Build
 
