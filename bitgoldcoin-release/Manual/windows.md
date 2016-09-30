@@ -196,7 +196,9 @@ mingw32-make
 
 ## Compiling bitgoldcoind.
 
-### 5. Download and extract the bitgoldcoin source code https://github.com/bitgoldcoin-project/bitgoldcoin/archive/master-0.8.zip to C:\bitgoldcoin-0.8. Navigate to  C:\bitgoldcoin-0.8\src\makefile.mingw and open with your text editor.
+### 5. Download and extract the bitgoldcoin source code to C:\bitgoldcoin-0.8. Navigate to  C:\bitgoldcoin-0.8\src\makefile.mingw and open with your text editor.
+
+[download](https://github.com/bitgoldcoin-project/bitgoldcoin/archive/master.zip)
 
 ```
 USE_UPNP:=-
