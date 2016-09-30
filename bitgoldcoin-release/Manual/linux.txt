@@ -1,6 +1,6 @@
-# Compiling an altcoin daemon in Ubuntu Linux
+# [How to Build Proof of Stake Altcoins and Stake Coins on a Remote Ubuntu Server](https://steemit.com/altcoins/@complexring/how-to-build-proof-of-stake-altcoins-and-stake-coins-on-a-remote-ubuntu-server)
 
-https://dev.cryptolife.net/compiling-the-daemon-for-your-altcoin-in-ubuntu-linux/
+# [Compiling an altcoin daemon in Ubuntu Linux](https://dev.cryptolife.net/compiling-the-daemon-for-your-altcoin-in-ubuntu-linux/)
 
 
 This guide will assist you in compiling a headless client (the daemon) in Ubuntu Linux. 
