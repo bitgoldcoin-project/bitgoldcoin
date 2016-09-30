@@ -234,47 +234,82 @@ Congratulations! You are now staking!
 # [Compiling an altcoin daemon in Ubuntu Linux](https://dev.cryptolife.net/compiling-the-daemon-for-your-altcoin-in-ubuntu-linux/)
 
 
-This guide will assist you in compiling a headless client (the daemon) in Ubuntu Linux. 
-This is a necessary step if you wish to set up a node of your altcoin. 
-It is assumed that you are starting on a fresh Ubuntu (14.04 x64) installation. 
-If you require a VPS for hosting, I highly recommended Digital Ocean.
-
+This guide will assist you in compiling a headless client (the daemon) in Ubuntu Linux. This is a necessary step if you wish to set up a node of your altcoin. It is assumed that you are starting on a fresh Ubuntu (14.04 x64) installation. If you require a VPS for hosting, I highly recommended Digital Ocean.
 
 The $5/month plan is all you need. Use sudo in front of all commands if you’re not logged in as root. Replace YOURCOIN with the name of your coin (case sensitive).
+
 Set up a swapfile if your system has less than 1.5GB of memory:
+
+```
 fallocate -l 2G /swapfile
 chown root:root /swapfile
 chmod 0600 /swapfile
 mkswap /swapfile
 swapon /swapfile
+```
+
 If fallocate doesn’t work, you can use dd if=/dev/zero of=/swapfile bs=1024 count=1024288 instead.
+
 Initialize swapfile automatically on boot
+
+```
 nano /etc/fstab
 Add this at the bottom: /swapfile none swap sw 0 0
+```
+
 Install all required dependencies:
+
+```
 apt-get update && apt-get upgrade
 apt-get install ntp unzip git build-essential libssl-dev libdb-dev
 apt-get install libdb++-dev libboost-all-dev libqrencode-dev
 aptitude install miniupnpc libminiupnpc-dev
+```
+
 Pull the source code from github, or upload it yourself:
+
+```
 git clone https://github.com/YOURCOIN
+```
+
 If your coin uses leveldb, compile leveldb:
+
+```
 cd /YOURCOIN/src/leveldb
 make libleveldb.a libmemenv.a
+```
+
 Return to source directory, and compile the daemon:
+
+```
 cd /YOURCOIN/src
 make -f makefile.unix USE_UPNP=1 USE_QRCODE=1 USE_UPNP=1
+```
+
 Strip the file to make it smaller, then relocate it:
+
+```
 strip YOURCOINd
 cp YOURCOINd /usr/bin
+```
+
 Now run the daemon:
+
+```
 YOURCOINd
+```
+
 It will return an error, telling you to set up config file in a directory. Now we’ll set up the config file. Note that this is case sensitive.
+
+```
 nano ~/.YOURCOIN/YOURCOIN.conf
+
 Add the following, save and exit:
+
 daemon=1
 server=1
 rpcuser=(username)
 rpcpassword=(strong password)
-Run YOURCOINd once more and if you did everything correctly, your daemon is now online! Type YOURCOINd help for a full list of commands available.
+```
 
+Run YOURCOINd once more and if you did everything correctly, your daemon is now online! Type YOURCOINd help for a full list of commands available.
