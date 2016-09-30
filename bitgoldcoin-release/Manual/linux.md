@@ -8,11 +8,11 @@ The $5/month plan is all you need. Use sudo in front of all commands if you’re
 Set up a swapfile if your system has less than 1.5GB of memory:
 
 ```
-fallocate -l 2G /swapfile
-chown root:root /swapfile
-chmod 0600 /swapfile
-mkswap /swapfile
-swapon /swapfile
+sudo fallocate -l 2G /swapfile
+sudo chown root:root /swapfile
+sudo chmod 0600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
 ```
 
 If fallocate doesn’t work, you can use dd if=/dev/zero of=/swapfile bs=1024 count=1024288 instead.
@@ -27,10 +27,10 @@ Add this at the bottom: /swapfile none swap sw 0 0
 Install all required dependencies:
 
 ```
-apt-get update && apt-get upgrade
-apt-get install ntp unzip git build-essential libssl-dev libdb-dev
-apt-get install libdb++-dev libboost-all-dev libqrencode-dev
-aptitude install miniupnpc libminiupnpc-dev
+sudo apt-get update && apt-get upgrade
+sudo apt-get install ntp unzip git build-essential libssl-dev libdb-dev
+sudo apt-get install libdb++-dev libboost-all-dev libqrencode-dev
+sudo aptitude install miniupnpc libminiupnpc-dev
 ```
 
 Pull the source code from github, or upload it yourself:
