@@ -1,5 +1,3 @@
-# Daemon
-
 ## Compiling Windows Altcoin Client 32 Bit  
 
 ### Windows 32 bit bitgoldcoind and bitgoldcoin Compiling Guide.
@@ -18,8 +16,7 @@ Download and install a text editor such as [Sublime Text](http://www.sublimetext
 
 ### 2. Download and install MingW
 
-[download](http://sourceforge.net/projects/mingw/files/Installer/mingw-get-setup.exe/download)
-Double click to install, keep the checkbox for the GUI checked and make sure to install in C:\MinGW. Press continue. From the MinGW GUI interface, go to all packages -> MYSYS
+[Download](http://sourceforge.net/projects/mingw/files/Installer/mingw-get-setup.exe/download) and Double click to install, keep the checkbox for the GUI checked and make sure to install in C:\MinGW. Press continue. From the MinGW GUI interface, go to all packages -> MYSYS
 
 Right click on the following installations and mark for installation.
 
