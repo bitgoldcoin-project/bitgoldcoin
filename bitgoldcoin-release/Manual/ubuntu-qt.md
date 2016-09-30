@@ -111,7 +111,7 @@ Since Peercoin was the first coin to use Proof of Stake, I will use that for dem
 The first step you need to do is to download PeerCoin's source code from the git repository. Type
 
 ```
-cd $HOME; git clone https://github.com/bitgoldcoin-project/bitgoldcoin.git; cd bitgoldcoin
+cd $HOME; git clone https://github.com/ppcoin/ppcoin.git; cd ppcoin
 ```
 
 Now, you need to add the location of the libraries and the header files to the bitcoin-qt.pro file (peercoin never updated the name of their *.pro file after they forked).
@@ -144,7 +144,7 @@ and then use the arrow keys to move a few lines down and then paste with ctrl + 
 
 Now, all you need to do is use the qt's software's making tool called qmake. Type qmake into the terminal and then cd src. Type make -f makefile.unix to build the peercoin daemon.
 
-Assuming all is well in the world, this should compile and you should have no compilation errors and a new file called bitgoldcoind is in the src directory. You can test for this by typing ls $HOME/bitgoldcoin/src and seeing if that file is listed there.
+Assuming all is well in the world, this should compile and you should have no compilation errors and a new file called ppcoind is in the src directory. You can test for this by typing ls $HOME/ppcoin/src and seeing if that file is listed there.
 
 If there was a failure, it is most likely due to miniupnpc and you can turn these features off in the qmake step by typing
 
@@ -153,25 +153,25 @@ qmake UPNP=-
 ```
 
 
-## Starting bitgoldcoind and Setting up bitgoldcoin.conf
+## Starting ppcoind and Setting up ppcoin.conf
 
 If you managed to make it this far, then you have successfully built the headless daemon and can begin staking as soon as you finish a few more small tasks.
 
 You first need to run the daemon. This can be accomplished by typing :
 
 ```
-$HOME/bitgoldcoin/src/bitgoldcoind &
+$HOME/ppcoin/src/ppcoind &
 ```
 
-The first time that this file is run, it will test for a configuration file in the default location. If no configuration file exists (and it shouldn't!), the bitgoldcoind program will give a suggestion for a username and password to be placed in the config file (in this case $HOME/.bitgoldcoin/bitgoldcoin.conf). Copy the username and password and paste these into a new file with this name in this location, using, for example emacs -nw $HOME/.bitgoldcoin/bitgoldcoin.conf and then pasting into the window.
+The first time that this file is run, it will test for a configuration file in the default location. If no configuration file exists (and it shouldn't!), the ppcoind program will give a suggestion for a username and password to be placed in the config file (in this case $HOME/.ppcoin/ppcoin.conf). Copy the username and password and paste these into a new file with this name in this location, using, for example emacs -nw $HOME/.ppcoin/ppcoin.conf and then pasting into the window.
 
 Now, you can rerun the daemon program again using
 
 ```
-$HOME/bitgoldcoin/src/bitgoldcoind &
+$HOME/ppcoin/src/ppcoind &
 ```
 
-At this point, bitgoldcoind should be downloading the blockchain and verifying blocks, which should take a day or so. This can be checked by looking at the log file. You can see if everything is going smoothly by typing tail -100 $HOME/.bitgoldcoin/debug.log.
+At this point, ppcoind should be downloading the blockchain and verifying blocks, which should take a day or so. This can be checked by looking at the log file. You can see if everything is going smoothly by typing tail -100 $HOME/.ppcoin/debug.log.
 
 Examine the contents of the file. If it appears as if blocks are being downloaded (they'll have a timestamp date), and the blockheight is increasing, then you are all set.
 
@@ -184,25 +184,25 @@ Now, after you're rested and have checked that the last blocks you are downloadi
 For a list of everything that you can do, type
 
 ```
-$HOME/bitgoldcoin/src/bitgoldcoind help
+$HOME/ppcoin/src/ppcoind help
 ```
 
 The most important commands will be getnewaddress, sendtoaddress, encryptwallet, walletpassphrase, and walletlock.
 
 Encrypt your wallet with the following :
 ```
-$HOME/bitgoldcoin/src/bitgoldcoind encryptwallet yourwalletpassword
+$HOME/ppcoin/src/ppcoind encryptwallet yourwalletpassword
 ```
 
 You will then need to restart the daemon again with
 ```
-$HOME/bitgoldcoin/src/bitgoldcoind &
+$HOME/ppcoin/src/ppcoind &
 ```
 
 Now you can get a new address (with a label, if you so desire) using
 
 ```
-$HOME/bitgoldcoin/src/bitgoldcoind getnewaddress "Label 1"
+$HOME/ppcoin/src/ppcoind getnewaddress "Label 1"
 ```
 
 The output of this will be your new address which will be associated (internally) with the identifier "Label 1". You can now send your peercoins to this new address.
@@ -210,7 +210,7 @@ The output of this will be your new address which will be associated (internally
 In order to stake the new coins (after waiting the required time for the coins to mature), you can type
 
 ```
-$HOME/bitgoldcoin/src/bitgoldcoind walletpassphrase yourpassphrasehere 999999 true
+$HOME/ppcoin/src/ppcoind walletpassphrase yourpassphrasehere 999999 true
 ```
 
 The 999999 is the number of seconds you want the wallet to remain unlocked and true indicates you want to set it up for staking (which doesn't allow you to send coins out of it).
