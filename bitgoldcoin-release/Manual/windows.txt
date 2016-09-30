@@ -1,10 +1,5 @@
 # Dependancy / QT 설치
 
-
-
-
-
-
 * DAEMON 빌드 방법
 
 > miniupnpc-1.9.20140911 => minupnpc rename
@@ -23,28 +18,11 @@
 endsWith => contains
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 * Daemon
 make -f makefile.mingw
 strip bitgoldcoind.exe
 
 * QT 
+set PATH=%PATH%;D:\Qt\4.8.6\bin
 qmake "USE_QRCODE=1" "USE_UPNP=1" "USE_IPV6=1" bitgoldcoin-qt_windows.pro
 mingw32-make -f Makefile.Release
