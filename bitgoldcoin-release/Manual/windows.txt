@@ -1,0 +1,50 @@
+# Dependancy / QT 설치
+
+
+
+
+
+
+* DAEMON 빌드 방법
+
+> miniupnpc-1.9.20140911 => minupnpc rename
+
+> mingw-64 설치시 버전을 4.9.1로 설치
+
+> makefile.mingw 수정
+
+  - DEFS += -DMINIUPNP_STATICLIB -DUSE_UPNP=$(USE_UPNP)
+
+> Qt 4.8.6
+
+- configureapp.cpp
+```
+2180, 2262
+endsWith => contains
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+* Daemon
+make -f makefile.mingw
+strip bitgoldcoind.exe
+
+* QT 
+qmake "USE_QRCODE=1" "USE_UPNP=1" "USE_IPV6=1" bitgoldcoin-qt_windows.pro
+mingw32-make -f Makefile.Release
